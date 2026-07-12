@@ -1,7 +1,7 @@
 //This is the overall structure format of a content file:
 
 //Legend:
-// [] - anything in between square brackets must be replaced
+// [] - anything in between square brackets must be replaced alongside the square brackets themselves
 
 package content;
 
