@@ -29,8 +29,8 @@ public class Main
         boolean bothStillHaveCoins = true;
         int clashRound = 1; // Added UI
         do{
-            currentAttackerPoints = 0;
-            currentDefenderPoints = 0;
+            currentAttackerPoints = comctx.getAttackerMove().getBaseAtk();
+            currentDefenderPoints = comctx.getDefenderMove().getBaseAtk();
             
             for(Coin co: attackerCoinSet){
                 currentAttackerPoints += co.getCoinPower(comctx.getAttacker().getMorale());
