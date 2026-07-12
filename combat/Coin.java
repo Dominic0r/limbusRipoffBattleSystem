@@ -1,7 +1,7 @@
 package combat;
 import java.util.*;
 import java.util.function.Consumer;
-impor effect.*;
+import effect.*;
 public class Coin{
         Random ra = new Random();
         private Consumer<clashResult> onHitEffect;
