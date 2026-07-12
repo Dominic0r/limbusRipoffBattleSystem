@@ -460,15 +460,15 @@ public class Main
             }
         }
         
-        attackQueue.sort(Comparator.comparingInt(combatContext -> combatContext.getAttacker().getSpeed()).reversed()); // sorts by fastest attack speed
+        attackQueue.sort(Comparator.comparingInt((combatContext cc) -> cc.getAttacker().getSpeed()).reversed()); // sorts by fastest attack speed
         
         for(combatContext cctx : attackQueue){
-            if((cctx.getAttacker().getHP() >0 && cctx.getDefender().getHP() > 0) && (!cctx.getAttacker().isStaggered() && !cctx.getDefender().isStaggered())){
+            if((cctx.getAttacker().getHP() >0 && cctx.getDefender().getHP() > 0) && (!cctx.getAttacker().stagger() && !cctx.getDefender().stagger())){
                 clashResult finalResult = clashFunction(field, cctx);
                 
                 keepAllAppliedEffectsInBounds(field);
                 
-                if(finalResult.getWinner().getHP() >0 && finalResult.getWinner().isStaggered()){
+                if(finalResult.getWinner().getHP() >0 && !finalResult.getWinner().stagger()){
                     afterClash(finalResult, field, cctx);
                 }
                 
