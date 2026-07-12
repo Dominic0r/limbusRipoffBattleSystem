@@ -1,0 +1,24 @@
+//This is the overall structure format of a content file:
+
+//Legend:
+// [] - anything in between square brackets must be replaced
+
+package content;
+
+//========================================================================
+import java.util.*; // this block imports the necessary libraries as well as access to the other folders and to the registry
+import combat.*;
+import effect.*;
+import registry.*;
+//========================================================================
+public class [content package name here] implements ContentPackage{
+    @Override
+    public String getPackageId(){
+        return "[package ID here]";
+    }
+//========================================================================
+ @Override
+  public void registerContent(){
+    // This is where you register all your stuff. for more info on this, see UnitFormats.txt, MoveFormats.txt, and StatusEffectFormats.txt
+  }
+//========================================================================
