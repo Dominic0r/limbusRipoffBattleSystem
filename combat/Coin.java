@@ -1,4 +1,4 @@
-package com.dominic0r.limbusripoff;
+package combat;
 import java.util.*;
 import java.util.function.Consumer;
 public class Coin{
