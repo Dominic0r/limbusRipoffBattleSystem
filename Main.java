@@ -207,7 +207,7 @@ public class Main
         field.incrementTurnCount(); 
     }
 
-    public static void battleStart(Battlefield field{
+    public static void battleStart(Battlefield field){
 
         System.out.println("\n===============================================");
         System.out.println("                 BATTLE START!");   
