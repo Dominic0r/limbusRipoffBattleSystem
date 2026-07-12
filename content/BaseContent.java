@@ -3,7 +3,6 @@ package content;
 import combat.*;
 import effect.*;
 import registry.*;
-import ContentPackage;
 
 public class BaseContent implements ContentPackage{
     @Override
