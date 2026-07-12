@@ -481,6 +481,7 @@ public class Main
         haveAllPendingMutationsApplied(field);
         keepAllAppliedEffectsInBounds(field);
         checkHP(field);
+        checkWin(field);
         
     }
     
