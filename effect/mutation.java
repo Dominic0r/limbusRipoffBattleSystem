@@ -1,4 +1,4 @@
-package com.dominic0r.limbusripoff;
+package effect;
 
 public class mutation{
         
