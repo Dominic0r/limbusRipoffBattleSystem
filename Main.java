@@ -218,7 +218,17 @@ public class Main
         int counter = 1;
         int coincounter=1;
         System.out.println("Your moves: ");
-        for(Move mov : playerUnit.getMoveSet()){
+
+        List<Move> validMoves = new ArrayList<>();
+        for(Move mov: playerUnit.getMoveSet(){
+            if(mov.isUsable(field, playerUnit)){
+                validMoves.add(mov);
+            }
+        }
+
+
+        
+        for(Move mov : validMoves){
             System.out.println(counter+ ": "+ mov.getName()+ "\n"+mov.getDesc());
             for(Coin co: mov.getCoinSet()){
                 System.out.println("Coin "+ coincounter+ ": "+ co.getDesc());
@@ -227,6 +237,8 @@ public class Main
             counter++;
             coincounter = 1;
         }
+
+        
         System.out.print("\nChoose move (number): ");
         
         boolean validInput = false;
@@ -243,7 +255,7 @@ public class Main
             
         }while(!validInput);
         
-        Move plyrMv = playerUnit.getMoveSet().get(choice-1);
+        Move plyrMv = validMoves.get(choice-1);
         counter = 1;
         System.out.println("\nChoose a target: ");
         for(Unit un: field.getEnemies()){
@@ -291,7 +303,17 @@ public class Main
     public static combatContext allyMove(Battlefield field, Unit un, List<combatContext> attackQueue){
         int maxnum=Integer.MIN_VALUE; // pick their move
         Move maxMove=null;
-        for(Move mov: un.getMoveSet()){
+
+        List<Move> validMoves = new ArrayList<>();
+        for(Move mov: un.getMoveSet(){
+            if(mov.isUsable(field, un)){
+                validMoves.add(mov);
+            }
+        }
+
+
+        
+        for(Move mov: validMoves){
             if(mov.getTotalPoints()> maxnum){
                 maxnum = mov.getTotalPoints();
                 maxMove = mov;
@@ -320,10 +342,16 @@ public class Main
             targetUn = field.getEnemies().get(ra.nextInt(field.getEnemies().size()));
             secondary = true;
         }
-        
+
+        validMoves.clear();
+        for(Move mov: targetUn.getMoveSet(){
+            if(mov.isUsable(field, targetUn)){
+                validMoves.add(mov);
+            }
+        }
         
         maxnum = Integer.MIN_VALUE;
-        for(Move mov: targetUn.getMoveSet()){
+        for(Move mov: validMoves){
             if(mov.getTotalPoints()> maxnum){
                 maxnum = mov.getTotalPoints();
                 maxMove = mov;
