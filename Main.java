@@ -132,9 +132,27 @@ public class Main
     
     public static void turnStart(Battlefield field){
         // Added UI for Turn Info
+
+        
         System.out.println("\n===============================================");
         System.out.println("                TURN " + field.getTurnCount() + " START");
         System.out.println("===============================================");
+
+        for(Unit un : field.getAllies()){
+            for(appliedEffect app : un.getEffectList()){
+                app.stat().triggerTurnStart(field, un);
+            }
+        }
+        for(Unit un : field.getEnemies()){
+            for(appliedEffect app : un.getEffectList()){
+                app.stat().triggerTurnStart(field, un);
+            }
+        }
+        for(appliedEffect app: playerUnit.getEffectList()){
+            app.stat().triggerTurnStart(field,un);
+        }
+
+        
         System.out.println("[ Player Info ]");
         System.out.println(playerUnit.getName() + " | HP: " + playerUnit.getHP() + "/" + playerUnit.maxHP + " | Morale: " + playerUnit.getMorale());
         
@@ -164,16 +182,7 @@ public class Main
         
         System.out.println("===============================================\n");
 
-        for(Unit un : field.getAllies()){
-            for(appliedEffect app : un.getEffectList()){
-                app.stat().triggerTurnStart(field, un);
-            }
-        }
-        for(Unit un : field.getEnemies()){
-            for(appliedEffect app : un.getEffectList()){
-                app.stat().triggerTurnStart(field, un);
-            }
-        }
+        
     }
     
     public static void turnEnd(Battlefield field){
@@ -191,8 +200,35 @@ public class Main
                 app.stat().triggerTurnEnd(field, un);
             }
         }
+
+        for(appliedEffect app: playerUnit.getEffectList()){
+            app.stat().triggerTurnEnd(field,un);
+        }
         field.incrementTurnCount(); 
     }
+
+    public static void battleStart(Battlefield field{
+
+        System.out.println("\n===============================================");
+        System.out.println("                 BATTLE START!");   
+        System.out.println("===============================================\n");
+        
+        for(Unit un : field.getAllies()){
+            for(appliedEffect app : un.getEffectList()){
+                app.stat().triggerOnBattleStart(field, un);
+            }
+        }
+        for(Unit un : field.getEnemies()){
+            for(appliedEffect app : un.getEffectList()){
+                app.stat().triggerOnBattleStart(field, un);
+            }
+        }
+        for(appliedEffect app: playerUnit.getEffectList()){
+            app.stat().triggerOnBattleStart(field,un);
+        }
+    }
+
+
     
     public static void keepAllAppliedEffectsInBounds(Battlefield field){
         for(Unit un : field.getAllies()){
@@ -585,125 +621,8 @@ public class Main
         }
         playerUnit.checkStagger();
     }
-    //public Unit(int hp, int morale, int speed, int staggerTresh, String name, String description, List<Move> moveSet){
-    
-    //public Move(String name, int baseatk, String description){
-    //public Coin (int atkPoints, String description, Consumer<combatContext> onHitEffect){
-    
-    public static Unit defAlly;
-    public static void defineDefaultAlly(){
-        List<Move> defEnemyMoveset = new ArrayList<>();
-        Move punch = new Move("Punch", 1, "Two weak punches");
-        
-        punch.addCoin(new Coin(1, "punch-", rst ->{
-            
-            rst.getLoser().takeHPDamage(1);
-        }));
-        punch.addCoin(new Coin(1, "punch again-", rst ->{
-            rst.getLoser().takeHPDamage(1);
-        }));
-        
-        defEnemyMoveset.add(punch);
-        
-        defAlly = new Unit(50, 0, 2, 15, "Ally", "Default Ally", defEnemyMoveset);
-        allAllies.add(defAlly);
-    }
-    
-    
-    public static Unit defEnemy;
-    public static void defineDefaultEnemy(){
-        List<Move> defEnemyMoveset = new ArrayList<>();
-        Move punch = new Move("Punch", 1, "Two weak punches");
-        
-        punch.addCoin(new Coin(1, "punch-", rst ->{
-            
-            rst.getLoser().takeHPDamage(1);
-        }));
-        punch.addCoin(new Coin(1, "punch again-", rst ->{
-            rst.getLoser().takeHPDamage(1);
-        }));
-        
-        defEnemyMoveset.add(punch);
-        
-        defEnemy = new Unit(50, 0, 2, 15, "Enemy", "Default Enemy", defEnemyMoveset);
-        allEnemies.add(defEnemy);
-    }
-    
     
     public static Unit playerUnit;
-    
-    public static void defPlayerUnit(){
-        List<Move> playerMoveSet = new ArrayList<>();
-        
-        Move multiPunch = new Move("Multi-Punch", 5, "Punches the Enemy 3 times");
-        multiPunch.addCoin(new Coin(2, "Punch!", rst ->{
-            rst.getLoser().takeHPDamage(2);
-        }));
-        
-        multiPunch.addCoin(new Coin(1, "Punch Again!", rst ->{
-            rst.getLoser().takeHPDamage(1);
-        }));
-        
-        multiPunch.addCoin(new Coin(3, "Upper Cut!", rst ->{
-            rst.getLoser().takeHPDamage(3);
-        }));
-        
-        Move roundhouse = new Move("Roundhouse Kick", 3, "Kicks the enemy hard");
-        roundhouse.addCoin(new Coin(10, "Kick!", rst ->{
-            rst.getLoser().takeHPDamage(10);
-        }));
-        
-        Move stab = new Move("Stab", 4, "Stabs the enemy twice");
-        stab.addCoin(new Coin(3, "Swish!", rst ->{
-            rst.getLoser().takeHPDamage(3);
-        }));
-        
-        stab.addCoin(new Coin(3, "Slash! - Inflicts 3 bleed potency", rst ->{
-            rst.getLoser().takeHPDamage(3);
-            if(!rst.getLoser().getEffectList().isEmpty()){
-                for(appliedEffect app: rst.getLoser().getEffectList()){
-                    if(app.stat()==defaultStatusEffects.get(0)){
-                        mutation mut = new mutation(Type.MOD_POTENCY, 3,defaultStatusEffects.get(0), rst.getWinner());
-                        rst.getLoser().queueMutation(mut);
-                    }else{
-                        mutation mut = new mutation(Type.ADD, 3, defaultStatusEffects.get(0),rst.getWinner());
-                        rst.getLoser().queueMutation(mut);
-                    }
-                }
-            }else{
-                mutation mut = new mutation(Type.ADD, 3, defaultStatusEffects.get(0),rst.getWinner());
-                        rst.getLoser().queueMutation(mut);
-            }
-        }));
-        playerMoveSet.add(multiPunch);
-        playerMoveSet.add(roundhouse);
-        playerMoveSet.add(stab);
-        
-        playerUnit = new Unit(100, 0, 5, 30, "Player", "Description", playerMoveSet);
-    }
-    
-    
-    
-    //public statusEffect(String name, boolean decays, int limit, String description){
-    //public mutation(Type type, int amount, statusEffect effect, Unit source){
-    public static List<statusEffect> defaultStatusEffects = new ArrayList<>();
-    public static void defDefaultStats(){
-        statusEffect bleed = new statusEffect("Bleed", false, 99, "Take fixed damage every coin toss");
-        
-        bleed.setOnClash((field, un)->{
-            int damagetaken=0;
-            for(appliedEffect app : un.getEffectList()){
-                if(app.stat() == bleed){
-                    damagetaken = app.getPotency();
-                    un.takeHPDamage(damagetaken);
-                    app.decrementStack();
-                    System.out.println("  > " + un.getName() + " took " + damagetaken + " bleed damage!"); // Added UI
-                }
-            }
-        });
-        
-        defaultStatusEffects.add(bleed);
-    }
     //===============================================================================================
     //MOD ZONE touch anything outside this with precaution
     //this is where you load your mod packages
@@ -744,7 +663,7 @@ public class Main
             }
         }
         
-        
+        battleStart();
         while(true){
         battleFlow(batContext);
         
