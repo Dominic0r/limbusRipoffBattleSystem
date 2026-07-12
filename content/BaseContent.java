@@ -14,7 +14,10 @@ public class BaseContent implements ContentPackage{
     
     @Override
     public void registerContent(){
-        
+        statusEffect bleed = Registry.getStatus("lim:bleed");
+        if(bleed == null){
+            System.out.println("Bleed not found!");
+        }
         List<Move> playerMoveSet = new ArrayList<>();
         
         Move multiPunch = new Move("Multi-Punch", 5, "Punches the Enemy 3 times");
