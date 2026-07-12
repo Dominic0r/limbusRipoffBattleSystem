@@ -663,7 +663,7 @@ public class Main
             }
         }
         
-        battleStart(field);
+        battleStart(batContext);
         while(true){
         battleFlow(batContext);
         
