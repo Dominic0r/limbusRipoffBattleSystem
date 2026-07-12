@@ -1,5 +1,5 @@
 package combat;
-
+impor effect.*;
 public class clashResult{
         Unit winner;
         Unit loser;
