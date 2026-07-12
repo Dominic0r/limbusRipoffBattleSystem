@@ -1,6 +1,6 @@
 package combat;
 import java.util.*;
-impor effect.*;
+import effect.*;
 
 public class Move{ 
         String name;
