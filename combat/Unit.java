@@ -27,7 +27,10 @@ public class Unit{
             this.moveSet = moveSet;
             this.staggerTresh = staggerTresh;
             unopposed = new Move("...",0,"...");
-            unopposed.addCoin(new Coin(0,"..."));
+            unopposed.addCoin(new Coin(0,"...", rst->{
+                rst.getLoser().modifyMorale(5);
+            }));
+            
         }
         
         public int getHP(){ return hp;}
