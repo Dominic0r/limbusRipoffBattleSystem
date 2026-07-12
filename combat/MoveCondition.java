@@ -8,5 +8,5 @@ public interface MoveCondition {
      * @param target The unit being targeted (can be null if checking general availability).
      * @return true if the move can be selected/executed; false otherwise.
      */
-    boolean canUse(Battlefield field, Unit user, Unit target);
+    boolean canUse(Battlefield field, Unit user);
 }
