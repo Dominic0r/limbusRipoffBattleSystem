@@ -1,0 +1,13 @@
+So you wanna learn how to make moves, hm? Well lucky for you this little piece of data exists
+
+Legend: [description, data type, additional notes if any] - anything in between square brackets must be replaced alongside the square brackets themselves
+
+
+Move [an identifier for the move] = new Move([The move's name, String], [The move's base attack weight, Integer], [description of the move, String]);
+
+[move identifier].addCoin(new Coin([the coin's added attack weight, Integer], [Description of what the coin does, String], rst ->{
+  // write here whatever the coin does when it lands on heads. I might make a guide later about all the actions you can do idk.
+}));
+
+[identifier for your unit's moveset, List<Move>].add([Move identifier]);
+
