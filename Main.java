@@ -192,16 +192,19 @@ public class Main
             for(appliedEffect app : un.getEffectList()){
                 app.keepInBounds();
             }
+            un.statLimiter();
         }
         
         for(Unit un : field.getEnemies()){
             for(appliedEffect app : un.getEffectList()){
                 app.keepInBounds();
             }
+            un.statLimiter();
         }
         for(appliedEffect app: playerUnit.getEffectList()){
             app.keepInBounds();
         }
+        playerUnit.statLimiter();
     }
     
     public static combatContext playerChoose(Battlefield field){
