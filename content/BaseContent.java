@@ -6,7 +6,7 @@ import registry.*;
 
 public class BaseContent implements ContentPackage{
     @Override
-    public String getPackageID(){
+    public String getPackageId(){
         return "base";
     }
     
