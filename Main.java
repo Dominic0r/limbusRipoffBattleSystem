@@ -194,16 +194,21 @@ public class Main
             for(appliedEffect app : un.getEffectList()){
                 app.stat().triggerTurnEnd(field, un);
             }
+            un.resetCritChance();
         }
         for(Unit un : field.getEnemies()){
             for(appliedEffect app : un.getEffectList()){
                 app.stat().triggerTurnEnd(field, un);
             }
+            un.resetCritChance();
         }
 
         for(appliedEffect app: playerUnit.getEffectList()){
             app.stat().triggerTurnEnd(field,playerUnit);
         }
+        playerUnit.resetCritChance():
+
+        
         field.incrementTurnCount(); 
     }
 
