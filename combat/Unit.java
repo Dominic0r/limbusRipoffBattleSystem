@@ -158,6 +158,13 @@ public class Unit{
             
             System.out.println("  > " + name + " took " + dam + " damage! (HP: " + hp + "/" + maxHP + ")");
         }
+
+        public void takeHPDamage(int dam, ){
+                
+            hp -= dam;
+            
+            System.out.println("  > " + name + " took " + dam + " damage! (HP: " + hp + "/" + maxHP + ")");
+        }
         public void takeMoraleDamage(int dam){
             morale -= dam;
             // Added UI
