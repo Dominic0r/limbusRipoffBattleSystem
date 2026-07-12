@@ -35,29 +35,29 @@ public class BaseContent implements ContentPackage{
         
         Move multiPunch = new Move("Multi-Punch", 5, "Punches the Enemy 3 times");
         multiPunch.addCoin(new Coin(2, "Punch!", rst ->{
-            rst.getLoser().takeHPDamage(2);
+            rst.getLoser().takeHPDamage(2, rst.getWinner());
         }));
         
         multiPunch.addCoin(new Coin(1, "Punch Again!", rst ->{
-            rst.getLoser().takeHPDamage(1);
+            rst.getLoser().takeHPDamage(1,rst.getWinner());
         }));
         
         multiPunch.addCoin(new Coin(3, "Upper Cut!", rst ->{
-            rst.getLoser().takeHPDamage(3);
+            rst.getLoser().takeHPDamage(3,rst.getWinner());
         }));
         
         Move roundhouse = new Move("Roundhouse Kick", 3, "Kicks the enemy hard");
         roundhouse.addCoin(new Coin(10, "Kick!", rst ->{
-            rst.getLoser().takeHPDamage(10);
+            rst.getLoser().takeHPDamage(10,rst.getWinner());
         }));
         
         Move stab = new Move("Stab", 4, "Stabs the enemy twice");
         stab.addCoin(new Coin(3, "Swish!", rst ->{
-            rst.getLoser().takeHPDamage(3);
+            rst.getLoser().takeHPDamage(3,rst.getWinner());
         }));
         
         stab.addCoin(new Coin(3, "Slash! - Inflicts 3 bleed potency", rst ->{
-            rst.getLoser().takeHPDamage(3);
+            rst.getLoser().takeHPDamage(3,rst.getWinner());
             if(!rst.getLoser().getEffectList().isEmpty()){
                 for(appliedEffect app: rst.getLoser().getEffectList()){
                     if(app.stat()==bleed){
@@ -85,7 +85,7 @@ public class BaseContent implements ContentPackage{
             });
 
         nuke.addCoin(new Coin(10, "NUKE!", rst->{
-            rst.getLoser().takeHPDamage(100);
+            rst.getLoser().takeHPDamage(100,rst.getWinner());
         }));
         
         playerMoveSet.add(multiPunch);
@@ -104,10 +104,10 @@ public class BaseContent implements ContentPackage{
         
         punch.addCoin(new Coin(1, "punch-", rst ->{
             
-            rst.getLoser().takeHPDamage(1);
+            rst.getLoser().takeHPDamage(1,rst.getWinner());
         }));
         punch.addCoin(new Coin(1, "punch again-", rst ->{
-            rst.getLoser().takeHPDamage(1);
+            rst.getLoser().takeHPDamage(1,rst.getWinner());
         }));
         
         defEnemyMoveset.add(punch);
