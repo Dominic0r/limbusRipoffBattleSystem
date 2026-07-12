@@ -2,6 +2,7 @@ package registry;
 
 import java.util.HashMap;
 import java.util.Map;
+import combat.*;
 
 public class Registry {
 
