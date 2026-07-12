@@ -1,7 +1,7 @@
 package com.dominic0r.limbusripoff;
 import java.util.*;
 
-public static class Battlefield{
+public class Battlefield{
         List<Unit> allies = new ArrayList<>();
         List<Unit> enemies = new ArrayList<>();
         int turnCount;
