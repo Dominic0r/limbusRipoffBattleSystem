@@ -1,6 +1,6 @@
 package combat;
 import java.util.*;
-impor effect.*;
+import effect.*;
 
 public class Unit{
         int maxHP, hp, morale, speed, staggerTresh;
