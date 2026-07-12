@@ -627,9 +627,9 @@ public class Main
 
         playerUnit = Registry.getUnitTemplate("base:player");
 
-        allAllies.add(Registry.getUnitTemplate("base:ally");
+        allAllies.add(Registry.getUnitTemplate("base:ally"));
 
-        allEnemies.add(Registry.getUnitTemplate("base:enemy");
+        allEnemies.add(Registry.getUnitTemplate("base:enemy"));
     }
     //===============================================================================================
 
