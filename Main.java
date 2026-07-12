@@ -538,6 +538,7 @@ public class Main
         List<combatContext> attackQueue = new ArrayList<>();
         turnStart(field);
         keepAllAppliedEffectsInBounds(field);
+        checkAllStaggerRecover(field);
         
         
         if(!playerUnit.staggered()){
@@ -649,6 +650,17 @@ public class Main
             un.checkStagger();
         }
         playerUnit.checkStagger();
+    }
+
+    public static void checkAllStaggerRecover(Battlefield field){
+        for(Unit un: field.getAllies()){
+            un.checkStaggerRecover();
+        }
+        
+        for(Unit un: field.getEnemies()){
+            un.checkStaggerRecover();
+        }
+        playerUnit.checkStaggerRecover();
     }
     
     public static Unit playerUnit;
