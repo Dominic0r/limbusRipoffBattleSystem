@@ -618,12 +618,28 @@ public class Main
         
         defaultStatusEffects.add(bleed);
     }
+    //===============================================================================================
+    //MOD ZONE touch anything outside this with precaution
+    //this is where you load your mod packages
+    public static void registerAllPackages() {
+        
+        loadPackage(new BaseContent()); 
+    }
+    //===============================================================================================
+
+    private static void loadPackage(ContentPackage pkg) {
+        System.out.println("Loading package: " + pkg.getPackageId());
+        pkg.registerContent();
+    }
+    
     public static void main(String[] args) {
         System.out.println("--- INITIALIZING GAME ---\n"); 
-        defPlayerUnit();
+        /*defPlayerUnit(); // Legacy Code
         defDefaultStats();
         defineDefaultEnemy();
-        defineDefaultAlly();
+        defineDefaultAlly();*/
+        
+        registerAllPackages();
         genBatContext();
         
         System.out.println("--- YOUR MOVESET ---");
