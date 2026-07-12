@@ -65,7 +65,7 @@ public class Unit{
         
         public void checkStagger(){
             if(!isStaggered){
-                if(hp < staggerTresh){
+                if(hp <= staggerTresh){
                     isStaggered = true;
                     System.out.println("!!! " + name + " is STAGGERED !!!"); // Added UI
                 }
