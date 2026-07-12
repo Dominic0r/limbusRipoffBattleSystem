@@ -8,7 +8,7 @@ public class Move{
         List <Coin> coinSet = new ArrayList<>();
         int baseatk;
 
-        private MoveCondition condition = (field, user, target) -> true;
+        private MoveCondition condition = (field, user) -> true;
         
         public Move(String name, int baseatk, String description){
             this.name = name;
@@ -23,8 +23,8 @@ public class Move{
                 return this; 
         }
 
-        public boolean isUsable(Battlefield field, Unit user, Unit target) {
-                return condition.canUse(field, user, target);
+        public boolean isUsable(Battlefield field, Unit user) {
+                return condition.canUse(field, user);
         }
         
         public String getName(){return name;}
