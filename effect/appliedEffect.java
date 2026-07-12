@@ -1,5 +1,5 @@
 package effect;
-
+import combat.*;
 public class appliedEffect{ // created on unit
         statusEffect effect;
         int potency, // the amount of the effect per stack 
