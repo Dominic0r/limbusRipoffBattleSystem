@@ -13,6 +13,7 @@ public class statusEffect{
         private BiConsumer<Battlefield, Unit> onTurnEnd;
         private BiConsumer<Battlefield, Unit> onClash;
         private BiConsumer<Battlefield, Unit> onHitGive;
+        private BiConsumer<Battlefield, Unit> onBattleStart;
         
         public statusEffect(String name, boolean decays, int limit, String description){
             this.name = name;
@@ -45,6 +46,11 @@ public class statusEffect{
             this.onHitGive = hook;
             return this;
         }
+
+        public statusEffect setOnBattleStart(BiConsumer<Battlefield, Unit> hook) {
+            this.onBattleStart = hook;
+            return this;
+        }
         
         public void triggerTurnStart(Battlefield field, Unit un) {
             if (onTurnStart != null) onTurnStart.accept(field, un);
@@ -64,6 +70,10 @@ public class statusEffect{
         
         public void triggerOnHitGive(Battlefield field, Unit un){
             if(onHitGive != null) onHitGive.accept(field, un);
+        }
+
+        public void triggerOnBattleStart(Battlefield field, Unit un){
+            if(onHitGive != null) onBattleStart.accept(field, un);
         }
         
         public String getName(){ return name;}
