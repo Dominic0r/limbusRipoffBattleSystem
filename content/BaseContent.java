@@ -60,16 +60,16 @@ public class BaseContent implements ContentPackage{
             rst.getLoser().takeHPDamage(3);
             if(!rst.getLoser().getEffectList().isEmpty()){
                 for(appliedEffect app: rst.getLoser().getEffectList()){
-                    if(app.stat()==defaultStatusEffects.get(0)){
-                        mutation mut = new mutation(Type.MOD_POTENCY, 3,defaultStatusEffects.get(0), rst.getWinner());
+                    if(app.stat()==bleed){
+                        mutation mut = new mutation(Type.MOD_POTENCY, 3,bleed, rst.getWinner());
                         rst.getLoser().queueMutation(mut);
                     }else{
-                        mutation mut = new mutation(Type.ADD, 3, defaultStatusEffects.get(0),rst.getWinner());
+                        mutation mut = new mutation(Type.ADD, 3, bleed,rst.getWinner());
                         rst.getLoser().queueMutation(mut);
                     }
                 }
             }else{
-                mutation mut = new mutation(Type.ADD, 3, defaultStatusEffects.get(0),rst.getWinner());
+                mutation mut = new mutation(Type.ADD, 3, bleed,rst.getWinner());
                         rst.getLoser().queueMutation(mut);
             }
         }));
