@@ -67,12 +67,16 @@ public class Unit{
             if(!isStaggered){
                 if(hp <= staggerTresh){
                     isStaggered = true;
-                    System.out.println("!!! " + name + " is STAGGERED !!!"); // Added UI
+                    System.out.println("!!! " + name + " is STAGGERED !!!"); 
                 }
-            }else{
-                isStaggered = false;
-                System.out.println(name + " has recovered from stagger."); // Added UI
             }
+        }
+
+        public void checkStaggerRecover(){
+                if(isStaggered){
+                        isStaggered = false;
+                        System.out.println(name + " has recovered from stagger."); 
+                }
         }
         
         public void setStaggerOn(){ isStaggered = true;}
