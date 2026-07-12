@@ -1,7 +1,7 @@
 package com.dominic0r.limbusripoff;
 import java.util.*;
 
-public static class Move{ 
+public class Move{ 
         String name;
         String description;
         List <Coin> coinSet = new ArrayList<>();
