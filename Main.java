@@ -109,8 +109,12 @@ public class Main
     public static void afterClash(clashResult result, Battlefield field, combatContext comctx){
         System.out.println("\n --- CLASH RESOLUTION --- "); // Added UI
 
-        result.getWinner().triggerOnClashWin(field, result.getWinner());
-        result.getLoser().triggerOnClashLose(field, result.getLoser());
+        for(appliedEffect app : result.getWinner().getEffectList()){
+                    app.stat().triggerOnClashWin(field, result.getWinner());
+        }
+        for(appliedEffect app : result.getLoser().getEffectList()){
+                    app.stat().triggerOnClashLose(field, result.getLoser());
+        }
         for(Coin co: result.getCoinSet()){
             System.out.print(result.getWinner().getName() + " activates: " + co.getDesc()); // Added UI
             
