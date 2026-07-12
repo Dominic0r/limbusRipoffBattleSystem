@@ -1,6 +1,7 @@
 package effect;
 import java.util.*;
 import java.util.function.BiConsumer;
+import combat.*;
 public class statusEffect{
         String name, description;
         
