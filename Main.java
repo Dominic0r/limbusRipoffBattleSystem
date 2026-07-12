@@ -82,17 +82,15 @@ public class Main
             loser = comctx.getDefender();
             remainingCoins = attackerCoinCount;
             winnerCoinSet = attackerCoinSet;
-            if(comctx.getDefenderMove().getBaseAtk()==0){
-                unopposed = true;
-            }
+            
+            unopposed = comctx.getDefenderMove() == comctx.getDefender().unop();
+            
         }else{
             winner = comctx.getDefender();
             loser = comctx.getAttacker();
             remainingCoins = defenderCoinCount;
             winnerCoinSet = defenderCoinSet;
-            if(comctx.getAttackerMove().getBaseAtk()==0){
-                unopposed = true;
-            }
+            unopposed = comctx.getAttackerMove() == comctx.getAttacker().unop();
         }
         
         // Added UI for winner
