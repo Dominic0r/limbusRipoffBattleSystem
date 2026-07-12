@@ -149,7 +149,7 @@ public class Main
             }
         }
         for(appliedEffect app: playerUnit.getEffectList()){
-            app.stat().triggerTurnStart(field,un);
+            app.stat().triggerTurnStart(field,playerUnit);
         }
 
         
@@ -202,7 +202,7 @@ public class Main
         }
 
         for(appliedEffect app: playerUnit.getEffectList()){
-            app.stat().triggerTurnEnd(field,un);
+            app.stat().triggerTurnEnd(field,playerUnit);
         }
         field.incrementTurnCount(); 
     }
@@ -224,7 +224,7 @@ public class Main
             }
         }
         for(appliedEffect app: playerUnit.getEffectList()){
-            app.stat().triggerOnBattleStart(field,un);
+            app.stat().triggerOnBattleStart(field,playerUnit);
         }
     }
 
@@ -663,7 +663,7 @@ public class Main
             }
         }
         
-        battleStart();
+        battleStart(field);
         while(true){
         battleFlow(batContext);
         
