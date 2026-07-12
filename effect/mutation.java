@@ -1,5 +1,5 @@
 package effect;
-
+import combat.*;
 public class mutation{
         
         final Type type;
