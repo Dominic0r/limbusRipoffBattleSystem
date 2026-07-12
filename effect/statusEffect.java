@@ -1,4 +1,4 @@
-package com.dominic0r.limbusripoff;
+package effect;
 import java.util.*;
 import java.util.function.BiConsumer;
 public class statusEffect{
