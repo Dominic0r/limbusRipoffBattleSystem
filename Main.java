@@ -339,7 +339,7 @@ public class Main
         
         targetMove = maxMove;
         if(targetEnemy.staggered()){
-            targetMove = targetUn.unop();
+            targetMove = targetEnemy.unop();
         }
         
         System.out.println("\n>>> You selected " + plyrMv.getName() + " targeting " + targetEnemy.getName() + " <<<");
