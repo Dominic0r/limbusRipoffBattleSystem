@@ -31,6 +31,10 @@ public class Unit{
             
         }
         
+        public void setUnopposedMove(Move newMove){
+            unopposed = newMove;
+        }
+        
         public int getHP(){ return hp;}
         public int getMorale(){return morale;}
         public int getSpeed(){return speed;}
