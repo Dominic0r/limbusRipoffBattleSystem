@@ -1,4 +1,6 @@
 package com.dominic0r.limbusripoff;
+import java.util.*;
+import java.util.function.BiConsumer;
 public class statusEffect{
         String name, description;
         
