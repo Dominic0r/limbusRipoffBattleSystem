@@ -16,6 +16,7 @@ public class Unit{
         List<Move> moveSet = new ArrayList<>();
         
         boolean isStaggered = false;
+        boolean justGotStaggered = false;
         
         
         Move unopposed;
@@ -67,6 +68,7 @@ public class Unit{
             if(!isStaggered){
                 if(hp <= staggerTresh){
                     isStaggered = true;
+                        justGotStaggered = true;
                     System.out.println("!!! " + name + " is STAGGERED !!!"); 
                 }
             }
@@ -74,8 +76,13 @@ public class Unit{
 
         public void checkStaggerRecover(){
                 if(isStaggered){
-                        isStaggered = false;
-                        System.out.println(name + " has recovered from stagger."); 
+                        if(!justGotStaggered){
+                                isStaggered = false;
+                                System.out.println(name + " has recovered from stagger."); 
+                        }else{
+                                justGotStaggered = false;
+                        }
+                        
                 }
         }
         
