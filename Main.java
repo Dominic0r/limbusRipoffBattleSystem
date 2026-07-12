@@ -209,7 +209,7 @@ public class Main
         for(appliedEffect app: playerUnit.getEffectList()){
             app.stat().triggerTurnEnd(field,playerUnit);
         }
-        playerUnit.resetCritChance():
+        playerUnit.resetCritChance();
 
         
         field.incrementTurnCount(); 
