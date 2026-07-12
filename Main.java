@@ -76,24 +76,33 @@ public class Main
         Unit winner, loser;
         int remainingCoins;
         List<Coin> winnerCoinSet = new ArrayList<>();
-        
+        boolean unopposed = false;
         if(attackerCoinCount >0){
             winner = comctx.getAttacker();
             loser = comctx.getDefender();
             remainingCoins = attackerCoinCount;
             winnerCoinSet = attackerCoinSet;
+            if(comctx.getDefenderMove().getBaseAtk()==0){
+                unopposed = true;
+            }
         }else{
             winner = comctx.getDefender();
             loser = comctx.getAttacker();
             remainingCoins = defenderCoinCount;
             winnerCoinSet = defenderCoinSet;
+            if(comctx.getAttackerMove().getBaseAtk()==0){
+                unopposed = true;
+            }
         }
         
         // Added UI for winner
         System.out.println("\n" + winner.getName() + " won the clash with " + remainingCoins + " coin(s) remaining!");
         
-        winner.modifyMorale(5);
-        loser.modifyMorale(-5);
+        if(!unopposed){
+            winner.modifyMorale(5);
+            
+            loser.modifyMorale(-5);
+        }
         
         clashResult finalResult = new clashResult(winner, loser, remainingCoins, winnerCoinSet);
         return finalResult;
