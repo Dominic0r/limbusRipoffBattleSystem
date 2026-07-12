@@ -162,6 +162,14 @@ public class Main
         
         System.out.println("[ Player Info ]");
         System.out.println(playerUnit.getName() + " | HP: " + playerUnit.getHP() + "/" + playerUnit.maxHP + " | Morale: " + playerUnit.getMorale());
+        if(playerUnit.getEffectList().size()>0){
+            for(appliedEffect app: playerUnit.getEffectList()){
+                System.out.println(app.stat().getName()+ " "+ app.getPotency()+" potency, "+ app.getStack()+ " stack");
+            }
+        }
+        if(playerUnit.staggered()){
+            System.out.println("Staggered!");
+        }
         
         System.out.println("\n[ Enemies ]");
         for(int i = 0; i < field.getEnemies().size(); i++){
@@ -171,6 +179,9 @@ public class Main
                 for(appliedEffect app: en.getEffectList()){
                     System.out.println(app.stat().getName()+ " "+ app.getPotency()+" potency, "+ app.getStack()+ " stack");
                 }
+            }
+            if(en.staggered()){
+                System.out.println("Staggered!");
             }
         }
         
@@ -183,6 +194,9 @@ public class Main
                     for(appliedEffect app: en.getEffectList()){
                         System.out.println(app.stat().getName()+ " "+ app.getPotency()+" potency, "+ app.getStack()+ " stack");
                     }
+                }
+                if(en.staggered()){
+                    System.out.println("Staggered!");
                 }
             }
         }
