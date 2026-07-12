@@ -3,8 +3,10 @@ import java.util.*;
 import effect.*;
 
 public class Unit{
-        public int maxHP, hp, morale, speed, staggerTresh;
+        public int maxHP, hp, morale, speed, staggerTresh, critChance, defaultCritChance;
         public String name, description;
+
+        public float critmodifier = 0.02; // damage modifier
         
         List<appliedEffect> effectsOnUnit = new ArrayList<>();
         List<mutation> pendingMutations = new ArrayList<>();
@@ -17,7 +19,7 @@ public class Unit{
         
         
         Move unopposed;
-        public Unit(int hp, int morale, int speed, int staggerTresh, String name, String description, List<Move> moveSet){
+        public Unit(int hp, int morale, int speed, int staggerTresh, int critChance, float critmodifier, String name, String description, List<Move> moveSet){
             this.hp = hp;
             this.maxHP = hp;
             this.morale = morale;
@@ -28,7 +30,9 @@ public class Unit{
             this.staggerTresh = staggerTresh;
             unopposed = new Move("defenseless",0,"...");
             unopposed.addCoin(new Coin(0,"..."));
-            
+            this.critChance = critChance;
+                this. defaultCritChance = critChance;
+                this.critmodifier = critmodifier;
         }
         
         public void setUnopposedMove(Move newMove){
@@ -45,6 +49,17 @@ public class Unit{
         public List<Move> getMoveSet(){ return moveSet;}
         public List<appliedEffect> getEffectList(){ return effectsOnUnit;}
         public boolean staggered(){ return isStaggered;}
+        public int getCritChance(){return critChance;}
+        public float getCritmodifier(){return critmodifier;}
+
+        public void modifyCritChance(int toAdd){
+                critChance+= toAdd;
+        }
+
+        public void resetCritChance(){
+                critChance = defaultCritChance;
+        }
+                
         
         public Move unop(){return unopposed;}
         
