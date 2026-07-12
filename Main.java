@@ -108,6 +108,9 @@ public class Main
     
     public static void afterClash(clashResult result, Battlefield field, combatContext comctx){
         System.out.println("\n --- CLASH RESOLUTION --- "); // Added UI
+
+        result.getWinner().triggerOnClashWin();
+        result.getLoser().triggerOnClashLose();
         for(Coin co: result.getCoinSet()){
             System.out.print(result.getWinner().getName() + " activates: " + co.getDesc()); // Added UI
             
