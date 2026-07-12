@@ -490,7 +490,7 @@ public class Main
         for(Unit un: field.getAllies()){
             if(un.getHP()<=0){
                 toRemove.add(un);
-                System.out.println("An Ally: "un.getName()+ " Has Died!");
+                System.out.println("An Ally: "+un.getName()+ " Has Died!");
             }
         }
         
@@ -500,7 +500,7 @@ public class Main
         for(Unit un: field.getEnemies()){
             if(un.getHP()<=0){
                 toRemove.add(un);
-                System.out.println("An Enemy: "un.getName()+ " Has Died!");
+                System.out.println("An Enemy: "+un.getName()+ " Has Died!");
             }
         }
         
