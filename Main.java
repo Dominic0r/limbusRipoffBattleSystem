@@ -184,7 +184,7 @@ public class Main
                 app.stat().triggerTurnEnd(field, un);
             }
         }
-        field.turnCount++; 
+        field.incrementTurnCount(); 
     }
     
     public static void keepAllAppliedEffectsInBounds(Battlefield field){
