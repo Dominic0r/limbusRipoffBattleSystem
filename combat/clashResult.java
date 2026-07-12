@@ -1,4 +1,4 @@
-package com.dominic0r.limbusripoff;
+package combat;
 
 public class clashResult{
         Unit winner;
