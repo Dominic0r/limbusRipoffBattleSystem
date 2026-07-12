@@ -338,7 +338,9 @@ public class Main
         }
         
         targetMove = maxMove;
-        
+        if(targetEnemy.stagger()){
+            targetMove = targetUn.unop();
+        }
         
         System.out.println("\n>>> You selected " + plyrMv.getName() + " targeting " + targetEnemy.getName() + " <<<");
         
@@ -406,7 +408,7 @@ public class Main
             }
         }
         Move eMov = maxMove; 
-        if(secondary){
+        if(secondary || targetUn.stagger()){
             eMov = targetUn.unop();
         }
         
