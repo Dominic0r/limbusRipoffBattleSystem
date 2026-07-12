@@ -3,8 +3,8 @@ import java.util.*;
 import effect.*;
 
 public class Unit{
-        int maxHP, hp, morale, speed, staggerTresh;
-        String name, description;
+        public int maxHP, hp, morale, speed, staggerTresh;
+        public String name, description;
         
         List<appliedEffect> effectsOnUnit = new ArrayList<>();
         List<mutation> pendingMutations = new ArrayList<>();
