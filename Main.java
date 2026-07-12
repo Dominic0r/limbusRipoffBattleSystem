@@ -338,7 +338,7 @@ public class Main
         }
         
         targetMove = maxMove;
-        if(targetEnemy.stagger()){
+        if(targetEnemy.staggered()){
             targetMove = targetUn.unop();
         }
         
@@ -408,7 +408,7 @@ public class Main
             }
         }
         Move eMov = maxMove; 
-        if(secondary || targetUn.stagger()){
+        if(secondary || targetUn.staggered()){
             eMov = targetUn.unop();
         }
         
@@ -464,7 +464,7 @@ public class Main
         }else{
             targetUn = playerUnit;
         }
-        if(secondary){
+        if(secondary || targetUn.staggered()){
             eMov = targetUn.unop();
         }
         combatContext finalCC = new combatContext(un, aMov, targetUn, eMov, field);
