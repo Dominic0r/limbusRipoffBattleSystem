@@ -1,0 +1,25 @@
+so you wanna learn how to create your own units, huh? well here's a simple guide:
+
+Legend: [description, data type, additional notes if any] - anything in between square brackets must be replaced alongside the square brackets themselves
+
+Unit [Unit identifier] = new Unit([health, integer],
+
+[starting morale, integer, goes from 45 to -45],
+
+[speed value, integer],
+
+[stagger treshold, integer],
+
+[base chance of a critical hit, integer],
+
+[critical hit multiplier, floating point (that means you add a "f" after the value itself), highly recommended to keep it in between 0.01 and 0.99],
+
+[Name of the unit, String],
+
+[Description of the unit, String],
+
+[the unit's moveset, List<Move>, to learn more about this, refer to MoveFormats.txt)]);
+
+
+// 
+Registry.registerUnit([unit ID, String, the highly recommended format is "[shortened content package name]:unitname"], [The newly assembled unit's identifier]);
