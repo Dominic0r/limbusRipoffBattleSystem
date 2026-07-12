@@ -73,9 +73,25 @@ public class BaseContent implements ContentPackage{
                         rst.getLoser().queueMutation(mut);
             }
         }));
+
+        Move nuke = new Move("Nuke", 10, "Nukes the Enemy. Requires at least one enemy to be on or less than 20% of their hp")
+            .setCondition((field,user) -> {
+                for(Unit un: field.getEnemies()){
+                    if(un.getHP() <= un.getMaxHP()/5){
+                        return true;
+                    }
+                }
+                return false;
+            });
+
+        nuke.addCoin(new Coin(10, "NUKE!", rst->{
+            rst.getLoser().takeHPamage(100);
+        }));
+        
         playerMoveSet.add(multiPunch);
         playerMoveSet.add(roundhouse);
         playerMoveSet.add(stab);
+        playerMoveSet.add(nuke);
         
         Unit playerUnit = new Unit(100, 0, 5, 30, "Player", "Description", playerMoveSet);
         
