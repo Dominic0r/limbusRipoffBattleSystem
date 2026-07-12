@@ -1,6 +1,6 @@
 package com.dominic0r.limbusripoff;
 
-public static class mutation{
+public class mutation{
         
         final Type type;
         final int amount;
