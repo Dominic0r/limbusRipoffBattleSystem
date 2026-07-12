@@ -220,7 +220,7 @@ public class Main
         System.out.println("Your moves: ");
 
         List<Move> validMoves = new ArrayList<>();
-        for(Move mov: playerUnit.getMoveSet(){
+        for(Move mov: playerUnit.getMoveSet()){
             if(mov.isUsable(field, playerUnit)){
                 validMoves.add(mov);
             }
@@ -305,7 +305,7 @@ public class Main
         Move maxMove=null;
 
         List<Move> validMoves = new ArrayList<>();
-        for(Move mov: un.getMoveSet(){
+        for(Move mov: un.getMoveSet()){
             if(mov.isUsable(field, un)){
                 validMoves.add(mov);
             }
@@ -344,7 +344,7 @@ public class Main
         }
 
         validMoves.clear();
-        for(Move mov: targetUn.getMoveSet(){
+        for(Move mov: targetUn.getMoveSet()){
             if(mov.isUsable(field, targetUn)){
                 validMoves.add(mov);
             }
