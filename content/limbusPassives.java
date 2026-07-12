@@ -8,7 +8,7 @@ import effect.*;
 import registry.*;
 
 
-public class BaseContent implements ContentPackage{
+public class limbusPassives implements ContentPackage{
     @Override
     public String getPackageId(){
         return "limbus_passives";
