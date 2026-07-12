@@ -76,6 +76,10 @@ public class Unit{
         }
         
         public void setStaggerOn(){ isStaggered = true;}
+
+        public void modifyStaggerTresh(int changeBy){
+                staggerTresh += changeBy;
+        }
         
         
         
