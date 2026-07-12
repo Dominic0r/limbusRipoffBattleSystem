@@ -3,7 +3,7 @@ package registry;
 import java.util.HashMap;
 import java.util.Map;
 import combat.*;
-
+import effect.*;
 public class Registry {
 
     // Storage for status effects (e.g., "base:bleed" -> statusEffect object)
