@@ -6,7 +6,7 @@ public class Unit{
         public int maxHP, hp, morale, speed, staggerTresh, critChance, defaultCritChance;
         public String name, description;
 
-        public float critmodifier = 0.02; // damage modifier
+        public float critmodifier = 0.02f; // damage modifier
         
         List<appliedEffect> effectsOnUnit = new ArrayList<>();
         List<mutation> pendingMutations = new ArrayList<>();
