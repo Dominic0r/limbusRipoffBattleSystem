@@ -18,6 +18,7 @@ Step 5: Run the program by entering java Main.java
 
 
 Instructions on modding:
-Prerequisites: Knowledge on how to code in Java
+
+Prerequisites: Baseline knowledge on how to code in Java
 
 There will be formats provided for each aspect
