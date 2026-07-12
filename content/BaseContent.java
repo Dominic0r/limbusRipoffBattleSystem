@@ -103,15 +103,6 @@ public class BaseContent implements ContentPackage{
         
         // Default Ally 
         List<Move> defAllyMoveSet = new ArrayList<>();
-        Move punch = new Move("Punch", 1, "Two weak punches");
-        
-        punch.addCoin(new Coin(1, "punch-", rst ->{
-            
-            rst.getLoser().takeHPDamage(1);
-        }));
-        punch.addCoin(new Coin(1, "punch again-", rst ->{
-            rst.getLoser().takeHPDamage(1);
-        }));
         
         defAllyMoveSet.add(punch);
         
