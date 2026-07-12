@@ -7,6 +7,7 @@ import effect.*
 
 public class Main
 {
+    public static Random ra = new Random();
     public static Scanner sc = new Scanner(System.in);
     
     public static clashResult clashFunction(Battlefield field, combatContext comctx){
