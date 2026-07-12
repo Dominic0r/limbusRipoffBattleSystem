@@ -566,7 +566,7 @@ public class Main
         attackQueue.sort(Comparator.comparingInt((combatContext cc) -> cc.getAttacker().getSpeed()).reversed()); // sorts by fastest attack speed
         
         for(combatContext cctx : attackQueue){
-            if((cctx.getAttacker().getHP() >0 && cctx.getDefender().getHP() > 0) && (!cctx.getAttacker().staggered() && !cctx.getDefender().staggered())){
+            if((cctx.getAttacker().getHP() >0 && cctx.getDefender().getHP() > 0) && (!cctx.getAttacker().staggered())){
                 clashResult finalResult = clashFunction(field, cctx);
                 
                 keepAllAppliedEffectsInBounds(field);
