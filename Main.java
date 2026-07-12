@@ -639,9 +639,11 @@ public class Main
     //MOD ZONE touch anything outside this with precaution
     //this is where you load your mod packages
     public static void registerAllPackages() {
-        
-        loadPackage(new BaseContent()); 
+
+        //Note: packages that declare passives have HIGHER priority over packages that contain moves that use those passives
         loadPackage(new limbusPassives());
+        loadPackage(new BaseContent()); 
+        
 
         playerUnit = Registry.getUnitTemplate("base:player");
 
