@@ -99,7 +99,7 @@ public class BaseContent implements ContentPackage{
         
         defEnemyMoveset.add(punch);
         
-        Unit defEnemy = new Unit(50, 0, 2, 15, 2,0.2f,  "Enemy", "Default Enemy", defEnemyMoveset);
+        Unit defEnemy = new Unit(50, 0, 2, 30, 2,0.2f,  "Enemy", "Default Enemy", defEnemyMoveset);
         
         Registry.registerUnit("base:enemy", defEnemy);
         
