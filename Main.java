@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 import combat.*;
 import effect.*;
 import content.*;
-
+import registry.*;
 public class Main
 {
     public static Random ra = new Random();
