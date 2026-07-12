@@ -637,6 +637,7 @@ public class Main
     public static void registerAllPackages() {
         
         loadPackage(new BaseContent()); 
+        loadPackage(new limbusPassives());
 
         playerUnit = Registry.getUnitTemplate("base:player");
 
