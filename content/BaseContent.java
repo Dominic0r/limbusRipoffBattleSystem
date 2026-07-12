@@ -14,22 +14,6 @@ public class BaseContent implements ContentPackage{
     
     @Override
     public void registerContent(){
-        statusEffect bleed = new statusEffect("Bleed", false, 99, "Take fixed damage every coin toss");
-        
-        bleed.setOnClash((field, un)->{
-            int damagetaken=0;
-            for(appliedEffect app : un.getEffectList()){
-                if(app.stat() == bleed){
-                    damagetaken = app.getPotency();
-                    un.takeHPDamage(damagetaken);
-                    app.decrementStack();
-                    System.out.println("  > " + un.getName() + " took " + damagetaken + " bleed damage!"); // Added UI
-                }
-            }
-        });
-        
-        Registry.registerStatus("base:bleed", bleed);
-        
         
         List<Move> playerMoveSet = new ArrayList<>();
         
