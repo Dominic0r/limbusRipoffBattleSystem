@@ -14,6 +14,8 @@ public class statusEffect{
         private BiConsumer<Battlefield, Unit> onClash;
         private BiConsumer<Battlefield, Unit> onHitGive;
         private BiConsumer<Battlefield, Unit> onBattleStart;
+        private BiConsumer<Battlefield, Unit> onClashLose;
+        private BiConsumer<Battlefield, Unit> onClashWin;
         
         public statusEffect(String name, boolean decays, int limit, String description){
             this.name = name;
@@ -51,6 +53,16 @@ public class statusEffect{
             this.onBattleStart = hook;
             return this;
         }
+
+        public statusEffect setOnClashLose(BiConsumer<Battlefield, Unit> hook) {
+            this.onClashLose = hook;
+            return this;
+        }
+
+        public statusEffect setOnClashWin(BiConsumer<Battlefield, Unit> hook) {
+            this.onClashWin = hook;
+            return this;
+        }
         
         public void triggerTurnStart(Battlefield field, Unit un) {
             if (onTurnStart != null) onTurnStart.accept(field, un);
@@ -74,6 +86,14 @@ public class statusEffect{
 
         public void triggerOnBattleStart(Battlefield field, Unit un){
             if(onHitGive != null) onBattleStart.accept(field, un);
+        }
+
+        public void triggerOnClashLose(Battlefield field, Unit un){
+            if(onHitGive != null) onClashLose.accept(field, un);
+        }
+        
+        public void triggerOnClashWin(Battlefield field, Unit un){
+            if(onHitGive != null) onClashWin.accept(field, un);
         }
         
         public String getName(){ return name;}
