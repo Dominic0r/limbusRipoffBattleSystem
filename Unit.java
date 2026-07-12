@@ -1,7 +1,7 @@
 package com.dominic0r.limbusripoff;
 import java.util.*;
 
-public static class Unit{
+public class Unit{
         int maxHP, hp, morale, speed, staggerTresh;
         String name, description;
         
