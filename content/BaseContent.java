@@ -85,7 +85,7 @@ public class BaseContent implements ContentPackage{
             });
 
         nuke.addCoin(new Coin(10, "NUKE!", rst->{
-            rst.getLoser().takeHPamage(100);
+            rst.getLoser().takeHPDamage(100);
         }));
         
         playerMoveSet.add(multiPunch);
