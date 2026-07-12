@@ -1,5 +1,6 @@
 package com.dominic0r.limbusripoff;
 import java.util.*;
+import java.util.function.Consumer;
 public class Coin{
         Random ra = new Random();
         private Consumer<clashResult> onHitEffect;
