@@ -18,8 +18,8 @@ public class Main
         int attackerCoinCount = attackerCoinSet.size();
         int defenderCoinCount = defenderCoinSet.size();
         
-        int currentAttackerPoints = 0;
-        int currentDefenderPoints = 0;
+        int currentAttackerPoints = comctx.getAttackerMove().getBaseAtk();
+        int currentDefenderPoints = comctx.getDefenderMove().getBaseAtk();
         
         // Added UI for clash initialization
         System.out.println("\n--- CLASH START --- ️");
