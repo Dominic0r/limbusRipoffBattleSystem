@@ -17,6 +17,7 @@ public class Unit{
         
         boolean isStaggered = false;
         boolean justGotStaggered = false;
+        boolean alreadyStaggered = false;
         
         
         Move unopposed;
@@ -65,11 +66,12 @@ public class Unit{
         public Move unop(){return unopposed;}
         
         public void checkStagger(){
-            if(!isStaggered){
+            if(!isStaggered && !alreadyStaggered){
                 if(hp <= staggerTresh){
                     isStaggered = true;
                         justGotStaggered = true;
                     System.out.println("!!! " + name + " is STAGGERED !!!"); 
+                        alreadyStaggered = true;
                 }
             }
         }
