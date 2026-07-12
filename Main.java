@@ -304,7 +304,7 @@ public class Main
         }while(!validInput);
         
         Move plyrMv = validMoves.get(choice-1);
-        counter = 1;
+        counter = 0;
         System.out.println("\nChoose a target: ");
         for(Unit un: field.getEnemies()){
             System.out.println(counter+": "+ un.getName()+ "\n"+un.getDesc());
