@@ -148,9 +148,14 @@ public class Unit{
             }
         }
         
-        public void takeHPDamage(int dam){
+        public void takeHPDamage(int dam, Unit source){
+                Random ra = new Random();
+                if(ra.nextInt(100) < source.getCritChance()){
+                        dam += dam*source.getCritmodifier;
+                }
+                
             hp -= dam;
-            // Added UI
+            
             System.out.println("  > " + name + " took " + dam + " damage! (HP: " + hp + "/" + maxHP + ")");
         }
         public void takeMoraleDamage(int dam){
