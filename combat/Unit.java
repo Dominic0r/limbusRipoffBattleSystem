@@ -36,6 +36,7 @@ public class Unit{
         }
         
         public int getHP(){ return hp;}
+        public int getMaxHP(){ return maxHP;}
         public int getMorale(){return morale;}
         public int getSpeed(){return speed;}
         public int getStaggerTresh(){ return staggerTresh;}
