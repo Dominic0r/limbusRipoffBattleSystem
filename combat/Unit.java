@@ -163,7 +163,7 @@ public class Unit{
             System.out.println("  > " + name + " took " + dam + " damage! (HP: " + hp + "/" + maxHP + ")");
         }
 
-        public void takeHPDamage(int dam, ){
+        public void takeHPDamage(int dam){
                 
             hp -= dam;
             
