@@ -577,6 +577,7 @@ public class Main
                 keepAllAppliedEffectsInBounds(field);
             }
             checkHP(field);
+            checkAllStagger(field);
         }
         
         turnEnd(field);
