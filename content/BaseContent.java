@@ -114,6 +114,6 @@ public class BaseContent implements ContentPackage{
         defAllyMoveSet.add(punch);
         
         Unit defAlly = new Unit(50, 0, 2, 15, "Ally", "Default Ally", defAllyMoveSet);
-        Registry.registerUnit("base:ally", defAlly)
+        Registry.registerUnit("base:ally", defAlly);
     }
 }
