@@ -624,6 +624,12 @@ public class Main
     public static void registerAllPackages() {
         
         loadPackage(new BaseContent()); 
+
+        playerUnit = Registry.getUnitTemplate("base:player");
+
+        allAllies.add(Registry.getUnitTemplate("base:ally");
+
+        allEnemies.add(Registry.getUnitTemplate("base:enemy");
     }
     //===============================================================================================
 
