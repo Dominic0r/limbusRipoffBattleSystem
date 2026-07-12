@@ -460,21 +460,68 @@ public class Main
             }
         }
         
+        attackQueue.sort(Comparator.comparingInt(combatContext -> combatContext.getAttacker().getSpeed()).reversed()); // sorts by fastest attack speed
+        
         for(combatContext cctx : attackQueue){
-            clashResult finalResult = clashFunction(field, cctx);
-            
-            keepAllAppliedEffectsInBounds(field);
-            
-            afterClash(finalResult, field, cctx);
-            
-            keepAllAppliedEffectsInBounds(field);
+            if((cctx.getAttacker().getHP() >0 && cctx.getDefender().getHP() > 0) && (!cctx.getAttacker().isStaggered() && !cctx.getDefender().isStaggered())){
+                clashResult finalResult = clashFunction(field, cctx);
+                
+                keepAllAppliedEffectsInBounds(field);
+                
+                if(finalResult.getWinner().getHP() >0 && finalResult.getWinner().isStaggered()){
+                    afterClash(finalResult, field, cctx);
+                }
+                
+                keepAllAppliedEffectsInBounds(field);
+            }
+            checkHP(field);
         }
         
         turnEnd(field);
         haveAllPendingMutationsApplied(field);
         keepAllAppliedEffectsInBounds(field);
+        checkHP(field);
         
+    }
+    
+    public static void checkHP(Battlefield field){
+        List<Unit> toRemove = new ArrayList<>();
         
+        for(Unit un: field.getAllies()){
+            if(un.getHP()<=0){
+                toRemove.add(un);
+                System.out.println("An Ally: "un.getName()+ " Has Died!");
+            }
+        }
+        
+        allAllies.removeAll(toRemove);
+        toRemove.clear();
+        
+        for(Unit un: field.getEnemies()){
+            if(un.getHP()<=0){
+                toRemove.add(un);
+                System.out.println("An Enemy: "un.getName()+ " Has Died!");
+            }
+        }
+        
+        allEnemies.removeAll(toRemove);
+        toRemove.clear();
+        
+        if(playerUnit.getHP() <= 0){
+            // lose scenario
+        }
+    }
+    
+    public static void checkWin(Battlefield field){
+        if(field.getEnemies().size() <=0){
+            System.out.println("YOU WIN!");
+            System.exit(0);
+        }
+    }
+    
+    public static void youlose(){
+        System.out.println("YOU LOSE!");
+        System.exit(0);
     }
     
     public static void haveAllPendingMutationsApplied(Battlefield field){
@@ -637,6 +684,8 @@ public class Main
         System.out.println("Loading package: " + pkg.getPackageId());
         pkg.registerContent();
     }
+    
+    
     
     public static void main(String[] args) {
         System.out.println("--- INITIALIZING GAME ---\n"); 
