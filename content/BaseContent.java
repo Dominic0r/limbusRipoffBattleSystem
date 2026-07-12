@@ -1,5 +1,7 @@
 package content;
 
+import java.util.*;
+
 import combat.*;
 import effect.*;
 import registry.*;
