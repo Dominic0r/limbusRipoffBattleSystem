@@ -14,7 +14,7 @@ public class Coin{
             this(atkPoints, description, rst ->{});
         }
         
-        public Coin (int atkPoints, boolean unbreakable, String description, Consumer<clashResult> onHitEffect){
+        public Coin (int atkPoints, boolean unbreakable, String description, BiConsumer<clashResult,Unit> onHitEffect){
             this.atkPoints = atkPoints;
             this.description = description;
             this.onHitEffect = onHitEffect;
