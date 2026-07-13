@@ -22,29 +22,29 @@ public class BaseContent implements ContentPackage{
         
         Move multiPunch = new Move("Multi-Punch", 5, "Punches the Enemy 3 times");
         multiPunch.addCoin(new Coin(2, "Punch!", (rst, un) ->{
-            rst.getLoser().takeHPDamage(5, rst.getWinner(), damageType.BLUNT);
+            rst.getLoser().takeHPDamage(5, rst.getNoOfTurns(), rst.getWinner(), damageType.BLUNT);
         }));
         
         multiPunch.addCoin(new Coin(1, "Punch Again!", (rst, un) ->{
-            rst.getLoser().takeHPDamage(3,rst.getWinner(), damageType.BLUNT);
+            rst.getLoser().takeHPDamage(3, rst.getNoOfTurns(), rst.getWinner(), damageType.BLUNT);
         }));
         
         multiPunch.addCoin(new Coin(3, "Upper Cut!", (rst, un) ->{
-            rst.getLoser().takeHPDamage(7,rst.getWinner(),damageType.BLUNT);
+            rst.getLoser().takeHPDamage(7, rst.getNoOfTurns(), rst.getWinner(),damageType.BLUNT);
         }));
         
         Move roundhouse = new Move("Roundhouse Kick", 3, "Kicks the enemy hard");
         roundhouse.addCoin(new Coin(10, "Kick!", (rst, un) ->{
-            rst.getLoser().takeHPDamage(10,rst.getWinner(),damageType.PIERCE);
+            rst.getLoser().takeHPDamage(10, rst.getNoOfTurns(), rst.getWinner(),damageType.PIERCE);
         }));
         
         Move stab = new Move("Stab", 4, "Stabs the enemy twice");
         stab.addCoin(new Coin(3, "Swish!", (rst, un)  ->{
-            rst.getLoser().takeHPDamage(4,rst.getWinner(),damageType.SLASH);
+            rst.getLoser().takeHPDamage(4, rst.getNoOfTurns(), rst.getWinner(),damageType.SLASH);
         }));
         
         stab.addCoin(new Coin(3, "Slash! - Inflicts 3 bleed potency", (rst, un)  ->{
-            rst.getLoser().takeHPDamage(4,rst.getWinner(),damageType.SLASH);
+            rst.getLoser().takeHPDamage(4, rst.getNoOfTurns(), rst.getWinner(),damageType.SLASH);
             if(!rst.getLoser().getEffectList().isEmpty()){
                 for(appliedEffect app: rst.getLoser().getEffectList()){
                     if(app.stat()==bleed){
@@ -74,7 +74,7 @@ public class BaseContent implements ContentPackage{
             });
 
         nuke.addCoin(new Coin(10, "NUKE!", (rst, un) ->{
-            rst.getLoser().takeHPDamage(100,rst.getWinner(),damageType.BLUNT);
+            rst.getLoser().takeHPDamage(100, rst.getNoOfTurns(), rst.getWinner(),damageType.BLUNT);
         }));
         
         playerMoveSet.add(multiPunch);
@@ -93,14 +93,14 @@ public class BaseContent implements ContentPackage{
         Move punchUnbreakable = new Move("Unbreakable Punch", 3, "Two weak punches");
         
         punchUnbreakable.addCoin(new Coin(1,"punch", (rst, un) ->{
-                rst.getLoser().takeHPDamage(3,rst.getWinner(),damageType.BLUNT);
+                rst.getLoser().takeHPDamage(3, rst.getNoOfTurns(), rst.getWinner(),damageType.BLUNT);
             
         }));
         punchUnbreakable.addCoin(new Coin(1,true, "punch unbreakable", (rst, un)  ->{
             if(rst.getLoser() ==un){ // this if/else is necessary for unbreakable coins 
-                rst.getWinner().takeHPDamage(3,rst.getWinner(),damageType.BLUNT);
+                rst.getWinner().takeHPDamage(3, rst.getNoOfTurns(), rst.getWinner(),damageType.BLUNT);
             }else{
-                rst.getLoser().takeHPDamage(3,rst.getWinner(),damageType.BLUNT);
+                rst.getLoser().takeHPDamage(3, rst.getNoOfTurns(), rst.getWinner(),damageType.BLUNT);
             }
         }));
 
@@ -109,10 +109,10 @@ public class BaseContent implements ContentPackage{
         
         punch.addCoin(new Coin(1, "punch-", (rst, un)  ->{
             
-            rst.getLoser().takeHPDamage(3,rst.getWinner(),damageType.BLUNT);
+            rst.getLoser().takeHPDamage(3, rst.getNoOfTurns(), rst.getWinner(),damageType.BLUNT);
         }));
         punch.addCoin(new Coin(1, "punch again-", (rst, un)  ->{
-            rst.getLoser().takeHPDamage(3,rst.getWinner(),damageType.BLUNT);
+            rst.getLoser().takeHPDamage(3, rst.getNoOfTurns(), rst.getWinner(),damageType.BLUNT);
         }));
         
         defEnemyMoveset.add(punchUnbreakable);
