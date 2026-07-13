@@ -216,18 +216,24 @@ public class Main
                 app.stat().triggerTurnEnd(field, un);
             }
             un.resetCritChance();
+            un.resetSpeedMod();
+            un.resetCritMod();
         }
         for(Unit un : field.getEnemies()){
             for(appliedEffect app : un.getEffectList()){
                 app.stat().triggerTurnEnd(field, un);
             }
             un.resetCritChance();
+            un.resetSpeedMod();
+            un.resetCritMod();
         }
 
         for(appliedEffect app: playerUnit.getEffectList()){
             app.stat().triggerTurnEnd(field,playerUnit);
         }
         playerUnit.resetCritChance();
+        playerUnit.resetSpeedMod();
+        playerUnit.resetCritMod();
 
         
         field.incrementTurnCount(); 
