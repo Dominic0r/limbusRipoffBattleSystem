@@ -339,7 +339,7 @@ public class Main
         do{
             choice = Integer.parseInt(sc.nextLine());
             
-            if(choice > counter){
+            if(choice > counter-1){
                 System.out.println("Invalid input. Try again:");
                 validInput = false;
             }else{
@@ -349,7 +349,7 @@ public class Main
         }while(!validInput);
         
         Move plyrMv = validMoves.get(choice-1);
-        counter = 0;
+        counter = 1;
         System.out.println("\nChoose a target: ");
         for(Unit un: field.getEnemies()){
             System.out.println(counter+": "+ un.getName()+ "\n"+un.getDesc());
@@ -360,7 +360,7 @@ public class Main
         do{
             choice = Integer.parseInt(sc.nextLine());
             
-            if(choice > counter){
+            if(choice > counter-1){
                 System.out.println("Invalid input. Try again:");
                 validInput = false;
             }else{
