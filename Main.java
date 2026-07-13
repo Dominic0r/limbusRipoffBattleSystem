@@ -732,9 +732,13 @@ public class Main
 
         allAllies.add(Registry.getUnitTemplate("base:ally"));
 
-        allEnemies.add(Registry.getUnitTemplate("base:enemy"));
-        allEnemies.add(Registry.getUnitTemplate("base:enemy"));
-        allEnemies.add(Registry.getUnitTemplate("base:enemy"));
+        Unit enem1 = new Unit(Registry.getUnitTemplate("base:enemy"));
+        Unit enem2 = new Unit(Registry.getUnitTemplate("base:enemy"));
+        Unit enem3 = new Unit(Registry.getUnitTemplate("base:enemy"));
+        
+        allEnemies.add(enem1);
+        allEnemies.add(enem2);
+        allEnemies.add(enem3);
     }
     //===============================================================================================
 
