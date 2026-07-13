@@ -172,6 +172,7 @@ public class Main
                 checkWin(field);
         }
 
+        System.out.println("\n")
         if(!result.getLoserUnbreakables().isEmpty()){
             for(Coin co: result.getLoserUnbreakables()){
             System.out.print(result.getLoser().getName() + " activates unbreakable coin: " + co.getDesc()); // Added UI
