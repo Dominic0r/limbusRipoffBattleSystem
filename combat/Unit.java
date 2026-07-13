@@ -48,15 +48,15 @@ public class Unit{
         public int getHP(){ return hp;}
         public int getMaxHP(){ return maxHP;}
         public int getMorale(){return morale;}
-        public int getSpeed(){return speed+speedMod;}
+        public int getSpeed(){return Math.max(1,speed+speedMod);}
         public int getStaggerTresh(){ return staggerTresh;}
         public String getName(){return name;}
         public String getDesc(){return description;}
         public List<Move> getMoveSet(){ return moveSet;}
         public List<appliedEffect> getEffectList(){ return effectsOnUnit;}
         public boolean staggered(){ return isStaggered;}
-        public int getCritChance(){return critChance+critChanceMod;}
-        public float getCritmodifier(){return critmodifier+critMod;}
+        public int getCritChance(){return Math.max(1,critChance+critChanceMod);}
+        public float getCritmodifier(){return Math.max(0.01,critmodifier+critMod);}
 
         public void addCritModifier(float toAdd){
                 critMod+=toAdd;
@@ -81,6 +81,8 @@ public class Unit{
         public void resetCritChance(){
                 critChanceMod = 0;
         }
+
+        
                 
         
         public Move unop(){return unopposed;}
