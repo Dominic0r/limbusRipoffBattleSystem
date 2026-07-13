@@ -21,29 +21,29 @@ public class BaseContent implements ContentPackage{
         List<Move> playerMoveSet = new ArrayList<>();
         
         Move multiPunch = new Move("Multi-Punch", 5, "Punches the Enemy 3 times");
-        multiPunch.addCoin(new Coin(2, "Punch!", rst ->{
+        multiPunch.addCoin(new Coin(2, "Punch!", (rst, un) ->{
             rst.getLoser().takeHPDamage(5, rst.getWinner(), damageType.BLUNT);
         }));
         
-        multiPunch.addCoin(new Coin(1, "Punch Again!", rst ->{
+        multiPunch.addCoin(new Coin(1, "Punch Again!", (rst, un) ->{
             rst.getLoser().takeHPDamage(3,rst.getWinner(), damageType.BLUNT);
         }));
         
-        multiPunch.addCoin(new Coin(3, "Upper Cut!", rst ->{
+        multiPunch.addCoin(new Coin(3, "Upper Cut!", (rst, un) ->{
             rst.getLoser().takeHPDamage(7,rst.getWinner(),damageType.BLUNT);
         }));
         
         Move roundhouse = new Move("Roundhouse Kick", 3, "Kicks the enemy hard");
-        roundhouse.addCoin(new Coin(10, "Kick!", rst ->{
+        roundhouse.addCoin(new Coin(10, "Kick!", (rst, un) ->{
             rst.getLoser().takeHPDamage(10,rst.getWinner(),damageType.PIERCE);
         }));
         
         Move stab = new Move("Stab", 4, "Stabs the enemy twice");
-        stab.addCoin(new Coin(3, "Swish!", rst ->{
+        stab.addCoin(new Coin(3, "Swish!", (rst, un)  ->{
             rst.getLoser().takeHPDamage(4,rst.getWinner(),damageType.SLASH);
         }));
         
-        stab.addCoin(new Coin(3, "Slash! - Inflicts 3 bleed potency", rst ->{
+        stab.addCoin(new Coin(3, "Slash! - Inflicts 3 bleed potency", (rst, un)  ->{
             rst.getLoser().takeHPDamage(4,rst.getWinner(),damageType.SLASH);
             if(!rst.getLoser().getEffectList().isEmpty()){
                 for(appliedEffect app: rst.getLoser().getEffectList()){
@@ -73,7 +73,7 @@ public class BaseContent implements ContentPackage{
                 return false;
             });
 
-        nuke.addCoin(new Coin(10, "NUKE!", rst->{
+        nuke.addCoin(new Coin(10, "NUKE!", (rst, un) ->{
             rst.getLoser().takeHPDamage(100,rst.getWinner(),damageType.BLUNT);
         }));
         
@@ -89,13 +89,28 @@ public class BaseContent implements ContentPackage{
         //Default Enemy
         
         List<Move> defEnemyMoveset = new ArrayList<>();
+
+        Move punchUnbreakable = new Move("Punch", 3, "Two weak punches");
+        
+        punch.addCoin(new Coin(1,"punch-", (rst, un) ->{
+            if(rst.getLoser() ==un){
+                rst.getWinner().takeHPDamage(3,rst.getWinner(),damageType.BLUNT);
+            }else{
+                rst.getLoser().takeHPDamage(3,rst.getWinner(),damageType.BLUNT);
+            }
+        }));
+        punch.addCoin(new Coin(1,true, "punch again-", (rst, un)  ->{
+            rst.getLoser().takeHPDamage(3,rst.getWinner(),damageType.BLUNT);
+        }));
+
+        
         Move punch = new Move("Punch", 3, "Two weak punches");
         
-        punch.addCoin(new Coin(1, "punch-", rst ->{
+        punch.addCoin(new Coin(1, "punch-", (rst, un)  ->{
             
             rst.getLoser().takeHPDamage(3,rst.getWinner(),damageType.BLUNT);
         }));
-        punch.addCoin(new Coin(1, "punch again-", rst ->{
+        punch.addCoin(new Coin(1, "punch again-", (rst, un)  ->{
             rst.getLoser().takeHPDamage(3,rst.getWinner(),damageType.BLUNT);
         }));
         
