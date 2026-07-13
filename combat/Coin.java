@@ -21,7 +21,7 @@ public class Coin{
                 this.unbreakable = unbreakable;
         }
 
-        public Coin (int atkPoints, String description, Consumer<clashResult, Unit> onHitEffect){
+        public Coin (int atkPoints, String description, BiConsumer<clashResult, Unit> onHitEffect){
             this.atkPoints = atkPoints;
             this.description = description;
             this.onHitEffect = onHitEffect;
