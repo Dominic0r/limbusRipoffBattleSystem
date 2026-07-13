@@ -9,36 +9,36 @@ public class Unit{
 
         public float critmodifier = 0.02f; // damage modifier
         
-        List<appliedEffect> effectsOnUnit = new ArrayList<>();
-        List<mutation> pendingMutations = new ArrayList<>();
+        public List<appliedEffect> effectsOnUnit = new ArrayList<>();
+        public List<mutation> pendingMutations = new ArrayList<>();
 
-        Map<damageType,Float> damageAffect= new HashMap<>();
-        Map<damageType,Float> damageAffectModifiers= new HashMap<>();
+        public Map<damageType,Float> damageAffect= new HashMap<>();
+        public Map<damageType,Float> damageAffectModifiers= new HashMap<>();
         
         
         
-        List<Move> moveSet = new ArrayList<>();
+        public List<Move> moveSet = new ArrayList<>();
         
-        boolean isStaggered = false;
-        boolean justGotStaggered = false;
-        boolean alreadyStaggered = false;
+        public boolean isStaggered = false;
+        public boolean justGotStaggered = false;
+        public boolean alreadyStaggered = false;
 
-        int speedMod = 0; // speed modifier
+        public int speedMod = 0; // speed modifier
 
-        int critChanceMod = 0;
+        public int critChanceMod = 0;
 
-        float critMod = 0; // modifies additional damage dealt by a critical hit
+        public float critMod = 0; // modifies additional damage dealt by a critical hit
 
-        int attackMod = 0, defendMod=0;
+        public int attackMod = 0, defendMod=0;
 
-        int baseAtk,baseDef;
+        public int baseAtk,baseDef;
 
-        int coinPowerMod = 0;
+        public int coinPowerMod = 0;
 
-        int finalCoinPowerMod = 0; // modifies coin power after all coins have been flipped
+        public int finalCoinPowerMod = 0; // modifies coin power after all coins have been flipped
         
-        Move unopposed;
-        Move staggered;
+        public Move unopposed;
+        public Move staggered;
         public Unit(int hp, int morale, int speed, int staggerTresh, int critChance, int baseAtk, int baseDef, float critmodifier, float slash, float pierce, float blunt, String name, String description, List<Move> moveSet){
             this.hp = hp;
             this.maxHP = hp;
@@ -55,6 +55,32 @@ public class Unit{
                 this.critmodifier = critmodifier;
                 this.baseAtk = baseAtk;
                 this.baseDef = baseDef;
+
+                damageAffect.put(damageType.SLASH, slash); // percentage guide: 1.5 = fatal, 1.0 = neutral, 0.5 = ineffective
+                damageAffect.put(damageType.PIERCE, pierce);
+                damageAffect.put(damageType.BLUNT, blunt);
+
+                damageAffectModifiers.put(damageType.SLASH,0.0f);
+                damageAffectModifiers.put(damageType.PIERCE,0.0f);
+                damageAffectModifiers.put(damageType.BLUNT,0.0f);
+                
+        }
+
+        public Unit(Unit other){
+            this.hp = other.hp;
+            this.maxHP = other.hp;
+            this.morale = other.morale;
+            this.speed = other.speed;
+            this.name = other.name;
+            this.description = other.description;
+            this.moveSet = other.moveSet;
+            this.staggerTresh = other.staggerTresh;
+            unopposed = other.unopposed;
+                staggered = new Move("defenseless",0,"...");
+            this.critChance = other.critChance;
+                this.critmodifier = other.critmodifier;
+                this.baseAtk = other.baseAtk;
+                this.baseDef = other.baseDef;
 
                 damageAffect.put(damageType.SLASH, slash); // percentage guide: 1.5 = fatal, 1.0 = neutral, 0.5 = ineffective
                 damageAffect.put(damageType.PIERCE, pierce);
