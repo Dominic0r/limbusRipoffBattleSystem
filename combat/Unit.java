@@ -67,7 +67,7 @@ public class Unit{
         public List<appliedEffect> getEffectList(){ return effectsOnUnit;}
         public boolean staggered(){ return isStaggered;}
         public int getCritChance(){return Math.max(1,critChance+critChanceMod);}
-        public float getCritmodifier(){return Math.max(0.01,critmodifier+critMod);}
+        public float getCritmodifier(){return Math.max(0.01f,critmodifier+critMod);}
         public int getAtk(){ return Math.max(0, baseAtk+attackMod);}
         public int getDef(){return Math.max(0,baseDef+defendMod);}
         public int getCoinPowerMod(){return coinPowerMod;}
