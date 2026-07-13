@@ -12,8 +12,8 @@ public class Unit{
         List<appliedEffect> effectsOnUnit = new ArrayList<>();
         List<mutation> pendingMutations = new ArrayList<>();
 
-        Map<damageType,float> damageAffect= new HashMap<>();
-        Map<damageType,float> damageAffectModifiers= new HashMap<>();
+        Map<damageType,Float> damageAffect= new HashMap<>();
+        Map<damageType,Float> damageAffectModifiers= new HashMap<>();
         
         
         
@@ -60,9 +60,9 @@ public class Unit{
                 damageAffect.put(damageType.PIERCE, pierce);
                 damageAffect.put(damageType.BLUNT, blunt);
 
-                damageAffectModifier.put(damageType.SLASH,0.0f);
-                damageAffectModifier.put(damageType.PIERCE,0.0f);
-                damageAffectModifier.put(damageType.BLUNT,0.0f);
+                damageAffectModifiers.put(damageType.SLASH,0.0f);
+                damageAffectModifiers.put(damageType.PIERCE,0.0f);
+                damageAffectModifiers.put(damageType.BLUNT,0.0f);
                 
         }
 
