@@ -234,6 +234,7 @@ public class Main
             un.resetAttackMod();
             un.resetDefendMod();
             un.resetCoinPowerMod();
+            un.resetFinalCoinPowerMod();
         }
         for(Unit un : field.getEnemies()){
             for(appliedEffect app : un.getEffectList()){
@@ -245,6 +246,7 @@ public class Main
             un.resetAttackMod();
             un.resetDefendMod();
             un.resetCoinPowerMod();
+            un.resetFinalCoinPowerMod();
         }
 
         for(appliedEffect app: playerUnit.getEffectList()){
@@ -256,6 +258,7 @@ public class Main
         playerUnit.resetAttackMod();
         playerUnit.resetDefendMod();
         playerUnit.resetCoinPowerMod();
+        playerUnit.resetFinalCoinPowerMod();
 
         
         field.incrementTurnCount(); 
