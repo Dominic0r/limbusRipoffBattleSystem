@@ -11,7 +11,7 @@ public class Coin{
         String description;
         
         public Coin(int atkPoints, String description){
-            this(atkPoints, description, rst ->{});
+            this(atkPoints, description, (rst, un) ->{});
         }
         
         public Coin (int atkPoints, boolean unbreakable, String description, BiConsumer<clashResult,Unit> onHitEffect){
