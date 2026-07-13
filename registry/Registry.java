@@ -13,7 +13,7 @@ public class Registry {
     public static Map<String, Unit> PRESET_UNITS = new HashMap<>();
 
     //Storage for moves
-    public static Map<String, Unit> MOVES = new HashMap<>();
+    public static Map<String, move> MOVES = new HashMap<>();
 
     public static void registerStatus(String id, statusEffect effect) {
         STATUS_EFFECTS.put(id.toLowerCase(), effect);
