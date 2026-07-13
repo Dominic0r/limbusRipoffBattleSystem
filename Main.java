@@ -69,7 +69,7 @@ public class Main
                 System.out.println("    -> Tie! No coins lost.");
             }else{
                 if(currentAttackerPoints > currentDefenderPoints){
-                    if(defenderCoinset.get(defenderCoinSet.size()-1).isUnbreakable()){
+                    if(defenderCoinSet.get(defenderCoinSet.size()-1).isUnbreakable()){
                         defenderUnbreakables.add(defenderCoinset.get(defenderCoinSet.size()-1));
                     }
                     defenderCoinSet.remove(defenderCoinSet.size()-1);
