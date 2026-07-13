@@ -5,11 +5,12 @@ public class clashResult{
         Unit winner;
         Unit loser;
         int remainingCoins;
+        int turnsTaken;
         List<Coin> winnerCoinSet = new ArrayList<>();
         
         List<Coin> loserUnbreakables = new ArrayList<>();
         
-        public clashResult(Unit winner, Unit loser, int remainingCoins, List<Coin> winnerCoinSet, List<Coin> loserUnbreakables, List<Coin> winnerUnbreakables){
+        public clashResult(Unit winner, Unit loser, int remainingCoins, int turnsTaken, List<Coin> winnerCoinSet, List<Coin> loserUnbreakables, List<Coin> winnerUnbreakables){
             this.winner = winner;
             this.loser = loser;
             this.remainingCoins = remainingCoins;
@@ -20,11 +21,13 @@ public class clashResult{
                                 winnerCoinSet.add(co);
                         }
                 }
+                this.turnsTaken = turnsTaken;
         }
         
         public Unit getWinner(){ return winner;}
         public Unit getLoser(){ return loser;}
         public int getRemCoins() { return remainingCoins;}
+        public int getNoOfTurns() { return turnsTaken;}
         public List<Coin> getCoinSet(){ return winnerCoinSet;}
         public List<Coin> getLoserUnbreakables(){return loserUnbreakables;}
     }
