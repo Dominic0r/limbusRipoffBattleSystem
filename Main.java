@@ -39,6 +39,14 @@ public class Main
             for(Coin co: defenderCoinSet){
                 currentDefenderPoints += co.getCoinPower(comctx.getDefender().getMorale());
             }
+
+            for(appliedEffect app : comctx.getAttacker().getEffectList()){
+                app.stat().triggerOnBeforeClash(field, comctx.getAttacker());
+            }
+
+            for(appliedEffect app : comctx.getDefender().getEffectList()){
+                app.stat().triggerOnBeforeClash(field, comctx.getDefender());
+            }
             
             // Added UI for Clash Results per round
             System.out.println("  [Round " + clashRound + "] " 
