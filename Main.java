@@ -733,6 +733,8 @@ public class Main
         allAllies.add(Registry.getUnitTemplate("base:ally"));
 
         allEnemies.add(Registry.getUnitTemplate("base:enemy"));
+        allEnemies.add(Registry.getUnitTemplate("base:enemy"));
+        allEnemies.add(Registry.getUnitTemplate("base:enemy"));
     }
     //===============================================================================================
 
