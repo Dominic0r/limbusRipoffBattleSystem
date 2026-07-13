@@ -35,6 +35,7 @@ public class Unit{
         int finalCoinPowerMod = 0; // modifies coin power after all coins have been flipped
         
         Move unopposed;
+        Move staggered;
         public Unit(int hp, int morale, int speed, int staggerTresh, int critChance, int baseAtk, int baseDef, float critmodifier, String name, String description, List<Move> moveSet){
             this.hp = hp;
             this.maxHP = hp;
@@ -46,6 +47,8 @@ public class Unit{
             this.staggerTresh = staggerTresh;
             unopposed = new Move("defenseless",0,"...");
             unopposed.addCoin(new Coin(0,"..."));
+                staggered = new Move("defenseless",0,"...");
+            staggered.addCoin(new Coin(0,"..."));
             this.critChance = critChance;
                 this.critmodifier = critmodifier;
                 this.baseAtk = baseAtk;
@@ -133,6 +136,7 @@ public class Unit{
                 
         
         public Move unop(){return unopposed;}
+        public Move whenStaggered(){ return staggered;}
         
         public void checkStagger(){
             if(!isStaggered && !alreadyStaggered){
