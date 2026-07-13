@@ -136,7 +136,7 @@ public class Main
             loser.modifyMorale(-5);
         }
         
-        clashResult finalResult = new clashResult(winner, loser, remainingCoins, winnerCoinSet, loserUnbreakables,winnerUnbreakables);
+        clashResult finalResult = new clashResult(winner, loser, clashRound, remainingCoins, winnerCoinSet, loserUnbreakables,winnerUnbreakables);
         return finalResult;
     }
     
