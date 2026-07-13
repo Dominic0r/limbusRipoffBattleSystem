@@ -70,7 +70,7 @@ public class Main
             }else{
                 if(currentAttackerPoints > currentDefenderPoints){
                     if(defenderCoinset.get(defenderCoinSet.size()-1).isUnbreakable()){
-                        defenderUnbreakables.add(defenderCoinset.get(defenderCoinSet.size()-1))
+                        defenderUnbreakables.add(defenderCoinset.get(defenderCoinSet.size()-1));
                     }
                     defenderCoinSet.remove(defenderCoinSet.size()-1);
                     defenderCoinCount--;
@@ -78,7 +78,7 @@ public class Main
                     System.out.println("    -> " + comctx.getDefender().getName() + " lost a coin!"); 
                 }else{
                     if(attackerCoinSet.get(attackerCoinSet.size()-1).isUnbreakable()){
-                        attackerUnbreakables.add(attackerCoinSet.get(attackerCoinSet.size()-1))
+                        attackerUnbreakables.add(attackerCoinSet.get(attackerCoinSet.size()-1));
                     }
                     attackerCoinSet.remove(attackerCoinSet.size()-1);
                     attackerCoinCount--;
