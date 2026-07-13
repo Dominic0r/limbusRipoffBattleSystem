@@ -11,6 +11,7 @@ public class statusEffect{
         private BiConsumer<Battlefield, Unit> onTurnStart;
         private BiConsumer<Battlefield, Unit> onHitReceived;
         private BiConsumer<Battlefield, Unit> onTurnEnd;
+        private BiConsumer<Battlefield, Unit> onBeforeClash; // to activate before the comparison of the final values
         private BiConsumer<Battlefield, Unit> onClash;
         private BiConsumer<Battlefield, Unit> onHitGive;
         private BiConsumer<Battlefield, Unit> onBattleStart;
@@ -63,6 +64,11 @@ public class statusEffect{
             this.onClashWin = hook;
             return this;
         }
+
+        public statusEffect setOnBeforeClash(BiConsumer<Battlefield, Unit> hook) {
+            this.onBeforeClash = hook;
+            return this;
+        }
         
         public void triggerTurnStart(Battlefield field, Unit un) {
             if (onTurnStart != null) onTurnStart.accept(field, un);
@@ -94,6 +100,10 @@ public class statusEffect{
         
         public void triggerOnClashWin(Battlefield field, Unit un){
             if(onHitGive != null) onClashWin.accept(field, un);
+        }
+
+        public void triggerOnBeforeClash(Battlefield field, Unit un){
+            if(onHitGive != null) onBeforeClash.accept(field, un);
         }
         
         public String getName(){ return name;}
