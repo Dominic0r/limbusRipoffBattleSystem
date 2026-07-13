@@ -11,6 +11,9 @@ public class Unit{
         
         List<appliedEffect> effectsOnUnit = new ArrayList<>();
         List<mutation> pendingMutations = new ArrayList<>();
+
+        Map<damageType,float> damageAffect= new HashMap<>();
+        Map<damageType,float> damageAffectModifiers= new HashMap<>();
         
         
         
@@ -36,7 +39,7 @@ public class Unit{
         
         Move unopposed;
         Move staggered;
-        public Unit(int hp, int morale, int speed, int staggerTresh, int critChance, int baseAtk, int baseDef, float critmodifier, String name, String description, List<Move> moveSet){
+        public Unit(int hp, int morale, int speed, int staggerTresh, int critChance, int baseAtk, int baseDef, float critmodifier, float slash, float pierce, float blunt, String name, String description, List<Move> moveSet){
             this.hp = hp;
             this.maxHP = hp;
             this.morale = morale;
@@ -52,7 +55,17 @@ public class Unit{
                 this.critmodifier = critmodifier;
                 this.baseAtk = baseAtk;
                 this.baseDef = baseDef;
+
+                damageAffect.put(SLASH, slash); // percentage guide: 1.5 = fatal, 1.0 = neutral, 0.5 = ineffective
+                damageAffect.put(PIERCE, pierce);
+                damageAffect.put(BLUNT, blunt);
+
+                damageAffectModifier.put(SLASH,0.0f);
+                damageAffectModifier.put(PIERCE,0.0f);
+                damageAffectModifier.put(BLUNT,0.0f);
+                
         }
+
         
         public void setUnopposedMove(Move newMove){
             unopposed = newMove;
@@ -74,7 +87,31 @@ public class Unit{
         public int getDef(){return Math.max(0,baseDef+defendMod);}
         public int getCoinPowerMod(){return coinPowerMod;}
         public int getFinalCoinPowerMod(){return finalCoinPowerMod;}
+        public float getDamageTypeEffect(damageType damType){
+                if(damageAffect.containsKey(damType) && damageAffectModifiers.containsKey(damType)){
+                        return Math.max(damageAffect.get(damType) + damageAffectModifiers.get(damType), 0.0f);
+                }else{
+                        System.out.println("Damage Type not found");
+                        return 0.0f;
+                }
+        }
 
+        public void modifyDamageTypeModifier(damageType damType, float toAdd){
+                if(damageAffect.containsKey(damType) && damageAffectModifiers.containsKey(damType)){
+                        damageAffectModifier.put(damType, damageAffectModifiers.get(damType)+toAdd);
+                }else{
+                        System.out.println("Damage Type not found");
+                }
+        }
+
+        public void resetAllDamageTypeModifiers(){
+                for(damageType damType: damageAffectModifiers.keySet()){
+                        damageAffectModifiers.put(damType, 0.0f);
+                }
+        }
+
+        
+        
         public void addFinalCoinPowerMod(int toAdd){
                 finalCoinPowerMod+=toAdd;
         }
@@ -237,7 +274,7 @@ public class Unit{
             }
         }
         
-        public void takeHPDamage(int dam, Unit source){
+        public void takeHPDamage(int dam, Unit source, damageType damType){
                 Random ra = new Random();
                 if(ra.nextInt(100) < source.getCritChance()){
                         System.out.println("Critical Hit (+"+ ((int)(source.getCritmodifier()*100))+"%)");
@@ -248,7 +285,7 @@ public class Unit{
                 float dif = source.getAtk() - this.getDef();
                 float divider = (source.getAtk() - this.getDef())+25;
                 totalDamageModifier = (dif/divider);
-
+                totalDamageModifier += this.getDamageTypeEffect(damType);
                 dam += dam*totalDamageModifier;
                 
             hp -= dam;
