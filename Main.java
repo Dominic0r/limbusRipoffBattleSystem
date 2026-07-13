@@ -70,7 +70,7 @@ public class Main
             }else{
                 if(currentAttackerPoints > currentDefenderPoints){
                     if(defenderCoinSet.get(defenderCoinSet.size()-1).isUnbreakable()){
-                        defenderUnbreakables.add(defenderCoinset.get(defenderCoinSet.size()-1));
+                        defenderUnbreakables.add(defenderCoinSet.get(defenderCoinSet.size()-1));
                     }
                     defenderCoinSet.remove(defenderCoinSet.size()-1);
                     defenderCoinCount--;
