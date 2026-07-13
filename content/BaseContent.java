@@ -22,15 +22,15 @@ public class BaseContent implements ContentPackage{
         
         Move multiPunch = new Move("Multi-Punch", 5, "Punches the Enemy 3 times");
         multiPunch.addCoin(new Coin(2, "Punch!", rst ->{
-            rst.getLoser().takeHPDamage(2, rst.getWinner(), damageType.BLUNT);
+            rst.getLoser().takeHPDamage(5, rst.getWinner(), damageType.BLUNT);
         }));
         
         multiPunch.addCoin(new Coin(1, "Punch Again!", rst ->{
-            rst.getLoser().takeHPDamage(1,rst.getWinner(), damageType.BLUNT);
+            rst.getLoser().takeHPDamage(3,rst.getWinner(), damageType.BLUNT);
         }));
         
         multiPunch.addCoin(new Coin(3, "Upper Cut!", rst ->{
-            rst.getLoser().takeHPDamage(3,rst.getWinner(),damageType.BLUNT);
+            rst.getLoser().takeHPDamage(7,rst.getWinner(),damageType.BLUNT);
         }));
         
         Move roundhouse = new Move("Roundhouse Kick", 3, "Kicks the enemy hard");
@@ -40,11 +40,11 @@ public class BaseContent implements ContentPackage{
         
         Move stab = new Move("Stab", 4, "Stabs the enemy twice");
         stab.addCoin(new Coin(3, "Swish!", rst ->{
-            rst.getLoser().takeHPDamage(3,rst.getWinner(),damageType.SLASH);
+            rst.getLoser().takeHPDamage(4,rst.getWinner(),damageType.SLASH);
         }));
         
         stab.addCoin(new Coin(3, "Slash! - Inflicts 3 bleed potency", rst ->{
-            rst.getLoser().takeHPDamage(3,rst.getWinner(),damageType.SLASH);
+            rst.getLoser().takeHPDamage(4,rst.getWinner(),damageType.SLASH);
             if(!rst.getLoser().getEffectList().isEmpty()){
                 for(appliedEffect app: rst.getLoser().getEffectList()){
                     if(app.stat()==bleed){
@@ -87,14 +87,14 @@ public class BaseContent implements ContentPackage{
         //Default Enemy
         
         List<Move> defEnemyMoveset = new ArrayList<>();
-        Move punch = new Move("Punch", 1, "Two weak punches");
+        Move punch = new Move("Punch", 3, "Two weak punches");
         
         punch.addCoin(new Coin(1, "punch-", rst ->{
             
-            rst.getLoser().takeHPDamage(1,rst.getWinner(),damageType.BLUNT);
+            rst.getLoser().takeHPDamage(3,rst.getWinner(),damageType.BLUNT);
         }));
         punch.addCoin(new Coin(1, "punch again-", rst ->{
-            rst.getLoser().takeHPDamage(1,rst.getWinner(),damageType.BLUNT);
+            rst.getLoser().takeHPDamage(3,rst.getWinner(),damageType.BLUNT);
         }));
         
         defEnemyMoveset.add(punch);
