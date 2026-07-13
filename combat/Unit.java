@@ -48,7 +48,6 @@ public class Unit{
             unopposed = new Move("defenseless",0,"...");
             unopposed.addCoin(new Coin(0,"..."));
                 staggered = new Move("defenseless",0,"...");
-            staggered.addCoin(new Coin(0,"..."));
             this.critChance = critChance;
                 this.critmodifier = critmodifier;
                 this.baseAtk = baseAtk;
