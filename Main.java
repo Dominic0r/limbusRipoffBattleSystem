@@ -384,7 +384,7 @@ public class Main
         
         targetMove = maxMove;
         if(targetEnemy.staggered()){
-            targetMove = targetEnemy.unop();
+            targetMove = targetEnemy.staggered();
         }
         
         System.out.println("\n>>> You selected " + plyrMv.getName() + " targeting " + targetEnemy.getName() + " <<<");
@@ -453,8 +453,12 @@ public class Main
             }
         }
         Move eMov = maxMove; 
-        if(secondary || targetUn.staggered()){
+        if(secondary){
             eMov = targetUn.unop();
+        }
+
+        if(targetUn.staggered()){
+            eMov = targetUn.whenStaggered();
         }
         
         
@@ -509,8 +513,12 @@ public class Main
         }else{
             targetUn = playerUnit;
         }
-        if(secondary || targetUn.staggered()){
+        if(secondary){
             eMov = targetUn.unop();
+        }
+
+        if(targetUn.staggered()){
+            eMov = targetUn.whenStaggered();
         }
         combatContext finalCC = new combatContext(un, aMov, targetUn, eMov, field);
         return finalCC;
