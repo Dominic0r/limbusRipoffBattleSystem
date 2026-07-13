@@ -98,7 +98,7 @@ public class Unit{
 
         public void modifyDamageTypeModifier(damageType damType, float toAdd){
                 if(damageAffect.containsKey(damType) && damageAffectModifiers.containsKey(damType)){
-                        damageAffectModifier.put(damType, damageAffectModifiers.get(damType)+toAdd);
+                        damageAffectModifiers.put(damType, damageAffectModifiers.get(damType)+toAdd);
                 }else{
                         System.out.println("Damage Type not found");
                 }
