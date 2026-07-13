@@ -31,6 +31,8 @@ public class Unit{
         int baseAtk,baseDef;
 
         int coinPowerMod = 0;
+
+        int finalCoinPowerMod = 0; // modifies coin power after all coins have been flipped
         
         Move unopposed;
         public Unit(int hp, int morale, int speed, int staggerTresh, int critChance, int baseAtk, int baseDef, float critmodifier, String name, String description, List<Move> moveSet){
@@ -69,6 +71,15 @@ public class Unit{
         public int getAtk(){ return Math.max(0, baseAtk+attackMod);}
         public int getDef(){return Math.max(0,baseDef+defendMod);}
         public int getCoinPowerMod(){return coinPowerMod;}
+        public int getFinalCoinPowerMod(){return finalCoinPowerMod;}
+
+        public void addFinalCoinPowerMod(int toAdd){
+                finalCoinPowerMod+=toAdd;
+        }
+        
+        public void resetFinalCoinPowerMod(){
+                finalCoinPowerMod = 0;
+        }
 
         public void addCoinPowerMod(int toAdd){
                 coinPowerMod += toAdd;
