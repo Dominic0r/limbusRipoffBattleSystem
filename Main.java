@@ -33,11 +33,11 @@ public class Main
             currentDefenderPoints = comctx.getDefenderMove().getBaseAtk();
             
             for(Coin co: attackerCoinSet){
-                currentAttackerPoints += co.getCoinPower(comctx.getAttacker().getMorale());
+                currentAttackerPoints += co.getCoinPower(comctx.getAttacker().getMorale()) + comctx.getAttacker().getCoinPowerMod();
             }
             
             for(Coin co: defenderCoinSet){
-                currentDefenderPoints += co.getCoinPower(comctx.getDefender().getMorale());
+                currentDefenderPoints += co.getCoinPower(comctx.getDefender().getMorale()) + comctx.getDefender().getCoinPowerMod();
             }
 
             for(appliedEffect app : comctx.getAttacker().getEffectList()){
@@ -47,6 +47,8 @@ public class Main
             for(appliedEffect app : comctx.getDefender().getEffectList()){
                 app.stat().triggerOnBeforeClash(field, comctx.getDefender());
             }
+
+            
             
             // Added UI for Clash Results per round
             System.out.println("  [Round " + clashRound + "] " 
@@ -226,6 +228,9 @@ public class Main
             un.resetCritChance();
             un.resetSpeedMod();
             un.resetCritMod();
+            un.resetAttackMod();
+            un.resetDefendMod();
+            un.resetCoinPowerMod();
         }
         for(Unit un : field.getEnemies()){
             for(appliedEffect app : un.getEffectList()){
@@ -234,6 +239,9 @@ public class Main
             un.resetCritChance();
             un.resetSpeedMod();
             un.resetCritMod();
+            un.resetAttackMod();
+            un.resetDefendMod();
+            un.resetCoinPowerMod();
         }
 
         for(appliedEffect app: playerUnit.getEffectList()){
@@ -242,6 +250,9 @@ public class Main
         playerUnit.resetCritChance();
         playerUnit.resetSpeedMod();
         playerUnit.resetCritMod();
+        playerUnit.resetAttackMod();
+        playerUnit.resetDefendMod();
+        playerUnit.resetCoinPowerMod();
 
         
         field.incrementTurnCount(); 
