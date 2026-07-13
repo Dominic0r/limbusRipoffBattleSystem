@@ -50,6 +50,8 @@ public class BaseContent implements ContentPackage{
                     if(app.stat()==bleed){
                         mutation mut = new mutation(Type.MOD_POTENCY, 3,bleed, rst.getWinner());
                         rst.getLoser().queueMutation(mut);
+                        mutation mut = new mutation(Type.MOD_STACK, 1,bleed, rst.getWinner());
+                        rst.getLoser().queueMutation(mut);
                     }else{
                         mutation mut = new mutation(Type.ADD, 3, bleed,rst.getWinner());
                         rst.getLoser().queueMutation(mut);
