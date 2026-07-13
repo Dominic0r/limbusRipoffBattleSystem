@@ -237,7 +237,7 @@ public class Unit{
         public void takeHPDamage(int dam, Unit source){
                 Random ra = new Random();
                 if(ra.nextInt(100) < source.getCritChance()){
-                        System.out.println("Critical Hit (+"+ ((int)(source.getCritModifier()*100))+"%)");
+                        System.out.println("Critical Hit (+"+ ((int)(source.getCritmodifier()*100))+"%)");
                         dam += dam*source.getCritmodifier();
                 }
 
