@@ -614,14 +614,18 @@ public class Main
                 clashResult finalResult = clashFunction(field, cctx);
                 
                 keepAllAppliedEffectsInBounds(field);
+                checkHP(field);
+                checkWin(field);
                 
                 if(finalResult.getWinner().getHP() >0 && !finalResult.getWinner().staggered()){
                     afterClash(finalResult, field, cctx);
                 }
                 
+                
                 keepAllAppliedEffectsInBounds(field);
             }
             checkHP(field);
+            checkWin(field);
             checkAllStagger(field);
         }
         
@@ -658,7 +662,7 @@ public class Main
         toRemove.clear();
         
         if(playerUnit.getHP() <= 0){
-            // lose scenario
+            youlose();
         }
     }
     
