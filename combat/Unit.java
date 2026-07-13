@@ -274,7 +274,7 @@ public class Unit{
             }
         }
         
-        public void takeHPDamage(float (float) dam, Unit source, damageType damType){
+        public void takeHPDamage(int dam, Unit source, damageType damType){
                 Random ra = new Random();
 
                 dam*= this.getDamageTypeEffect(damType);
@@ -290,7 +290,7 @@ public class Unit{
                 totalDamageModifier = (dif/divider);
                 dam += dam*totalDamageModifier;
                 
-            hp -= (int) dam;
+            hp -=dam;
             
             System.out.println("  > " + name + " took " + dam +" (+"+ ((int)(totalDamageModifier*100))+ "%) "  + " damage! (HP: " + hp + "/" + maxHP + ")");
         }
