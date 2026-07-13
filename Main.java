@@ -30,6 +30,8 @@ public class Main
         int clashRound = 1; // Added UI
         do{
             if(attackerCoinCount ==0 || defenderCoinCount == 0) break;
+            checkHP(field);
+            checkWin(field);
             
             currentAttackerPoints = comctx.getAttackerMove().getBaseAtk();
             currentDefenderPoints = comctx.getDefenderMove().getBaseAtk();
@@ -84,6 +86,7 @@ public class Main
             }
             
             checkStacks(field);
+            
             bothStillHaveCoins = (attackerCoinCount> 0) && (defenderCoinCount > 0);
             clashRound++;
         }while(bothStillHaveCoins);
@@ -149,6 +152,8 @@ public class Main
             }
             
             checkStacks(field);
+            checkHP(field);
+                checkWin(field);
         }
     }
     
