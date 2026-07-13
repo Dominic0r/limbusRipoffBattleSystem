@@ -6,7 +6,7 @@ public class statusEffect{
         String name, description;
         
         boolean decays; // whether or not it decays every turn 
-        int limit;
+        int potencyLimit, stackLimit;
         
         private BiConsumer<Battlefield, Unit> onTurnStart;
         private BiConsumer<Battlefield, Unit> onHitReceived;
@@ -18,11 +18,12 @@ public class statusEffect{
         private BiConsumer<Battlefield, Unit> onClashLose;
         private BiConsumer<Battlefield, Unit> onClashWin;
         
-        public statusEffect(String name, boolean decays, int limit, String description){
+        public statusEffect(String name, boolean decays, int potencyLimit, int stackLimit, String description){
             this.name = name;
             this.description = description;
             this.decays = decays;
-            this.limit = limit;
+            this.potencyLimit = potencyLimit;
+            this.stackLimit = stackLimit;
         }
         
         public statusEffect setOnTurnStart(BiConsumer<Battlefield, Unit> hook) {
@@ -109,5 +110,6 @@ public class statusEffect{
         public String getName(){ return name;}
         public String getDesc(){ return description;}
         public boolean Decays() { return decays;}
-        public int getLimit() { return limit;}
+        public int getPotencyLimit() { return potencyLimit;}
+        public int getStackLimit() { return stackLimit;}
     }
