@@ -157,7 +157,7 @@ public class limbusPassives implements ContentPackage{
         });
       Registry.registerStatus("lim:binding",binding);
 
-      statusEffect offenseLevelUp = new statusEffect("Offense Level Up", false, 1, "Increases this unit's offense level by the count for 1 turn");
+      statusEffect offenseLevelUp = new statusEffect("Offense Level Up", false, 99,1, "Increases this unit's offense level by the count for 1 turn");
         binding.setOnTurnStart((field, un)->{
             int atkModify=0;
             for(appliedEffect app : un.getEffectList()){
