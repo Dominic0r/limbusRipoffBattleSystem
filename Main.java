@@ -29,6 +29,8 @@ public class Main
         boolean bothStillHaveCoins = true;
         int clashRound = 1; // Added UI
         do{
+            if(attackerCoinCount ==0 || defenderCoinCount == 0) break;
+            
             currentAttackerPoints = comctx.getAttackerMove().getBaseAtk();
             currentDefenderPoints = comctx.getDefenderMove().getBaseAtk();
             
