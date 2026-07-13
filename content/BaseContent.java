@@ -92,14 +92,14 @@ public class BaseContent implements ContentPackage{
 
         Move punchUnbreakable = new Move("Punch", 3, "Two weak punches");
         
-        punch.addCoin(new Coin(1,"punch-", (rst, un) ->{
+        punchUnbreakable.addCoin(new Coin(1,"punch-", (rst, un) ->{
             if(rst.getLoser() ==un){
                 rst.getWinner().takeHPDamage(3,rst.getWinner(),damageType.BLUNT);
             }else{
                 rst.getLoser().takeHPDamage(3,rst.getWinner(),damageType.BLUNT);
             }
         }));
-        punch.addCoin(new Coin(1,true, "punch again-", (rst, un)  ->{
+        punchUnbreakable.addCoin(new Coin(1,true, "punch again-", (rst, un)  ->{
             rst.getLoser().takeHPDamage(3,rst.getWinner(),damageType.BLUNT);
         }));
 
@@ -114,7 +114,7 @@ public class BaseContent implements ContentPackage{
             rst.getLoser().takeHPDamage(3,rst.getWinner(),damageType.BLUNT);
         }));
         
-        defEnemyMoveset.add(punch);
+        defEnemyMoveset.add(punchUnbreakable);
         
         Unit defEnemy = new Unit(50, 0, 2, 30, 2,8,8,0.2f,1.5f,1.0f,0.5f,  "Enemy", "Default Enemy", defEnemyMoveset);
         
