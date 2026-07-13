@@ -1,5 +1,6 @@
 package combat;
 import java.util.*;
+import java.lang.Math;
 import effect.*;
 
 public class Unit{
