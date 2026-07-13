@@ -274,8 +274,11 @@ public class Unit{
             }
         }
         
-        public void takeHPDamage(int dam, Unit source, damageType damType){
+        public void takeHPDamage(float (float) dam, Unit source, damageType damType){
                 Random ra = new Random();
+
+                dam*= this.getDamageTypeEffect(damType);
+                
                 if(ra.nextInt(100) < source.getCritChance()){
                         System.out.println("Critical Hit (+"+ ((int)(source.getCritmodifier()*100))+"%)");
                         dam += dam*source.getCritmodifier();
@@ -285,10 +288,9 @@ public class Unit{
                 float dif = source.getAtk() - this.getDef();
                 float divider = (source.getAtk() - this.getDef())+25;
                 totalDamageModifier = (dif/divider);
-                totalDamageModifier += this.getDamageTypeEffect(damType);
                 dam += dam*totalDamageModifier;
                 
-            hp -= dam;
+            hp -= (int) dam;
             
             System.out.println("  > " + name + " took " + dam +" (+"+ ((int)(totalDamageModifier*100))+ "%) "  + " damage! (HP: " + hp + "/" + maxHP + ")");
         }
