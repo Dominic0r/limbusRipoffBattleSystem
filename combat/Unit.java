@@ -74,7 +74,7 @@ public class Unit{
                 speedMod=0;
         }
 
-        public void modifyCritChance(int toAdd){
+        public void addCritChanceModifier(int toAdd){
                 critChanceMod+= toAdd;
         }
 
