@@ -79,8 +79,8 @@ public class BaseContent implements ContentPackage{
         playerMoveSet.add(roundhouse);
         playerMoveSet.add(stab);
         playerMoveSet.add(nuke);
-        //public Unit(int hp, int morale, int speed, int staggerTresh, int critChance, float critmodifier, String name, String description, List<Move> moveSet){
-        Unit playerUnit = new Unit(100, 0, 5, 30, 2,0.2f, "Player", "Description", playerMoveSet);
+        //public Unit(int hp, int morale, int speed, int staggerTresh, int critChance, int baseAtk, int baseDef, float critmodifier, String name, String description, List<Move> moveSet){
+        Unit playerUnit = new Unit(100, 0, 5, 30, 2, 10, 10,0.2f, "Player", "Description", playerMoveSet);
         
         Registry.registerUnit("base:player", playerUnit);
         
@@ -99,7 +99,7 @@ public class BaseContent implements ContentPackage{
         
         defEnemyMoveset.add(punch);
         
-        Unit defEnemy = new Unit(50, 0, 2, 30, 2,0.2f,  "Enemy", "Default Enemy", defEnemyMoveset);
+        Unit defEnemy = new Unit(50, 0, 2, 30, 2,5,50.2f,  "Enemy", "Default Enemy", defEnemyMoveset);
         
         Registry.registerUnit("base:enemy", defEnemy);
         
@@ -109,7 +109,7 @@ public class BaseContent implements ContentPackage{
         
         defAllyMoveSet.add(punch);
         
-        Unit defAlly = new Unit(50, 0, 2, 15, 2,0.2f,  "Ally", "Default Ally", defAllyMoveSet);
+        Unit defAlly = new Unit(50, 0, 2, 15, 2,5,5,0.2f,  "Ally", "Default Ally", defAllyMoveSet);
         Registry.registerUnit("base:ally", defAlly);
     }
 }
