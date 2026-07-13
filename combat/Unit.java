@@ -300,7 +300,7 @@ public class Unit{
             }
         }
         
-        public void takeHPDamage(int dam, Unit source, damageType damType){
+        public void takeHPDamage(int dam, int turnCount,Unit source, damageType damType){
                 Random ra = new Random();
 
                 dam*= this.getDamageTypeEffect(damType);
@@ -314,6 +314,9 @@ public class Unit{
                 float dif = source.getAtk() - this.getDef();
                 float divider = (source.getAtk() - this.getDef())+25;
                 totalDamageModifier = (dif/divider);
+                for(int i=0; i<turnCount;i++){
+                        dam+= 0.01f;
+                }
                 dam += dam*totalDamageModifier;
                 
             hp -=dam;
