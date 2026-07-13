@@ -92,19 +92,19 @@ public class statusEffect{
         }
 
         public void triggerOnBattleStart(Battlefield field, Unit un){
-            if(onHitGive != null) onBattleStart.accept(field, un);
+            if(onBattleStart != null) onBattleStart.accept(field, un);
         }
 
         public void triggerOnClashLose(Battlefield field, Unit un){
-            if(onHitGive != null) onClashLose.accept(field, un);
+            if(onClashLose != null) onClashLose.accept(field, un);
         }
         
         public void triggerOnClashWin(Battlefield field, Unit un){
-            if(onHitGive != null) onClashWin.accept(field, un);
+            if(onClashWin != null) onClashWin.accept(field, un);
         }
 
         public void triggerOnBeforeClash(Battlefield field, Unit un){
-            if(onHitGive != null) onBeforeClash.accept(field, un);
+            if(onBeforeClash != null) onBeforeClash.accept(field, un);
         }
         
         public String getName(){ return name;}
