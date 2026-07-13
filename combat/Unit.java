@@ -82,9 +82,9 @@ public class Unit{
                 this.baseAtk = other.baseAtk;
                 this.baseDef = other.baseDef;
 
-                damageAffect.put(damageType.SLASH, slash); // percentage guide: 1.5 = fatal, 1.0 = neutral, 0.5 = ineffective
-                damageAffect.put(damageType.PIERCE, pierce);
-                damageAffect.put(damageType.BLUNT, blunt);
+                damageAffect.put(damageType.SLASH, other.damageAffect.get(damageType.SLASH)); // percentage guide: 1.5 = fatal, 1.0 = neutral, 0.5 = ineffective
+                damageAffect.put(damageType.PIERCE, other.damageAffect.get(damageType.PIERCE));
+                damageAffect.put(damageType.BLUNT, other.damageAffect.get(damageType.BLUNT));
 
                 damageAffectModifiers.put(damageType.SLASH,0.0f);
                 damageAffectModifiers.put(damageType.PIERCE,0.0f);
