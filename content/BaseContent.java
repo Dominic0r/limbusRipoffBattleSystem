@@ -90,17 +90,18 @@ public class BaseContent implements ContentPackage{
         
         List<Move> defEnemyMoveset = new ArrayList<>();
 
-        Move punchUnbreakable = new Move("Punch", 3, "Two weak punches");
+        Move punchUnbreakable = new Move("Unbreakable Punch", 3, "Two weak punches");
         
-        punchUnbreakable.addCoin(new Coin(1,"punch-", (rst, un) ->{
-            if(rst.getLoser() ==un){
+        punchUnbreakable.addCoin(new Coin(1,"punch", (rst, un) ->{
+                rst.getLoser().takeHPDamage(3,rst.getWinner(),damageType.BLUNT);
+            
+        }));
+        punchUnbreakable.addCoin(new Coin(1,true, "punch unbreakable", (rst, un)  ->{
+            if(rst.getLoser() ==un){ // this if/else is necessary for unbreakable coins 
                 rst.getWinner().takeHPDamage(3,rst.getWinner(),damageType.BLUNT);
             }else{
                 rst.getLoser().takeHPDamage(3,rst.getWinner(),damageType.BLUNT);
             }
-        }));
-        punchUnbreakable.addCoin(new Coin(1,true, "punch again-", (rst, un)  ->{
-            rst.getLoser().takeHPDamage(3,rst.getWinner(),damageType.BLUNT);
         }));
 
         
