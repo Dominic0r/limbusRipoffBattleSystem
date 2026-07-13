@@ -1,4 +1,4 @@
-My attempt at recreating Limbus Company's battle system (not really 100% accurate though). I really liked the system and saw potential in status effects. 
+My attempt at recreating Limbus Company's battle system (not really 100% accurate though). I really liked the system and saw potential in status effects if they're combined with complex scription
 
 This program contains a very flexible status effects system that allows users with the know-how to script custom status effects using java.
 
