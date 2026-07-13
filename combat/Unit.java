@@ -24,6 +24,8 @@ public class Unit{
         int critChanceMod = 0;
 
         float critMod = 0; // modifies additional damage dealt by a critical hit
+
+        int attackMod = 0;
         
         Move unopposed;
         public Unit(int hp, int morale, int speed, int staggerTresh, int critChance, float critmodifier, String name, String description, List<Move> moveSet){
@@ -57,6 +59,15 @@ public class Unit{
         public boolean staggered(){ return isStaggered;}
         public int getCritChance(){return Math.max(1,critChance+critChanceMod);}
         public float getCritmodifier(){return Math.max(0.01,critmodifier+critMod);}
+        public int getAttackMod(){return attackMod;}
+
+        public void addAttackMod(int toAdd){
+                attackMod +=toAdd;
+        }
+
+        public void resetAttackMod(){
+                attackMod=0;
+        }
 
         public void addCritModifier(float toAdd){
                 critMod+=toAdd;
