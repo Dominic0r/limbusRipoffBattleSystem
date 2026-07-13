@@ -49,9 +49,13 @@ public class appliedEffect{ // created on unit
                 potency = 1;
             }
             
-            if(potency > effect.getLimit()){
-                potency = effect.getLimit();
+            if(potency > effect.getPotencyLimit()){
+                potency = effect.getPotencyLimit();
             }
+            if(potency > effect.getStackLimit()){
+                potency = effect.getStackLimit();
+            }
+                
             
         }
         
