@@ -25,10 +25,14 @@ public class Unit{
 
         float critMod = 0; // modifies additional damage dealt by a critical hit
 
-        int attackMod = 0;
+        int attackMod = 0, defendMod=0;
+
+        int baseAtk,baseDef;
+
+        int coinPowerMod = 0;
         
         Move unopposed;
-        public Unit(int hp, int morale, int speed, int staggerTresh, int critChance, float critmodifier, String name, String description, List<Move> moveSet){
+        public Unit(int hp, int morale, int speed, int staggerTresh, int critChance, int baseAtk, int baseDef, float critmodifier, String name, String description, List<Move> moveSet){
             this.hp = hp;
             this.maxHP = hp;
             this.morale = morale;
@@ -41,6 +45,8 @@ public class Unit{
             unopposed.addCoin(new Coin(0,"..."));
             this.critChance = critChance;
                 this.critmodifier = critmodifier;
+                this.baseAtk = baseAtk;
+                this.baseDef = baseDef;
         }
         
         public void setUnopposedMove(Move newMove){
@@ -59,7 +65,25 @@ public class Unit{
         public boolean staggered(){ return isStaggered;}
         public int getCritChance(){return Math.max(1,critChance+critChanceMod);}
         public float getCritmodifier(){return Math.max(0.01,critmodifier+critMod);}
-        public int getAttackMod(){return attackMod;}
+        public int getAtk(){ return Math.max(0, baseAtk+attackMod);}
+        public int getDef(){return Math.max(0,baseDef+defendMod);}
+        public int getCoinPowerMod(){return coinPowerMod;}
+
+        public void addCoinPowerMod(int toAdd){
+                coinPowerMod += toAdd;
+        }
+
+        public void resetCoinPowerMod(){
+                coinPowerMod=0;
+        }
+
+        public void addDefendMod(int toAdd){
+                defendMod += toAdd;
+        }
+
+        public void resetDefendMod(){
+                defendMod = 0;
+        }
 
         public void addAttackMod(int toAdd){
                 attackMod +=toAdd;
@@ -203,6 +227,13 @@ public class Unit{
                 if(ra.nextInt(100) < source.getCritChance()){
                         dam += dam*source.getCritmodifier();
                 }
+
+                float totalDamageModifier = 0.0f;
+                float dif = source.getAtk() - this.getDef();
+                float divider = (source.getAtk() - this.getDef())+25;
+                totalDamageModifier = (dif/divider)*100;
+
+                dam += dam*totalDamageModifier;
                 
             hp -= dam;
             
