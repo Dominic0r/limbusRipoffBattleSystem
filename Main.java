@@ -14,6 +14,9 @@ public class Main
     public static clashResult clashFunction(Battlefield field, combatContext comctx){
         List<Coin> attackerCoinSet = comctx.getAttackerMove().getClashCoins();
         List<Coin> defenderCoinSet = comctx.getDefenderMove().getClashCoins();
+
+        List<Coin>attackerUnbreakables = new ArrayList<>();
+        List<Coin>defenderUnbreakables = new ArrayList<>();
         
         int attackerCoinCount = attackerCoinSet.size();
         int defenderCoinCount = defenderCoinSet.size();
@@ -63,16 +66,23 @@ public class Main
                                + comctx.getDefender().getName() + " rolled: " + currentDefenderPoints);
             
             if(currentAttackerPoints == currentDefenderPoints){
-                System.out.println("    -> Tie! No coins lost."); // Added UI
+                System.out.println("    -> Tie! No coins lost.");
             }else{
                 if(currentAttackerPoints > currentDefenderPoints){
+                    if(defenderCoinset.get(defenderCoinSet.size()-1).isUnbreakable()){
+                        defenderUnbreakables.add(defenderCoinset.get(defenderCoinSet.size()-1))
+                    }
                     defenderCoinSet.remove(defenderCoinSet.size()-1);
                     defenderCoinCount--;
-                    System.out.println("    -> " + comctx.getDefender().getName() + " lost a coin!"); // Added UI
+                    
+                    System.out.println("    -> " + comctx.getDefender().getName() + " lost a coin!"); 
                 }else{
+                    if(attackerCoinSet.get(attackerCoinSet.size()-1).isUnbreakable()){
+                        attackerUnbreakables.add(attackerCoinSet.get(attackerCoinSet.size()-1))
+                    }
                     attackerCoinSet.remove(attackerCoinSet.size()-1);
                     attackerCoinCount--;
-                    System.out.println("    -> " + comctx.getAttacker().getName() + " lost a coin!"); // Added UI
+                    System.out.println("    -> " + comctx.getAttacker().getName() + " lost a coin!"); 
                 }
             }
             
@@ -94,12 +104,16 @@ public class Main
         Unit winner, loser;
         int remainingCoins;
         List<Coin> winnerCoinSet = new ArrayList<>();
+        List<Coin> winnerUnbreakables = new ArrayList<>();
+        List<Coin> loserUnbreakables = new ArrayList<>();
         boolean unopposed = false;
         if(attackerCoinCount >0){
             winner = comctx.getAttacker();
             loser = comctx.getDefender();
             remainingCoins = attackerCoinCount;
             winnerCoinSet = attackerCoinSet;
+            winnerUnbreakables = attackerUnbreakables;
+            loserUnbreakables = defenderUnbreakables;
             
             unopposed = comctx.getDefenderMove() == comctx.getDefender().unop();
             
@@ -108,6 +122,8 @@ public class Main
             loser = comctx.getAttacker();
             remainingCoins = defenderCoinCount;
             winnerCoinSet = defenderCoinSet;
+            winnerUnbreakables = defenderUnbreakables;
+            loserUnbreakables = attackerUnbreakables;
             unopposed = comctx.getAttackerMove() == comctx.getAttacker().unop();
         }
         
@@ -120,7 +136,7 @@ public class Main
             loser.modifyMorale(-5);
         }
         
-        clashResult finalResult = new clashResult(winner, loser, remainingCoins, winnerCoinSet);
+        clashResult finalResult = new clashResult(winner, loser, remainingCoins, winnerCoinSet, winnerUnbreakables, loserUnbreakables);
         return finalResult;
     }
     
@@ -138,7 +154,7 @@ public class Main
             
             if(co.getCoinPower(result.getWinner().getMorale()) >0){
                 System.out.print(" - HEADS!");
-                co.triggerOnHit(result);
+                co.triggerOnHit(result, result.getWinner());
                 
                 for(appliedEffect app : result.getWinner().getEffectList()){
                     app.stat().triggerOnHitGive(field, result.getWinner());
@@ -154,6 +170,31 @@ public class Main
             checkStacks(field);
             checkHP(field);
                 checkWin(field);
+        }
+
+        if(!result.getLoserUnbreakables().isNull()){
+            for(Coin co: result.getLoserUnbreakables()){
+            System.out.print(result.getLoser().getName() + " activates unbreakable coin: " + co.getDesc()); // Added UI
+            
+            if(co.getCoinPower(result.getLoser().getMorale()) >0){
+                System.out.print(" - HEADS!");
+                co.triggerOnHit(result, result.getLoser());
+                
+                for(appliedEffect app : result.getWinner().getEffectList()){
+                    app.stat().triggerOnHitGive(field, result.getWinner());
+                }
+                
+                for(appliedEffect app : result.getLoser().getEffectList()){
+                    app.stat().triggerOnHitReceived(field, result.getLoser());
+                }
+            }else{
+                System.out.println(" - TAILS!");
+            }
+            
+            checkStacks(field);
+            checkHP(field);
+                checkWin(field);
+            }
         }
     }
     
