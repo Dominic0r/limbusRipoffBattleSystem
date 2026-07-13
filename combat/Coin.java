@@ -1,10 +1,10 @@
 package combat;
 import java.util.*;
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 import effect.*;
 public class Coin{
         Random ra = new Random();
-        private Consumer<clashResult> onHitEffect;
+        private BiConsumer<clashResult, Unit> onHitEffect;
         int atkPoints; // attack points
         boolean unbreakable=false;
         
@@ -29,11 +29,13 @@ public class Coin{
         }
 
         public boolean isUnbreakable(){return unbreakable;}
+
         
         
-        public void triggerOnHit(clashResult result){
+        
+        public void triggerOnHit(clashResult result, Unit un){
             if(onHitEffect !=null){
-                onHitEffect.accept(result);
+                onHitEffect.accept(result, un);
             }
         }
         
