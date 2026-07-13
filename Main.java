@@ -40,6 +40,9 @@ public class Main
                 currentDefenderPoints += co.getCoinPower(comctx.getDefender().getMorale()) + comctx.getDefender().getCoinPowerMod();
             }
 
+            currentAttackerPoints += comctx.getAttacker().getFinalCoinPowerMod();
+            currentDefenderPoints += comctx.getDefender().getFinalCoinPowerMod();
+
             for(appliedEffect app : comctx.getAttacker().getEffectList()){
                 app.stat().triggerOnBeforeClash(field, comctx.getAttacker());
             }
