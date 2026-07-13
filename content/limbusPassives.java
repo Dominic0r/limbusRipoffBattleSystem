@@ -16,7 +16,7 @@ public class limbusPassives implements ContentPackage{
 
     @Override
   public void registerContent(){
-    statusEffect bleed = new statusEffect("Bleed", false, 99, "Take fixed damage every coin toss");
+    statusEffect bleed = new statusEffect("Bleed", false,99, 99, "Take fixed damage every coin toss");
         bleed.setOnClash((field, un)->{
             int damagetaken=0;
             for(appliedEffect app : un.getEffectList()){
@@ -41,7 +41,7 @@ public class limbusPassives implements ContentPackage{
           });
     Registry.registerStatus("lim:bleed", bleed);
 
-    statusEffect rupture = new statusEffect("Rupture", false, 99, "Take fixed damage every hit");
+    statusEffect rupture = new statusEffect("Rupture", false, 99,99, "Take fixed damage every hit");
         rupture.setOnHitReceived((field, un)->{
             int damagetaken=0;
             for(appliedEffect app : un.getEffectList()){
@@ -55,7 +55,7 @@ public class limbusPassives implements ContentPackage{
         });
     Registry.registerStatus("lim:rupture", rupture);
 
-    statusEffect burn = new statusEffect("Burn", false, 99, "Take fixed damage every end of turn");
+    statusEffect burn = new statusEffect("Burn", false, 99,99, "Take fixed damage every end of turn");
         burn.setOnTurnEnd((field, un)->{
             int damagetaken=0;
             for(appliedEffect app : un.getEffectList()){
@@ -69,7 +69,7 @@ public class limbusPassives implements ContentPackage{
         });
     Registry.registerStatus("lim:burn", burn);
 
-    statusEffect sinking = new statusEffect("Sinking", false, 99, "Take fixed Morale damage every hit");
+    statusEffect sinking = new statusEffect("Sinking", false, 99,99, "Take fixed Morale damage every hit");
         sinking.setOnHitReceived((field, un)->{
             int damagetaken=0;
             for(appliedEffect app : un.getEffectList()){
@@ -83,13 +83,13 @@ public class limbusPassives implements ContentPackage{
         });
     Registry.registerStatus("lim:sinking", sinking);
 
-    statusEffect poise = new statusEffect("Poise", false, 99, "+5% chance of critical hit on target");
+    statusEffect poise = new statusEffect("Poise", false, 99,99, "+5% chance of critical hit on target");
         poise.setOnTurnStart((field, un)->{
             int critChanceModify=0;
             for(appliedEffect app : un.getEffectList()){
                 if(app.stat() == poise){
                     critChanceModify += app.getPotency()*5;
-                    un.modifyCritChance(critChanceModify);
+                    un.addCritChanceModifier(critChanceModify);
                     app.decrementStack();
                     System.out.println("  > " + un.getName() + "'s crit chance is increased by " + critChanceModify + "%!"); 
                 }
@@ -97,11 +97,11 @@ public class limbusPassives implements ContentPackage{
         });
     Registry.registerStatus("lim:poise", poise);
 
-    statusEffect charge = new statusEffect("Charge", false, 99, "Can be used by skills");
+    statusEffect charge = new statusEffect("Charge", false, 99,99, "Can be used by skills");
         
     Registry.registerStatus("lim:charge", charge);
 
-    statusEffect tremor = new statusEffect("Tremor", false, 99, "Increases stagger threshold upon tremor burst");
+    statusEffect tremor = new statusEffect("Tremor", false, 99,99, "Increases stagger threshold upon tremor burst");
     tremor.setOnTurnEnd((field,un)->{
       for(appliedEffect app : un.getEffectList()){
                 if(app.stat() == tremor){
@@ -111,7 +111,7 @@ public class limbusPassives implements ContentPackage{
     });
     Registry.registerStatus("lim:tremor", tremor);
 
-    statusEffect tremorBurst = new statusEffect("Tremor Burst", false, 1, "increases stagger treshold by the amount of tremor potency");
+    statusEffect tremorBurst = new statusEffect("Tremor Burst", false, 1,1, "increases stagger treshold by the amount of tremor potency");
     tremorBurst.setOnTurnEnd((field,un)->{
       for(appliedEffect app : un.getEffectList()){
         if(app.stat()==tremorBurst){
@@ -122,9 +122,69 @@ public class limbusPassives implements ContentPackage{
             }
           }
           un.modifyStaggerTresh(tremorAmt);
+            app.decrementStack();
+            System.out.println("  > " + un.getName() + " got hit with Tremor Burst!"); 
         }
       }
     });
+      Registry.registerStatus("lim:tremorburst",tremorBurst);
+
+      statusEffect haste = new statusEffect("Haste", false, 99,1, "Increases this unit's speed by the count for 1 turn");
+        haste.setOnTurnStart((field, un)->{
+            int speedModify=0;
+            for(appliedEffect app : un.getEffectList()){
+                if(app.stat() == haste){
+                    speedModify += app.getPotency();
+                    un.addSpeedModifier(speedModify);
+                    app.decrementStack();
+                    System.out.println("  > " + un.getName() + "'s speed is increased by " + speedModify + " for this turn!"); 
+                }
+            }
+        });
+      Registry.registerStatus("lim:haste",haste);
+
+      statusEffect binding = new statusEffect("Binding", false, 99,1, "Decreases this unit's speed by the count for 1 turn");
+        binding.setOnTurnStart((field, un)->{
+            int speedModify=0;
+            for(appliedEffect app : un.getEffectList()){
+                if(app.stat() == binding){
+                    speedModify += app.getPotency();
+                    un.addSpeedModifier(speedModify*-1);
+                    app.decrementStack();
+                    System.out.println("  > " + un.getName() + "'s speed is decreased by " + speedModify + "!"); 
+                }
+            }
+        });
+      Registry.registerStatus("lim:binding",binding);
+
+      statusEffect offenseLevelUp = new statusEffect("Offense Level Up", false, 1, "Increases this unit's offense level by the count for 1 turn");
+        binding.setOnTurnStart((field, un)->{
+            int atkModify=0;
+            for(appliedEffect app : un.getEffectList()){
+                if(app.stat() == offenseLevelUp){
+                    atkModify += app.getPotency();
+                    un.addAttackMod(atkModify);
+                    app.decrementStack();
+                    System.out.println("  > " + un.getName() + "'s attack is increased by " + atkModify + "!"); 
+                }
+            }
+        });
+      Registry.registerStatus("lim:offenseLevelUp",offenseLevelUp);
+
+      statusEffect offenseLevelDown = new statusEffect("Offense Level Down", false, 99,1, "Decreases this unit's offense level by the count for 1 turn");
+        binding.setOnTurnStart((field, un)->{
+            int atkModify=0;
+            for(appliedEffect app : un.getEffectList()){
+                if(app.stat() == offenseLevelDown){
+                    atkModify += app.getPotency();
+                    un.addAttackMod(atkModify*-1);
+                    app.decrementStack();
+                    System.out.println("  > " + un.getName() + "'s attack is decreased by " + atkModify + "!"); 
+                }
+            }
+        });
+      Registry.registerStatus("lim:offenseLevelDown",offenseLevelDown);
+      
     
   }
 
