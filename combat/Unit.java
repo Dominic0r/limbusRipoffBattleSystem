@@ -3,7 +3,7 @@ import java.util.*;
 import effect.*;
 
 public class Unit{
-        public int maxHP, hp, morale, speed, staggerTresh, critChance, defaultCritChance;
+        public int maxHP, hp, morale, speed, staggerTresh, critChance;
         public String name, description;
 
         public float critmodifier = 0.02f; // damage modifier
@@ -18,7 +18,12 @@ public class Unit{
         boolean isStaggered = false;
         boolean justGotStaggered = false;
         boolean alreadyStaggered = false;
-        
+
+        int speedMod = 0; // speed modifier
+
+        int critChanceMod = 0;
+
+        float critMod = 0; // modifies additional damage dealt by a critical hit
         
         Move unopposed;
         public Unit(int hp, int morale, int speed, int staggerTresh, int critChance, float critmodifier, String name, String description, List<Move> moveSet){
@@ -33,7 +38,6 @@ public class Unit{
             unopposed = new Move("defenseless",0,"...");
             unopposed.addCoin(new Coin(0,"..."));
             this.critChance = critChance;
-                this. defaultCritChance = critChance;
                 this.critmodifier = critmodifier;
         }
         
@@ -44,22 +48,38 @@ public class Unit{
         public int getHP(){ return hp;}
         public int getMaxHP(){ return maxHP;}
         public int getMorale(){return morale;}
-        public int getSpeed(){return speed;}
+        public int getSpeed(){return speed+speedMod;}
         public int getStaggerTresh(){ return staggerTresh;}
         public String getName(){return name;}
         public String getDesc(){return description;}
         public List<Move> getMoveSet(){ return moveSet;}
         public List<appliedEffect> getEffectList(){ return effectsOnUnit;}
         public boolean staggered(){ return isStaggered;}
-        public int getCritChance(){return critChance;}
-        public float getCritmodifier(){return critmodifier;}
+        public int getCritChance(){return critChance+critChanceMod;}
+        public float getCritmodifier(){return critmodifier+critMod;}
+
+        public void addCritModifier(float toAdd){
+                critMod+=toAdd;
+        }
+
+        public void resetCritMod(){
+                critMod = 0;
+        }
+
+        public void addSpeedModifier(int toAdd){
+                speedMod += toAdd;
+        }
+
+        public void resetSpeedMod(){
+                speedMod=0;
+        }
 
         public void modifyCritChance(int toAdd){
-                critChance+= toAdd;
+                critChanceMod+= toAdd;
         }
 
         public void resetCritChance(){
-                critChance = defaultCritChance;
+                critChanceMod = 0;
         }
                 
         
