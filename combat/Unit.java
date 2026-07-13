@@ -244,7 +244,7 @@ public class Unit{
                 float totalDamageModifier = 0.0f;
                 float dif = source.getAtk() - this.getDef();
                 float divider = (source.getAtk() - this.getDef())+25;
-                totalDamageModifier = (dif/divider)*100;
+                totalDamageModifier = (dif/divider);
 
                 dam += dam*totalDamageModifier;
                 
