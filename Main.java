@@ -49,7 +49,7 @@ public class Main
                 cby += comctx.getAttacker().getCoinPowerMod();
                 currentAttackerPoints += cby;
             }
-            System.out.print("\n"+comctx.getAttacker().getName()+": ");
+            System.out.print("\n"+comctx.getDefender().getName()+": ");
             for(Coin co: defenderCoinSet){
                 int cby = co.getCoinPower(comctx.getDefender().getMorale());
                 if(cby >0){
