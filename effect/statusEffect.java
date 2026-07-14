@@ -74,12 +74,12 @@ public class statusEffect{
         }
         
         public statusEffect setOnAllyDeath(BiConsumer<Unit, Unit> hook) {
-            this.onBeforeClash = hook;
+            this.onAllyDeath = hook;
             return this;
         }
         
         public statusEffect setOnEnemyDeath(BiConsumer<Unit, Unit> hook) {
-            this.onBeforeClash = hook;
+            this.onEnemyDeath = hook;
             return this;
         }
         
@@ -120,11 +120,11 @@ public class statusEffect{
         }
 
         public void triggerOnEnemyDeath(Unit deadUn, Unit un){
-            if(onBeforeClash != null) onBeforeClash.accept(deadUn, un);
+            if(onEnemyDeath != null) onEnemyDeath.accept(deadUn, un);
         }
 
         public void triggerOnAllyDeath(Unit deadUn, Unit un){
-            if(onBeforeClash != null) onBeforeClash.accept(deadUn, un);
+            if(onAllyDeath != null) onAllyDeath.accept(deadUn, un);
         }
         
         public String getName(){ return name;}
