@@ -38,14 +38,29 @@ public class Main
             
             currentAttackerPoints = comctx.getAttackerMove().getBaseAtk();
             currentDefenderPoints = comctx.getDefenderMove().getBaseAtk();
-            
+            System.out.print(comctx.getAttacker().getName()+ ": ");
             for(Coin co: attackerCoinSet){
-                currentAttackerPoints += co.getCoinPower(comctx.getAttacker().getMorale()) + comctx.getAttacker().getCoinPowerMod();
+                int cby = co.getCoinPower(comctx.getAttacker().getMorale());
+                if(cby >0){
+                    System.out.print("HEADS ");
+                }else{
+                    System.out.print("TAILS ");
+                }
+                cby += comctx.getAttacker().getCoinPowerMod();
+                currentAttackerPoints += cby;
             }
-            
+            System.out.print("\n"+comctx.getAttacker().getName()+": ");
             for(Coin co: defenderCoinSet){
+                int cby = co.getCoinPower(comctx.getDefender().getMorale());
+                if(cby >0){
+                    System.out.print("HEADS ");
+                }else{
+                    System.out.print("TAILS ");
+                }
+                cby += comctx.getDefender().getCoinPowerMod();
                 currentDefenderPoints += co.getCoinPower(comctx.getDefender().getMorale()) + comctx.getDefender().getCoinPowerMod();
             }
+            System.out.println();
 
             currentAttackerPoints += comctx.getAttacker().getFinalCoinPowerMod();
             currentDefenderPoints += comctx.getDefender().getFinalCoinPowerMod();
