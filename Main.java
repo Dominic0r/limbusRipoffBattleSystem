@@ -702,13 +702,13 @@ public class Main
                         eun.takeMoraleDamage(2);
                     }
                     for(appliedEffect app : eun.getEffectList()){
-                        app.triggerOnAllyDeath();
+                        app.stat().triggerOnAllyDeath();
                     }
                 }
 
                 for(Unit eun : field.getEnemies()){
                     for(appliedEffect app : eun.getEffectList()){
-                        app.triggerOnEnemyDeath();
+                        app.stat().triggerOnEnemyDeath();
                     }
                 }
             }
@@ -727,13 +727,13 @@ public class Main
                         }
     
                         for(appliedEffect app : eun.getEffectList()){
-                            app.triggerOnAllyDeath();
+                            app.stat().triggerOnAllyDeath();
                         }
                     }
                 
                     for(Unit eun : field.getAllies()){
                         for(appliedEffect app : eun.getEffectList()){
-                            app.triggerOnEnemyDeath();
+                            app.stat().triggerOnEnemyDeath();
                         }
                     }
                 
