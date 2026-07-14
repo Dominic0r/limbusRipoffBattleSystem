@@ -82,7 +82,7 @@ public class BaseContent implements ContentPackage{
         playerMoveSet.add(stab);
         playerMoveSet.add(nuke);
         //public Unit(int hp, int morale, int speed, int staggerTresh, int critChance, int baseAtk, int baseDef, float critmodifier, float slash, float pierce, float blunt, String name, String description, List<Move> moveSet){
-        Unit playerUnit = new Unit(100, 0, 5, 30, 2, 10, true, 10,0.2f,0.5f,0.5f,1.0f, "Player", "Description", playerMoveSet);
+        Unit playerUnit = new Unit(100, 0, 5, 30, 2, 10, 10,true,0.2f,0.5f,0.5f,1.0f, "Player", "Description", playerMoveSet);
         
         Registry.registerUnit("base:player", playerUnit);
         
