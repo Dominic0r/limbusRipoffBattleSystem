@@ -697,6 +697,20 @@ public class Main
             if(un.getHP()<=0){
                 toRemove.add(un);
                 System.out.println("An Ally: "+un.getName()+ " Has Died!");
+                for(Unit eun : field.getAllies()){
+                    if(eun.canChangeMorale(){
+                        eun.takeMoraleDamage(2);
+                    }
+                    for(appliedEffect app : eun.getEffectList()){
+                        app.triggerOnAllyDeath();
+                    }
+                }
+
+                for(Unit eun : field.getEnemies()){
+                    for(appliedEffect app : eun.getEffectList()){
+                        app.triggerOnEnemyDeath();
+                    }
+                }
             }
         }
         
@@ -707,6 +721,23 @@ public class Main
             if(un.getHP()<=0){
                 toRemove.add(un);
                 System.out.println("An Enemy: "+un.getName()+ " Has Died!");
+                    for(Unit eun : field.getEnemies()){
+                        if(eun.canChangeMorale(){
+                            eun.takeMoraleDamage(2);
+                        }
+    
+                        for(appliedEffect app : eun.getEffectList()){
+                            app.triggerOnAllyDeath();
+                        }
+                    }
+                
+                    for(Unit eun : field.getAllies()){
+                        for(appliedEffect app : eun.getEffectList()){
+                            app.triggerOnEnemyDeath();
+                        }
+                    }
+                
+                }
             }
         }
         
