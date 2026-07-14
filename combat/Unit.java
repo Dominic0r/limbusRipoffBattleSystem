@@ -39,7 +39,9 @@ public class Unit{
         
         public Move unopposed;
         public Move staggered;
-        public Unit(int hp, int morale, int speed, int staggerTresh, int critChance, int baseAtk, int baseDef, float critmodifier, float slash, float pierce, float blunt, String name, String description, List<Move> moveSet){
+
+        public boolean moraleChanges;
+        public Unit(int hp, int morale, int speed, int staggerTresh, int critChance, int baseAtk, int baseDef, boolean moraleChanges, float critmodifier, float slash, float pierce, float blunt, String name, String description, List<Move> moveSet){
             this.hp = hp;
             this.maxHP = hp;
             this.morale = morale;
@@ -63,6 +65,7 @@ public class Unit{
                 damageAffectModifiers.put(damageType.SLASH,0.0f);
                 damageAffectModifiers.put(damageType.PIERCE,0.0f);
                 damageAffectModifiers.put(damageType.BLUNT,0.0f);
+                this.moraleChanges = moraleChanges;
                 
         }
 
@@ -89,6 +92,8 @@ public class Unit{
                 damageAffectModifiers.put(damageType.SLASH,0.0f);
                 damageAffectModifiers.put(damageType.PIERCE,0.0f);
                 damageAffectModifiers.put(damageType.BLUNT,0.0f);
+
+                this.moraleChanges = other.moraleChanges;
                 
         }
 
@@ -121,6 +126,8 @@ public class Unit{
                         return 0.0f;
                 }
         }
+
+        public boolean canChangeMorale(){ return moraleChanges;}
 
         public void modifyDamageTypeModifier(damageType damType, float toAdd){
                 if(damageAffect.containsKey(damType) && damageAffectModifiers.containsKey(damType)){
