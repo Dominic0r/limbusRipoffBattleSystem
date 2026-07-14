@@ -710,6 +710,9 @@ public class Main
         
         for(Unit un: field.getAllies()){
             if(un.getHP()<=0){
+                for(appliedEffect app : un.getEffectList()){
+                            app.stat().triggerOnDeath(field,un);
+                }
                 toRemove.add(un);
                 System.out.println("An Ally: "+un.getName()+ " Has Died!");
                 for(Unit eun : field.getAllies()){
@@ -734,6 +737,10 @@ public class Main
         
         for(Unit un: field.getEnemies()){
             if(un.getHP()<=0){
+                for(appliedEffect app : un.getEffectList()){
+                            app.stat().triggerOnDeath(field,un);
+                }
+                
                 toRemove.add(un);
                 System.out.println("An Enemy: "+un.getName()+ " Has Died!");
                     for(Unit eun : field.getEnemies()){
