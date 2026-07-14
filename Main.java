@@ -131,9 +131,14 @@ public class Main
         System.out.println("\n" + winner.getName() + " won the clash with " + remainingCoins + " coin(s) remaining!");
         
         if(!unopposed){
-            winner.modifyMorale(5);
+            if(winner.canChangeMorale()){
+                winner.modifyMorale(5);
+            }
             
-            loser.modifyMorale(-5);
+            if(loser.canChangeMorale(){
+                loser.modifyMorale(-5);
+            }
+            
         }
         
         clashResult finalResult = new clashResult(winner, loser, clashRound, remainingCoins, winnerCoinSet, loserUnbreakables,winnerUnbreakables);
