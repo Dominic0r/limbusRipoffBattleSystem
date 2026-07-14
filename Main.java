@@ -698,7 +698,7 @@ public class Main
                 toRemove.add(un);
                 System.out.println("An Ally: "+un.getName()+ " Has Died!");
                 for(Unit eun : field.getAllies()){
-                    if(eun.canChangeMorale(){
+                    if(eun.canChangeMorale()){
                         eun.takeMoraleDamage(2);
                     }
                     for(appliedEffect app : eun.getEffectList()){
@@ -722,7 +722,7 @@ public class Main
                 toRemove.add(un);
                 System.out.println("An Enemy: "+un.getName()+ " Has Died!");
                     for(Unit eun : field.getEnemies()){
-                        if(eun.canChangeMorale(){
+                        if(eun.canChangeMorale()){
                             eun.takeMoraleDamage(2);
                         }
     
