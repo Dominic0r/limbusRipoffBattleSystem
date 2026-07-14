@@ -135,7 +135,7 @@ public class Main
                 winner.modifyMorale(5);
             }
             
-            if(loser.canChangeMorale(){
+            if(loser.canChangeMorale()){
                 loser.modifyMorale(-5);
             }
             
