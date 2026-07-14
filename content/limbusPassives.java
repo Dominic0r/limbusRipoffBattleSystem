@@ -69,13 +69,18 @@ public class limbusPassives implements ContentPackage{
         });
     Registry.registerStatus("lim:burn", burn);
 
-    statusEffect sinking = new statusEffect("Sinking", false, 99,99, "Take fixed Morale damage every hit");
+    statusEffect sinking = new statusEffect("Sinking", false, 99,99, "Take fixed Morale damage every hit. If morale cannot be changed, inflict half of the damage on HP");
         sinking.setOnHitReceived((field, un)->{
             int damagetaken=0;
             for(appliedEffect app : un.getEffectList()){
                 if(app.stat() == sinking){
                     damagetaken = app.getPotency();
-                    un.takeMoraleDamage(damagetaken);
+                    if(un.canChangeMorale()){
+                        un.takeMoraleDamage(damagetaken);
+                    }else{
+                        un.takeHPDamage(damagetaken/2);
+                    }
+                    
                     app.decrementStack();
                     System.out.println("  > " + un.getName() + " took " + damagetaken + " sinking damage!"); 
                 }
