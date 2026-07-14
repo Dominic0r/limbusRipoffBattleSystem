@@ -17,6 +17,8 @@ public class statusEffect{
         private BiConsumer<Battlefield, Unit> onBattleStart;
         private BiConsumer<Battlefield, Unit> onClashLose;
         private BiConsumer<Battlefield, Unit> onClashWin;
+        private BiConsumer<Unit, Unit> onEnemyDeath; // first unit is the unit that dies, second is the unit holder
+        private BiConsumer<Unit, Unit> onAllyDeath;
         
         public statusEffect(String name, boolean decays, int potencyLimit, int stackLimit, String description){
             this.name = name;
@@ -71,6 +73,16 @@ public class statusEffect{
             return this;
         }
         
+        public statusEffect setOnAllyDeath(BiConsumer<Unit, Unit> hook) {
+            this.onBeforeClash = hook;
+            return this;
+        }
+        
+        public statusEffect setOnEnemyDeath(BiConsumer<Unit, Unit> hook) {
+            this.onBeforeClash = hook;
+            return this;
+        }
+        
         public void triggerTurnStart(Battlefield field, Unit un) {
             if (onTurnStart != null) onTurnStart.accept(field, un);
         }
@@ -105,6 +117,14 @@ public class statusEffect{
 
         public void triggerOnBeforeClash(Battlefield field, Unit un){
             if(onBeforeClash != null) onBeforeClash.accept(field, un);
+        }
+
+        public void triggerOnEnemyDeath(Unit deadUn, Unit un){
+            if(onBeforeClash != null) onBeforeClash.accept(deadUn, un);
+        }
+
+        public void triggerOnAllyDeath(Unit deadUn, Unit un){
+            if(onBeforeClash != null) onBeforeClash.accept(deadUn, un);
         }
         
         public String getName(){ return name;}
