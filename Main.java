@@ -422,7 +422,7 @@ public class Main
         }while(!validInput);
         
         //Move plyrMv = validMoves.get(choice-1);
-        move plyrMv = display.getPlayerMoveChoice();
+        move plyrMv = GD.getPlayerMoveChoice();
         counter = 1;
         System.out.println("\nChoose a target: ");
         for(Unit un: field.getEnemies()){
@@ -853,7 +853,7 @@ public class Main
         pkg.registerContent();
     }
     
-    
+    public static gameDisplay GD = new gameDisplay(batContext, playerUnit);
     
     public static void main(String[] args) {
         System.out.println("--- INITIALIZING GAME ---\n"); 
@@ -874,7 +874,7 @@ public class Main
         }
         
         battleStart(batContext);
-        gameDisplay GD = new gameDisplay(batContext, playerUnit);
+        
         while(true){
         GD.updateHP();
             GD.updateMoves();
