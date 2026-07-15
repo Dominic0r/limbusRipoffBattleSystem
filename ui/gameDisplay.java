@@ -285,7 +285,7 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
                 playerHPBar.setString(player.getName() + " is DEAD");
                 playerHPBar.setForeground(Color.DARK_GRAY);
             } else {
-                updateBarValue(playerHPBar, player.getName(), player.getHP(), player.maxHP);
+                updateBarValue(playerHPBar, player.getName(), player.getHP(), player.maxHP, player);
             }
 
             updateSide(allyBarsMap, allyContentPanel);
@@ -293,10 +293,11 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
             updateSide(enemyBarsMap, enemContentPanel);
         });
     }
-  private void updateBarValue(JProgressBar bar, String name, int current, int max) {
+  private void updateBarValue(JProgressBar bar, String name, int current, int max, Unit un) {
         bar.setMaximum(max);
         bar.setValue(current);
         bar.setString(name + ": " + current + "/" + max + " HP");
+    bar.setToolTipText(un.getKey().overView());
     }
 
   private void updateSide(Map<Unit, JProgressBar> barMap, JPanel containerPanel) {
