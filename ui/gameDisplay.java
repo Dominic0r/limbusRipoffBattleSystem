@@ -60,12 +60,12 @@ java.util.List<Move> playerMoves = new ArrayList<>();
 
     JScrollPane movelist = new JScrollPane(playerMovePanel);
 
-    add(moveList, BorderLayout.SOUTH);
+    add(movelist, BorderLayout.SOUTH);
     
   }
 
   private JButton createMoveButton(Move mov){
-    JButton but = new Jbutton(mov.getName());
+    JButton but = new JButton(mov.getName());
     return but;
   }
   
