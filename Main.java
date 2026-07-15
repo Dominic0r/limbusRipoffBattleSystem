@@ -167,10 +167,10 @@ public class Main
     }
     
     public static void afterClash(clashResult result, Battlefield field, combatContext comctx){
+        if(result.getLoser().getHP() >0 && result.getWinner().getHP()> 0 && !result.getWinner().staggered()){
         System.out.println("\n --- CLASH RESOLUTION --- "); // Added UI
-        checkStacks(field);
-            checkHP(field);
-            GD.updateHP();
+        }
+        
 
         for(appliedEffect app : result.getWinner().getEffectList()){
                     app.stat().triggerOnClashWin(field, result.getWinner());
