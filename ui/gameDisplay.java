@@ -53,7 +53,7 @@ java.util.List<Move> playerMoves = new ArrayList<>();
     playerMovePanel.add(new JLabel("Your Moves:"));
 
     for(Move mov: playerMoves){
-      if(mov.isUsable()){
+      if(mov.isUsable(field, player)){
         playerMovePanel.add(createMoveButton(mov));
       }
     }
