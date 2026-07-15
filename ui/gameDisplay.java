@@ -24,7 +24,7 @@ public class gameDisplay extends JFrame{
     private JPanel enemContentPanel;
 
 java.util.List<Move> playerMoves = new ArrayList<>();
-  private Map<Unit, JButton> playerMoveMap = new HashMap<>();
+  private Map<Move, JButton> playerMoveMap = new HashMap<>();
   private JPanel playerMovePanel;
   
   public gameDisplay(Battlefield field, Unit player){
@@ -53,7 +53,7 @@ java.util.List<Move> playerMoves = new ArrayList<>();
     playerMovePanel.add(new JLabel("Your Moves:"));
 
     for(Move mov: playerMoves){
-      Jbutton but = createMoveButton(mov);
+      JButton but = createMoveButton(mov);
       playerMoveMap.put(mov,but);
         playerMovePanel.add(but);
       
