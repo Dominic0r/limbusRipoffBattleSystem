@@ -5,6 +5,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class gameDisplay extends JFrame{
   java.util.List<Unit> allies = new ArrayList<>();
