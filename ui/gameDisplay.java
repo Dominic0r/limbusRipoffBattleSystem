@@ -47,7 +47,7 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
     this.playerMoves = player.getMoveSet();
     
     setTitle("Game Display");
-        setSize(700, 500);
+        setSize(1280, 720);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // Center on screen
         setLayout(new BorderLayout(10, 10));
