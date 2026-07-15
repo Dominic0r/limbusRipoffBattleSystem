@@ -45,26 +45,35 @@ public class gameDisplay extends JFrame{
     enemList.setBackground(Color.WHITE);
     enemList.setForeground(Color.BLACK);*/
 
-    JScrollPane allyPanel = new JScrollPane();
-    JScrollPane enemPanel = new JScrollPane();
-    
-    allyPanel.setBackground(Color.LIGHT_GRAY);
-    allyPanel.add(new JLabel("Your Side"));
 
-    enemPanel.setBackground(Color.LIGHT_GRAY);
+    JPanel allyContentPanel = new JPanel();
+    // BoxLayout.Y_AXIS stacks components vertically
+    allyContentPanel.setLayout(new BoxLayout(allyContentPanel, BoxLayout.Y_AXIS)); 
+    allyContentPanel.setBackground(Color.LIGHT_GRAY);
+
+    JPanel enemContentPanel = new JPanel();
+    enemContentPanel.setLayout(new BoxLayout(enemContentPanel, BoxLayout.Y_AXIS));
+    enemContentPanel.setBackground(Color.LIGHT_GRAY);
+    
+    
+    allyContentPanel.add(new JLabel("Your Side"));
+
     enemPanel.add(new JLabel("Enemies"));
 
-    allyPanel.add(createHealthBar(player.getName(), player.getHP(), player.maxHP));
+    allyContentPanel.add(createHealthBar(player.getName(), player.getHP(), player.maxHP));
     for(Unit un : allies){
-      allyPanel.add(createHealthBar(un.getName(), un.getHP(), un.maxHP));
+      allyContentPanel.add(createHealthBar(un.getName(), un.getHP(), un.maxHP));
     }
 
     for(Unit un : enemies){
-      enemPanel.add(createHealthBar(un.getName(), un.getHP(), un.maxHP));
+      enemContentPanel.add(createHealthBar(un.getName(), un.getHP(), un.maxHP));
     }
 
-    add(allyPanel, BorderLayout.WEST);
-    add(enemPanel, BorderLayout.EAST);
+    JScrollPane allyScroll = new JScrollPane(allyContentPanel);
+    JScrollPane enemScroll = new JScrollPane(enemContentPanel);
+
+    add(allyScroll, BorderLayout.WEST);
+    add(enemScroll, BorderLayout.EAST);
     
   }
 
