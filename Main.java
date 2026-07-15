@@ -161,12 +161,16 @@ public class Main
             
         }
         
+        
         clashResult finalResult = new clashResult(winner, loser, clashRound, remainingCoins, winnerCoinSet, loserUnbreakables,winnerUnbreakables);
         return finalResult;
     }
     
     public static void afterClash(clashResult result, Battlefield field, combatContext comctx){
         System.out.println("\n --- CLASH RESOLUTION --- "); // Added UI
+        checkStacks(field);
+            checkHP(field);
+            GD.updateHP();
 
         for(appliedEffect app : result.getWinner().getEffectList()){
                     app.stat().triggerOnClashWin(field, result.getWinner());
@@ -174,31 +178,32 @@ public class Main
         for(appliedEffect app : result.getLoser().getEffectList()){
                     app.stat().triggerOnClashLose(field, result.getLoser());
         }
-        for(Coin co: result.getCoinSet()){
-            System.out.print(result.getWinner().getName() + " activates: " + co.getDesc()); // Added UI
-            
-            if(co.getCoinPower(result.getWinner().getMorale()) >0){
+        if(result.getLoser().getHP() >0 && result.getWinner().getHP()> 0 && !result.getWinner().staggered()){
+            for(Coin co: result.getCoinSet()){
+                System.out.print(result.getWinner().getName() + " activates: " + co.getDesc()); // Added UI
                 
-                System.out.print(" - HEADS!");
-                co.triggerOnHit(result, result.getWinner());
-                
-                for(appliedEffect app : result.getWinner().getEffectList()){
-                    app.stat().triggerOnHitGive(field, result.getWinner());
+                if(co.getCoinPower(result.getWinner().getMorale()) >0){
+                    
+                    System.out.print(" - HEADS!");
+                    co.triggerOnHit(result, result.getWinner());
+                    
+                    for(appliedEffect app : result.getWinner().getEffectList()){
+                        app.stat().triggerOnHitGive(field, result.getWinner());
+                    }
+                    
+                    for(appliedEffect app : result.getLoser().getEffectList()){
+                        app.stat().triggerOnHitReceived(field, result.getLoser());
+                    }
+                }else{
+                    System.out.println(" - TAILS!");
                 }
-                
-                for(appliedEffect app : result.getLoser().getEffectList()){
-                    app.stat().triggerOnHitReceived(field, result.getLoser());
-                }
-            }else{
-                System.out.println(" - TAILS!");
+                waitFor(1000/(result.getCoinSet().size()+1));
+                checkStacks(field);
+                checkHP(field);
+                GD.updateHP();
+                    checkWin(field);
             }
-            waitFor(1000/(result.getCoinSet().size()+1));
-            checkStacks(field);
-            checkHP(field);
-            GD.updateHP();
-                checkWin(field);
         }
-        
         System.out.println("\n");
         if(!result.getLoserUnbreakables().isEmpty() && !result.getLoser().staggered() && result.getLoser().getHP()>0){
             for(Coin co: result.getLoserUnbreakables()){
