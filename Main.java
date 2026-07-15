@@ -668,14 +668,23 @@ public class Main
                     }
                 }
             }
-
+            List<combatContext> cctToAdd = new ArrayList<>();
             for(Unit un: field.getEnemies()){
-                for(combatContext comc : attackQueue){
-                    if(un!=comc.getAttacker() && un!= comc.getDefender()){
-                        attackQueue.add(enemMove(field, un, attackQueue));
+                
+                if(!un.staggered() && attackQueue.get(0).getDefender() != un){
+                    
+                    for(combatContext comc : attackQueue){
+                        if(un!=comc.getAttacker() && un!= comc.getDefender()){
+                            
+                            cctToAdd.add(enemMove(field, un, attackQueue));
+                        }
                     }
+                    
                 }
+                
             }
+            attackQueue.addAll(cctToadd);
+            
         }else{
             if(field.getEnemies().size()>0){
                 for(Unit un: field.getEnemies()){
@@ -684,13 +693,17 @@ public class Main
                     }
                 }
 
+                List<combatContext> cctToAdd = new ArrayList<>();
             for(Unit un: field.getAllies()){
-                for(combatContext comc : attackQueue){
-                    if(un!=comc.getAttacker() && un!= comc.getDefender()){
-                        attackQueue.add(allyMove(field, un, attackQueue));
+                if(!un.staggered() && attackQueue.get(0).getDefender() != un){
+                    for(combatContext comc : attackQueue){
+                        if(un!=comc.getAttacker() && un!= comc.getDefender()){
+                            cctToAdd.add(allyMove(field, un, attackQueue));
+                        }
                     }
                 }
             }
+                attackQueue.addAll(cctToadd);
                 
             }
         }
