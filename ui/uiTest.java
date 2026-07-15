@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class uiTest extends JFrame{
-  List<Unit> allies = new ArrayList<>();
-  List<Unit> enemies = new ArrayList<>();
+  util.List<Unit> allies = new ArrayList<>();
+  util.List<Unit> enemies = new ArrayList<>();
   Battlefield field;
 
   public uiTest(Battlefield field){
