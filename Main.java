@@ -35,6 +35,7 @@ public class Main
         do{
             if(attackerCoinCount ==0 || defenderCoinCount == 0) break;
             checkHP(field);
+            GD.updateHP();
             checkWin(field);
             
             currentAttackerPoints = comctx.getAttackerMove().getBaseAtk();
@@ -194,6 +195,7 @@ public class Main
             
             checkStacks(field);
             checkHP(field);
+            GD.updateHP();
                 checkWin(field);
         }
 
@@ -219,6 +221,7 @@ public class Main
             
             checkStacks(field);
             checkHP(field);
+                GD.updateHP();
                 checkWin(field);
             }
         }
@@ -681,6 +684,7 @@ public class Main
                 
                 keepAllAppliedEffectsInBounds(field);
                 checkHP(field);
+                GD.updateHP();
                 checkWin(field);
                 
                 if(finalResult.getWinner().getHP() >0 && !finalResult.getWinner().staggered()){
@@ -691,6 +695,7 @@ public class Main
                 keepAllAppliedEffectsInBounds(field);
             }
             checkHP(field);
+            GD.updateHP();
             checkWin(field);
             checkAllStagger(field);
         }
@@ -699,6 +704,7 @@ public class Main
         haveAllPendingMutationsApplied(field);
         keepAllAppliedEffectsInBounds(field);
         checkHP(field);
+        GD.updateHP();
         checkWin(field);
         checkAllStaggerRecover(field);
         
