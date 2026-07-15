@@ -150,7 +150,7 @@ public class Main
         System.out.println("\n" + winner.getName() + " won the clash with " + remainingCoins + " coin(s) remaining!");
         waitFor(1500);
         
-        if(!unopposed){
+        if(!unopposed && !loser.staggered()){
             if(winner.canChangeMorale()){
                 winner.modifyMorale(5);
             }
