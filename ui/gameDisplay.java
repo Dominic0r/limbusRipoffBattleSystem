@@ -31,6 +31,9 @@ java.util.List<Move> playerMoves = new ArrayList<>();
 
   private final Object lock = new Object(); // Used to synchronize the wait/notify
     private Move chosenMove = null;
+
+  private Unit chosenTarget = null;
+private Map<Unit, JButton> targetButtonMap = new HashMap<>();
   
   public gameDisplay(Battlefield field, Unit player){
     this.field = field;
@@ -49,6 +52,72 @@ java.util.List<Move> playerMoves = new ArrayList<>();
     displayMoves();
     setVisible(true);
   }
+
+  public Unit getPlayerTargetChoice() {
+    synchronized (lock) {
+        chosenTarget = null; 
+
+        SwingUtilities.invokeLater(() -> {
+            playerMovePanel.removeAll();
+            targetButtonMap.clear();
+
+            playerMovePanel.add(new JLabel("Choose a Target:"));
+
+            for (Unit enemy : enemies) {
+                if (enemy.getHP() > 0) {
+                    JButton targetBtn = new JButton(enemy.getName());
+                    
+                    targetBtn.addActionListener(e -> {
+                        synchronized (lock) {
+                            chosenTarget = enemy;
+                            lock.notify(); // Wake up the Main thread
+                        }
+                    });
+
+                    targetButtonMap.put(enemy, targetBtn);
+                    playerMovePanel.add(targetBtn);
+                }
+            }
+
+            playerMovePanel.revalidate();
+            playerMovePanel.repaint();
+        });
+
+        while (chosenTarget == null) {
+            try {
+                lock.wait();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return null;
+            }
+        }
+
+        restoreMovePanel();
+
+        return chosenTarget;
+    }
+}
+
+  private void restoreMovePanel() {
+    SwingUtilities.invokeLater(() -> {
+        playerMovePanel.removeAll();
+        playerMovePanel.add(new JLabel("Your Moves:"));
+
+        // Put the move buttons back
+        for (Move mov : playerMoves) {
+            JButton button = playerMoveMap.get(mov);
+            if (button != null) {
+                playerMovePanel.add(button);
+            }
+        }
+
+        // Re-evaluate which moves are usable right now
+        updateMoves();
+
+        playerMovePanel.revalidate();
+        playerMovePanel.repaint();
+    });
+}
 
   public Move getPlayerMoveChoice() {
         synchronized (lock) {
