@@ -23,12 +23,17 @@ public class gameDisplay extends JFrame{
   private JPanel allyContentPanel;
     private JPanel enemContentPanel;
 
-
+java.util.List<Move> playerMoves = new ArrayList<>();
+  private Map<Unit, JProgressBar> enemyBarsMap = new HashMap<>();
+  private JPanel playerMovePanel;
+  
   public gameDisplay(Battlefield field, Unit player){
     this.field = field;
     this.player= player;
     this.allies = field.getAllies();
     this.enemies = field.getEnemies();
+    this.playerMoves = player.getMoveSet();
+    
     setTitle("Game Display");
         setSize(700, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,9 +41,34 @@ public class gameDisplay extends JFrame{
         setLayout(new BorderLayout(10, 10));
 
     displayHP();
-
+    displayMoves();
     setVisible(true);
   }
+
+  public void displayMoves(){
+    playerMovePanel = new JPanel();
+    
+    playerMovePanel.setLayout(new BoxLayout(playerMovePanel, BoxLayout.X_AXIS)); 
+    playerMovePanel.setBackground(Color.LIGHT_GRAY);
+    playerMovePanel.add(new JLabel("Your Moves:"));
+
+    for(Move mov: playerMoves){
+      if(mov.isUsable()){
+        playerMovePanel.add(createMoveButton(mov));
+      }
+    }
+
+    JScrollPane movelist = new JScrollPane(playerMovePanel);
+
+    add(moveList, BorderLayout.SOUTH);
+    
+  }
+
+  private JButton createMoveButton(Move mov){
+    JButton but = new Jbutton(mov.getName());
+    return but;
+  }
+  
 
   public void displayHP(){
     allyContentPanel = new JPanel();
@@ -138,5 +168,6 @@ public class gameDisplay extends JFrame{
             containerPanel.repaint();
         }
     }
+
 
 }
