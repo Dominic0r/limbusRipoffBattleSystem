@@ -498,7 +498,7 @@ public class Main
         for(Unit enun : field.getEnemies()){
             alreadyTargeted = false;
             for(combatContext comctx : attackQueue){
-                if(comctx.getDefender() == enun){
+                if(comctx.getDefender() == enun || comctx.getAttacker() == enun){
                     alreadyTargeted = true;
                 }
             }
@@ -562,7 +562,7 @@ public class Main
             for(Unit enun : field.getAllies()){
                 alreadyTargeted = false;
                 for(combatContext comctx : attackQueue){
-                    if(comctx.getDefender() == enun){
+                    if(comctx.getDefender() == enun || comctx.getAttacker() == enun){
                         alreadyTargeted = true;
                     }
                 }
