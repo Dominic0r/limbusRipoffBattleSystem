@@ -557,7 +557,7 @@ public class Main
         Unit targetUn=null;
         boolean secondary=false;
         //pick their target
-        if(field.getAllies().size() >0){
+        if(field.getAllies().size() >0 && ra.nextInt(field.getAllies().size()+1)>1){
             boolean alreadyTargeted = false;
             for(Unit enun : field.getAllies()){
                 alreadyTargeted = false;
