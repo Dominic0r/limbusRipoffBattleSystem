@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class gameDisplay extends JFrame{
   java.util.List<Unit> allies = new ArrayList<>();
@@ -26,6 +28,9 @@ public class gameDisplay extends JFrame{
 java.util.List<Move> playerMoves = new ArrayList<>();
   private Map<Move, JButton> playerMoveMap = new HashMap<>();
   private JPanel playerMovePanel;
+
+  private final Object lock = new Object(); // Used to synchronize the wait/notify
+    private Move chosenMove = null;
   
   public gameDisplay(Battlefield field, Unit player){
     this.field = field;
@@ -45,6 +50,26 @@ java.util.List<Move> playerMoves = new ArrayList<>();
     setVisible(true);
   }
 
+  public Move getPlayerMoveChoice() {
+        synchronized (lock) {
+            chosenMove = null; 
+            
+            
+            updateMoves(); 
+
+            
+            while (chosenMove == null) {
+                try {
+                    lock.wait(); 
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    return null;
+                }
+            }
+            return chosenMove;
+        }
+    }
+
   public void displayMoves(){
     playerMovePanel = new JPanel();
     
@@ -54,6 +79,15 @@ java.util.List<Move> playerMoves = new ArrayList<>();
 
     for(Move mov: playerMoves){
       JButton but = createMoveButton(mov);
+      but.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+          synchronized(lock){
+            chosenMove = mov;
+            lock.notify();
+          }
+        }
+      })
       playerMoveMap.put(mov,but);
         playerMovePanel.add(but);
       
@@ -64,6 +98,8 @@ java.util.List<Move> playerMoves = new ArrayList<>();
     add(movelist, BorderLayout.SOUTH);
     
   }
+
+  
 
   private JButton createMoveButton(Move mov){
     JButton but = new JButton(mov.getName());
