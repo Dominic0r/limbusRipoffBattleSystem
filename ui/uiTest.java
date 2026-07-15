@@ -39,7 +39,7 @@ public class uiTest extends JFrame{
     }
 
     JScrollPane scrollPaneAlly = new JScrollPane(allyList);
-    add(scrollPaneAlly, BorderLayout.CENTER);
+    add(scrollPaneAlly, BorderLayout.WEST);
 
     JTextArea enemList = new JTextArea();
     enemList.setEditable(false);
@@ -51,7 +51,7 @@ public class uiTest extends JFrame{
       enemList.append("\n"+ un.getName());
     }
     JScrollPane scrollPaneEnemy = new JScrollPane(enemList);
-    add(scrollPaneEnemy, BorderLayout.CENTER);
+    add(scrollPaneEnemy, BorderLayout.EAST);
   }
   
 }
