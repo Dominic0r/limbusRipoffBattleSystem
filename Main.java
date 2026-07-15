@@ -40,6 +40,7 @@ public class Main
             currentAttackerPoints = comctx.getAttackerMove().getBaseAtk();
             currentDefenderPoints = comctx.getDefenderMove().getBaseAtk();
             System.out.print(comctx.getAttacker().getName()+ ": ");
+            waitFor(500);
             for(Coin co: attackerCoinSet){
                 int cby = co.getCoinPower(comctx.getAttacker().getMorale());
                 if(cby >0){
@@ -52,6 +53,7 @@ public class Main
             }
             System.out.print("\n"+comctx.getDefender().getName()+": ");
             for(Coin co: defenderCoinSet){
+                waitFor(500);
                 int cby = co.getCoinPower(comctx.getDefender().getMorale());
                 if(cby >0){
                     System.out.print("HEADS ");
@@ -80,7 +82,7 @@ public class Main
             System.out.println("  [Round " + clashRound + "] " 
                                + comctx.getAttacker().getName() + " rolled: " + currentAttackerPoints + " | " 
                                + comctx.getDefender().getName() + " rolled: " + currentDefenderPoints);
-            
+            waitFor(500);
             if(currentAttackerPoints == currentDefenderPoints){
                 System.out.println("    -> Tie! No coins lost.");
             }else{
@@ -112,7 +114,7 @@ public class Main
             }
             
             checkStacks(field);
-            
+            waitFor(1000);
             bothStillHaveCoins = (attackerCoinCount> 0) && (defenderCoinCount > 0);
             clashRound++;
         }while(bothStillHaveCoins);
@@ -145,6 +147,7 @@ public class Main
         
         // Added UI for winner
         System.out.println("\n" + winner.getName() + " won the clash with " + remainingCoins + " coin(s) remaining!");
+        waitFor(1000);
         
         if(!unopposed){
             if(winner.canChangeMorale()){
@@ -174,6 +177,7 @@ public class Main
             System.out.print(result.getWinner().getName() + " activates: " + co.getDesc()); // Added UI
             
             if(co.getCoinPower(result.getWinner().getMorale()) >0){
+                waitFor(500);
                 System.out.print(" - HEADS!");
                 co.triggerOnHit(result, result.getWinner());
                 
@@ -197,7 +201,7 @@ public class Main
         if(!result.getLoserUnbreakables().isEmpty()){
             for(Coin co: result.getLoserUnbreakables()){
             System.out.print(result.getLoser().getName() + " activates unbreakable coin: " + co.getDesc()); // Added UI
-            
+            waitFor(500);
             if(co.getCoinPower(result.getLoser().getMorale()) >0){
                 System.out.print(" - HEADS!");
                 co.triggerOnHit(result, result.getLoser());
@@ -395,17 +399,15 @@ public class Main
 
         
         for(Move mov : validMoves){
-            System.out.println(counter+ ": "+ mov.getName()+ "\n"+mov.getDesc());
+            System.out.println(mov.getName()+ "\n"+mov.getDesc());
             for(Coin co: mov.getCoinSet()){
-                System.out.println("Coin "+ coincounter+ ": "+ co.getDesc());
+                System.out.println("     Coin "+ coincounter+ ": "+ co.getDesc());
                 coincounter++;
             }
             counter++;
             coincounter = 1;
         }
 
-        
-        System.out.print("\nChoose move (number): ");
         
         boolean validInput = false;
         int choice;
@@ -425,11 +427,6 @@ public class Main
         Move plyrMv = GD.getPlayerMoveChoice();
         counter = 1;
         System.out.println("\nChoose a target: ");
-        for(Unit un: field.getEnemies()){
-            System.out.println(counter+": "+ un.getName()+ "\n"+un.getDesc());
-            counter++;
-        }
-        System.out.print("Target (number): "); 
         
         /*do{
             choice = Integer.parseInt(sc.nextLine());
@@ -854,6 +851,14 @@ public class Main
     }
     
     public static gameDisplay GD;
+
+    public static void waitFor(int ms){
+        try{
+            Thread.sleep(ms);
+        }catch(Exception e){
+            System.out.println("Error: "+ e);
+        }
+    }
     
     public static void main(String[] args) {
         System.out.println("--- INITIALIZING GAME ---\n"); 
