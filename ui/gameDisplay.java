@@ -47,8 +47,8 @@ public class gameDisplay extends JFrame{
     enemList.setBackground(Color.WHITE);
     enemList.setForeground(Color.BLACK);*/
 
-    JPanel allyPanel = new JPanel();
-    JPanel enemPanel = new JPanel();
+    JScrollPane allyPanel = new JScrollPane();
+    JScrollPane enemPanel = new JScrollPane();
     
     allyPanel.setBackground(Color.LIGHT_GRAY);
     allyPanel.add(new JLabel("Your Side"));
@@ -65,8 +65,8 @@ public class gameDisplay extends JFrame{
       enemPanel.add(createHealthBar(un.getName(), un.getHP(), un.maxHP));
     }
 
-    frame.add(allyPanel, BorderLayout.WEST);
-    frame.add(enemPanel, BorderLayout.EAST);
+    addScrollPane(allyPanel, BorderLayout.WEST);
+    addScrollPane(enemPanel, BorderLayout.EAST);
     
   }
 
