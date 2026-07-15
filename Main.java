@@ -6,6 +6,7 @@ import combat.*;
 import effect.*;
 import content.*;
 import registry.*;
+import ui.*;
 public class Main
 {
     public static Random ra = new Random();
@@ -874,7 +875,8 @@ public class Main
         battleStart(batContext);
         while(true){
         battleFlow(batContext);
-        
+        uiTest test = new uiTest(batContext);
+            test.setVisible(true);
         }
         
         
