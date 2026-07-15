@@ -116,7 +116,7 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
                             lock.notify();
                         }
                     });
-
+                  targetBtn.setToolTopText(enemy.overView());
                     targetButtonMap.put(enemy, targetBtn);
                     playerMovePanel.add(targetBtn);
                 }
@@ -245,15 +245,18 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
     enemContentPanel.add(new JLabel("Enemies"));
 
     playerHPBar = createHealthBar(player.getName(), player.getHP(), player.maxHP);
+    playerHPBar.setToolTopText(player.overView());
     allyContentPanel.add(playerHPBar);
     for (Unit un : allies) {
             JProgressBar bar = createHealthBar(un.getName(), un.getHP(), un.maxHP);
+      bar.setToolTopText(un.overView());
             allyBarsMap.put(un, bar);
             allyContentPanel.add(bar);
         }
 
     for (Unit un : enemies) {
             JProgressBar bar = createHealthBar(un.getName(), un.getHP(), un.maxHP);
+      bar.setToolTopText(un.overView());
             enemyBarsMap.put(un, bar);
             enemContentPanel.add(bar);
         }
