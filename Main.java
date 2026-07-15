@@ -208,11 +208,11 @@ public class Main
                 System.out.print(" - HEADS!");
                 co.triggerOnHit(result, result.getLoser());
                 
-                for(appliedEffect app : result.getWinner().getEffectList()){
+                for(appliedEffect app : result.getLoser().getEffectList()){
                     app.stat().triggerOnHitGive(field, result.getWinner());
                 }
                 
-                for(appliedEffect app : result.getLoser().getEffectList()){
+                for(appliedEffect app : result.getWinner().getEffectList()){
                     app.stat().triggerOnHitReceived(field, result.getLoser());
                 }
             }else{
