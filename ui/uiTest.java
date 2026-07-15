@@ -31,18 +31,27 @@ public class uiTest extends JFrame{
     JTextArea allyList = new JTextArea();
     allyList.setEditable(false);
     allyList.setText("Allies: ");
+    allyList.setBackground(new Color(25, 25, 25));
+    allyList.setForeground(Color.CYAN);
 
     for(Unit un : allies){
       allyList.append("\n"+ un.getName());
     }
 
+    JScrollPane scrollPaneAlly = new JScrollPane(allyList);
+    add(scrollPaneAlly, BorderLayout.CENTER);
+
     JTextArea enemList = new JTextArea();
     enemList.setEditable(false);
     enemList.setText("\nEnemies: ");
+    enemList.setBackground(new Color(25, 25, 25));
+    enemList.setForeground(Color.CYAN);
 
     for(Unit un : enemies){
       enemList.append("\n"+ un.getName());
     }
+    JScrollPane scrollPaneEnemy = new JScrollPane(enemList);
+    add(scrollPaneEnemy, BorderLayout.CENTER);
   }
   
 }
