@@ -64,7 +64,6 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
     OutputStream out = new OutputStream() {
         @Override
         public void write(int b) {
-            // Write a single byte character to the JTextArea (on the EDT thread)
             SwingUtilities.invokeLater(() -> {
                 logArea.append(String.valueOf((char) b));
                 logArea.setCaretPosition(logArea.getDocument().getLength());
@@ -73,7 +72,6 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
 
         @Override
         public void write(byte[] b, int off, int len) {
-            // Write character chunks for performance
             String s = new String(b, off, len);
             SwingUtilities.invokeLater(() -> {
                 logArea.append(s);
@@ -93,10 +91,8 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
     logArea.setBackground(Color.BLACK);
     logArea.setForeground(Color.WHITE); 
 
-    // Wrap the text area inside a scroll pane so it handles large logs gracefully
     JScrollPane logScrollPane = new JScrollPane(logArea);
     
-    // Add it to the exact CENTER of your BorderLayout
     add(logScrollPane, BorderLayout.CENTER);
 }
 
@@ -117,7 +113,7 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
                     targetBtn.addActionListener(e -> {
                         synchronized (lock) {
                             chosenTarget = enemy;
-                            lock.notify(); // Wake up the Main thread
+                            lock.notify();
                         }
                     });
 
@@ -150,7 +146,6 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
         playerMovePanel.removeAll();
         playerMovePanel.add(new JLabel("Your Moves:"));
 
-        // Put the move buttons back
         for (Move mov : playerMoves) {
             JButton button = playerMoveMap.get(mov);
             if (button != null) {
@@ -158,7 +153,6 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
             }
         }
 
-        // Re-evaluate which moves are usable right now
         updateMoves();
 
         playerMovePanel.revalidate();
@@ -281,9 +275,7 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
     }
 
   public void updateHP() {
-        // SwingUtilities.invokeLater ensures this runs safely on the UI thread
         SwingUtilities.invokeLater(() -> {
-            // Update Player
             if (player.getHP() <= 0) {
                 playerHPBar.setValue(0);
                 playerHPBar.setString(player.getName() + " is DEAD");
@@ -292,10 +284,8 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
                 updateBarValue(playerHPBar, player.getName(), player.getHP(), player.maxHP);
             }
 
-            // 2. Process Allies and safely remove dead ones
             updateSide(allyBarsMap, allyContentPanel);
 
-            // 3. Process Enemies and safely remove dead ones
             updateSide(enemyBarsMap, enemContentPanel);
         });
     }
@@ -315,18 +305,14 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
             JProgressBar bar = entry.getValue();
 
             if (unit.getHP() <= 0) {
-                // Remove visually from the GUI panel
                 containerPanel.remove(bar);
-                // Remove tracking entry from our map
                 iterator.remove(); 
                 structureChanged = true;
             } else {
-                // Otherwise, just update its layout figures
                 updateBarValue(bar, unit.getName(), unit.getHP(), unit.maxHP);
             }
         }
 
-        // If components were removed, tell Swing to recalculate layout positions
         if (structureChanged) {
             containerPanel.revalidate();
             containerPanel.repaint();
