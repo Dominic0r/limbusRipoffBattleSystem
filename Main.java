@@ -45,7 +45,7 @@ public class Main
             for(Coin co: attackerCoinSet){
                 int cby = co.getCoinPower(comctx.getAttacker().getMorale());
                 if(cby >0){
-                    System.out.print("HEADS ");
+                    System.out.print("HEADS (+"+ cby+ ") ");
                 }else{
                     System.out.print("TAILS ");
                 }
@@ -58,7 +58,7 @@ public class Main
                 
                 int cby = co.getCoinPower(comctx.getDefender().getMorale());
                 if(cby >0){
-                    System.out.print("HEADS ");
+                    System.out.print("HEADS (+"+ cby+") ");
                 }else{
                     System.out.print("TAILS ");
                 }
