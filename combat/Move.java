@@ -34,7 +34,7 @@ public class Move{
         public String overView(){
                 
         int coincounter=1;
-                String outP = "<html>";
+                String outP = "<html> ";
                 outP+=this.name+ "<br/>"+this.description;
                 
             for(Coin co: this.coinSet){
