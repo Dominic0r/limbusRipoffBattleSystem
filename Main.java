@@ -660,7 +660,7 @@ public class Main
             combatContext playerMove = playerChoose(field);// have player and all NPCs pick move and target. generates combatContext 
             attackQueue.add(playerMove);
         }
-        if(field.getAllies().size()+1 > field.getEnemies().size()){
+        if(field.getAllies().size()+1 >= field.getEnemies().size()){
             if(field.getAllies().size()>0){
                 for(Unit un: field.getAllies()){
                     if(!un.staggered() && attackQueue.get(0).getDefender() != un){
