@@ -317,10 +317,10 @@ public class Unit{
                         dam += dam*source.getCritmodifier();
 
                         for(appliedEffect app : source.getEffectList()){
-                                app.triggerOnCriticalInflict(this,source);
+                                app.stat().triggerOnCriticalInflict(this,source);
                         }
                         for(appliedEffect app : this.getEffectList()){
-                                app.triggerOnCriticalGet(source, this);
+                                app.stat().triggerOnCriticalGet(source, this);
                         }
                 }
 
