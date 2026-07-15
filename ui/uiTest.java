@@ -3,7 +3,7 @@ package ui;
 import combat.*;
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
 
 public class uiTest extends JFrame{
   List<Unit> allies = new ArrayList<>();
@@ -27,7 +27,7 @@ public class uiTest extends JFrame{
   }
 
   public void displayAlliesAndEnemies(){
-    allyList = new JTextArea();
+    JTextArea allyList = new JTextArea();
     allyList.setEditable(false);
     allyList.setText("Allies: ");
 
@@ -35,7 +35,7 @@ public class uiTest extends JFrame{
       allyList.append("\n"+ un.getName());
     }
 
-    enemList = new JTextArea();
+    JTextArea enemList = new JTextArea();
     enemList.setEditable(false);
     enemList.setText("\nEnemies: ");
 
