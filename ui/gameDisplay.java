@@ -63,8 +63,8 @@ public class gameDisplay extends JFrame{
       enemPanel.add(createHealthBar(un.getName(), un.getHP(), un.maxHP));
     }
 
-    addScrollPane(allyPanel, BorderLayout.WEST);
-    addScrollPane(enemPanel, BorderLayout.EAST);
+    add(allyPanel, BorderLayout.WEST);
+    add(enemPanel, BorderLayout.EAST);
     
   }
 
