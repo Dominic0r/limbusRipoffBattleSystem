@@ -12,10 +12,13 @@ public class gameDisplay extends JFrame{
   Battlefield field;
   Unit player;
 
-  java.util.List<JProgressBar> allyHPBar = new ArrayList<>();
-  java.util.List<JProgressBar> enemyHPBar = new ArrayList<>();
+  private Map<Unit, JProgressBar> allyBarsMap = new HashMap<>();
+  private Map<Unit, JProgressBar> enemyBarsMap = new HashMap<>();
 
   JProgressBar playerHPBar;
+
+  private JPanel allyContentPanel;
+    private JPanel enemContentPanel;
 
 
   public gameDisplay(Battlefield field, Unit player){
@@ -37,11 +40,9 @@ public class gameDisplay extends JFrame{
   public void displayHP(){
 
 
-    JPanel allyContentPanel = new JPanel();
     allyContentPanel.setLayout(new BoxLayout(allyContentPanel, BoxLayout.Y_AXIS)); 
     allyContentPanel.setBackground(Color.LIGHT_GRAY);
 
-    JPanel enemContentPanel = new JPanel();
     enemContentPanel.setLayout(new BoxLayout(enemContentPanel, BoxLayout.Y_AXIS));
     enemContentPanel.setBackground(Color.LIGHT_GRAY);
     
@@ -52,18 +53,17 @@ public class gameDisplay extends JFrame{
 
     playerHPBar = createHealthBar(player.getName(), player.getHP(), player.maxHP);
 
-    allyContentPanel.add(playerHPBar);
-    for(Unit un : allies){
-      JProgressBar bar = createHealthBar(un.getName(), un.getHP(), un.maxHP);
-      allyHPBar.add(bar);
-      allyContentPanel.add(bar);
-    }
+    for (Unit un : allies) {
+            JProgressBar bar = createHealthBar(un.getName(), un.getHP(), un.maxHP);
+            allyBarsMap.put(un, bar);
+            allyContentPanel.add(bar);
+        }
 
-    for(Unit un : enemies){
-      JProgressBar bar = createHealthBar(un.getName(), un.getHP(), un.maxHP);
-      enemyHPBar.add(bar);
-      enemContentPanel.add(bar);
-    }
+    for (Unit un : enemies) {
+            JProgressBar bar = createHealthBar(un.getName(), un.getHP(), un.maxHP);
+            enemyBarsMap.put(un, bar);
+            enemContentPanel.add(bar);
+        }
 
     JScrollPane allyScroll = new JScrollPane(allyContentPanel);
     JScrollPane enemScroll = new JScrollPane(enemContentPanel);
@@ -86,27 +86,53 @@ public class gameDisplay extends JFrame{
         // SwingUtilities.invokeLater ensures this runs safely on the UI thread
         SwingUtilities.invokeLater(() -> {
             // Update Player
-            updateBarValue(playerHPBar, player.getName(), player.getHP(), player.maxHP);
-
-            // Update Allies (assuming the lists stay in the same order)
-            for (int i = 0; i < allies.size(); i++) {
-                Unit unit = allies.get(i);
-                JProgressBar bar = allyHPBar.get(i);
-                updateBarValue(bar, unit.getName(), unit.getHP(), unit.maxHP);
+            if (player.getHP() <= 0) {
+                playerHPBar.setValue(0);
+                playerHPBar.setString(player.getName() + " is DEAD");
+                playerHPBar.setForeground(Color.DARK_GRAY);
+            } else {
+                updateBarValue(playerHPBar, player.getName(), player.getHP(), player.maxHP);
             }
 
-            // Update Enemies
-            for (int i = 0; i < enemies.size(); i++) {
-                Unit unit = enemies.get(i);
-                JProgressBar bar = enemyHPBar.get(i);
-                updateBarValue(bar, unit.getName(), unit.getHP(), unit.maxHP);
-            }
+            // 2. Process Allies and safely remove dead ones
+            updateSide(allyBarsMap, allyContentPanel);
+
+            // 3. Process Enemies and safely remove dead ones
+            updateSide(enemyBarsMap, enemContentPanel);
         });
     }
   private void updateBarValue(JProgressBar bar, String name, int current, int max) {
         bar.setMaximum(max);
         bar.setValue(current);
         bar.setString(name + ": " + current + "/" + max + " HP");
+    }
+
+  private void updateSide(Map<Unit, JProgressBar> barMap, JPanel containerPanel) {
+        Iterator<Map.Entry<Unit, JProgressBar>> iterator = barMap.entrySet().iterator();
+        boolean structureChanged = false;
+
+        while (iterator.hasNext()) {
+            Map.Entry<Unit, JProgressBar> entry = iterator.next();
+            Unit unit = entry.getKey();
+            JProgressBar bar = entry.getValue();
+
+            if (unit.getHP() <= 0) {
+                // Remove visually from the GUI panel
+                containerPanel.remove(bar);
+                // Remove tracking entry from our map
+                iterator.remove(); 
+                structureChanged = true;
+            } else {
+                // Otherwise, just update its layout figures
+                updateBarValue(bar, unit.getName(), unit.getHP(), unit.maxHP);
+            }
+        }
+
+        // If components were removed, tell Swing to recalculate layout positions
+        if (structureChanged) {
+            containerPanel.revalidate();
+            containerPanel.repaint();
+        }
     }
 
 }
