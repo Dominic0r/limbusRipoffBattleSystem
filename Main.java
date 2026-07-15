@@ -400,22 +400,16 @@ public class Main
         System.out.println("Your moves: ");
 
         List<Move> validMoves = new ArrayList<>();
-        for(Move mov: playerUnit.getMoveSet()){
+        /*for(Move mov: playerUnit.getMoveSet()){
             if(mov.isUsable(field, playerUnit)){
                 validMoves.add(mov);
             }
-        }
+        }*/
 
 
         
         for(Move mov : validMoves){
-            System.out.println(mov.getName()+ "\n"+mov.getDesc());
-            for(Coin co: mov.getCoinSet()){
-                System.out.println("     Coin "+ coincounter+ ": "+ co.getDesc());
-                coincounter++;
-            }
-            counter++;
-            coincounter = 1;
+            System.out.println(mov.overView());
         }
 
         
