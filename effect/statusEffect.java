@@ -154,7 +154,7 @@ public class statusEffect{
         }
 
         public void triggerOnCriticalInflict(Unit target, Unit un){
-            if(onCriticalInflict != null) onCriticalInfict.accept(source, un);
+            if(onCriticalInflict != null) onCriticalInflict.accept(target, un);
         }
         
         public String getName(){ return name;}
