@@ -87,7 +87,7 @@ java.util.List<Move> playerMoves = new ArrayList<>();
             lock.notify();
           }
         }
-      })
+      });
       playerMoveMap.put(mov,but);
         playerMovePanel.add(but);
       
