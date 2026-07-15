@@ -409,7 +409,7 @@ public class Main
         
         boolean validInput = false;
         int choice;
-        do{
+        /*do{
             choice = Integer.parseInt(sc.nextLine());
             
             if(choice > counter-1){
@@ -419,7 +419,7 @@ public class Main
                 validInput = true;
             }
             
-        }while(!validInput);
+        }while(!validInput);*/
         
         //Move plyrMv = validMoves.get(choice-1);
         Move plyrMv = GD.getPlayerMoveChoice();
@@ -431,7 +431,7 @@ public class Main
         }
         System.out.print("Target (number): "); 
         
-        do{
+        /*do{
             choice = Integer.parseInt(sc.nextLine());
             
             if(choice > counter-1){
@@ -441,10 +441,10 @@ public class Main
                 validInput = true;
             }
             
-        }while(!validInput);
+        }while(!validInput);*/
         
-        Unit targetEnemy = field.getEnemies().get(choice-1);
-        
+        //Unit targetEnemy = field.getEnemies().get(choice-1);
+        Unit targetEnemy = GD.getPlayerTargetChoice();
         Move targetMove;
         
         int maxnum=Integer.MIN_VALUE;
