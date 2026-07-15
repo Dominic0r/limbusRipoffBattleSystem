@@ -785,6 +785,7 @@ public class Main
             System.out.println("==========");
             System.out.println("|YOU WIN!|");
             System.out.println("==========");
+            return;
         }
     }
     
@@ -792,6 +793,7 @@ public class Main
         System.out.println("===========");
         System.out.println("|YOU LOSE!|");
         System.out.println("===========");
+        return;
     }
     
     public static void haveAllPendingMutationsApplied(Battlefield field){
