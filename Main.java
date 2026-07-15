@@ -853,7 +853,7 @@ public class Main
         pkg.registerContent();
     }
     
-    public static gameDisplay GD = new gameDisplay(batContext, playerUnit);
+    public static gameDisplay GD;
     
     public static void main(String[] args) {
         System.out.println("--- INITIALIZING GAME ---\n"); 
@@ -874,7 +874,7 @@ public class Main
         }
         
         battleStart(batContext);
-        
+        GD = new gameDisplay(batContext, playerUnit);
         while(true){
         GD.updateHP();
             GD.updateMoves();
