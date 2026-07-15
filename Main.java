@@ -683,7 +683,7 @@ public class Main
                 }
                 
             }
-            attackQueue.addAll(cctToadd);
+            attackQueue.addAll(cctToAdd);
             
         }else{
             if(field.getEnemies().size()>0){
@@ -703,7 +703,7 @@ public class Main
                     }
                 }
             }
-                attackQueue.addAll(cctToadd);
+                attackQueue.addAll(cctToAdd);
                 
             }
         }
