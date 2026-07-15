@@ -668,22 +668,21 @@ public class Main
                     }
                 }
             }
-            List<combatContext> cctToAdd = new ArrayList<>();
             for(Unit un: field.getEnemies()){
                 
                 if(!un.staggered() && attackQueue.get(0).getDefender() != un){
-                    
+                    boolean isAlreadyInCombat= false;
                     for(combatContext comc : attackQueue){
-                        if(un!=comc.getAttacker() && un!= comc.getDefender()){
-                            
-                            cctToAdd.add(enemMove(field, un, attackQueue));
-                        }
+                        isAlreadyInCombat = (un==comc.getAttacker() || un== comc.getDefender());
+                    }
+
+                    if(!isAlreadyInCombat){
+                        attackQueue.add(enemMove(field, un, attackQueue));
                     }
                     
                 }
                 
             }
-            attackQueue.addAll(cctToAdd);
             
         }else{
             if(field.getEnemies().size()>0){
@@ -693,17 +692,17 @@ public class Main
                     }
                 }
 
-                List<combatContext> cctToAdd = new ArrayList<>();
             for(Unit un: field.getAllies()){
                 if(!un.staggered() && attackQueue.get(0).getDefender() != un){
+                    boolean isAlreadyInCombat = false;
                     for(combatContext comc : attackQueue){
-                        if(un!=comc.getAttacker() && un!= comc.getDefender()){
-                            cctToAdd.add(allyMove(field, un, attackQueue));
-                        }
+                        isAlreadyInCombat = (un==comc.getAttacker() || un== comc.getDefender());
+                    }
+                    if(!isAlreadyInCombat){
+                        attackQueue.add(allyMove(field,un,attackQueue));
                     }
                 }
             }
-                attackQueue.addAll(cctToAdd);
                 
             }
         }
