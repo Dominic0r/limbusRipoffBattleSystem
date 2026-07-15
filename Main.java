@@ -673,7 +673,7 @@ public class Main
                 if(!un.staggered() && attackQueue.get(0).getDefender() != un){
                     boolean isAlreadyInCombat= false;
                     for(combatContext comc : attackQueue){
-                        isAlreadyInCombat = (un==comc.getAttacker() || un== comc.getDefender());
+                        isAlreadyInCombat = un== comc.getDefender();
                     }
 
                     if(!isAlreadyInCombat){
@@ -696,7 +696,7 @@ public class Main
                 if(!un.staggered() && attackQueue.get(0).getDefender() != un){
                     boolean isAlreadyInCombat = false;
                     for(combatContext comc : attackQueue){
-                        isAlreadyInCombat = (un==comc.getAttacker() || un== comc.getDefender());
+                        isAlreadyInCombat = un== comc.getDefender();
                     }
                     if(!isAlreadyInCombat){
                         attackQueue.add(allyMove(field,un,attackQueue));
