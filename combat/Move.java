@@ -38,7 +38,7 @@ public class Move{
                 outP+=this.name+ "\n"+this.description;
                 
             for(Coin co: this.coinSet){
-                OutP+="\n     Coin "+ coincounter+ ": "+ co.getDesc();
+                outP+="\n     Coin "+ coincounter+ ": "+ co.getDesc();
                 coincounter++;
             }
                 return outP;
