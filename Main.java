@@ -422,7 +422,7 @@ public class Main
         }while(!validInput);
         
         //Move plyrMv = validMoves.get(choice-1);
-        move plyrMv = GD.getPlayerMoveChoice();
+        Move plyrMv = GD.getPlayerMoveChoice();
         counter = 1;
         System.out.println("\nChoose a target: ");
         for(Unit un: field.getEnemies()){
