@@ -30,6 +30,19 @@ public class Move{
         public String getName(){return name;}
         public String getDesc(){ return description;}
         public int getBaseAtk(){ return baseatk;}
+
+        public String overView(){
+                
+        int coincounter=1;
+                String outP = "";
+                outP+=this.name+ "\n"+this.description;
+                
+            for(Coin co: this.coinSet){
+                OutP+="\n     Coin "+ coincounter+ ": "+ co.getDesc();
+                coincounter++;
+            }
+                return outP;
+        }
         
         public int getTotalPoints(){
             int tot = baseatk;
