@@ -80,6 +80,7 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
             });
         }
     };
+  }
 
   private void setupCombatLog() {
     logArea = new JTextArea();
