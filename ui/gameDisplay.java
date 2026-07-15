@@ -85,4 +85,8 @@ public class gameDisplay extends JFrame{
         bar.setForeground(Color.RED);
         return bar;
     }
+
+  public void updateData(){
+    displayHP();
+  }
 }
