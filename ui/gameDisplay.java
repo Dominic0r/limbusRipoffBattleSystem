@@ -41,7 +41,8 @@ public class gameDisplay extends JFrame{
   }
 
   public void displayHP(){
-
+    allyContentPanel = new JPanel();
+    enemContentPanel = new JPanel();
 
     allyContentPanel.setLayout(new BoxLayout(allyContentPanel, BoxLayout.Y_AXIS)); 
     allyContentPanel.setBackground(Color.LIGHT_GRAY);
