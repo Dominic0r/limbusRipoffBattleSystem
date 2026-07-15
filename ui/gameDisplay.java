@@ -24,7 +24,7 @@ public class gameDisplay extends JFrame{
     private JPanel enemContentPanel;
 
 java.util.List<Move> playerMoves = new ArrayList<>();
-  private Map<Unit, JProgressBar> enemyBarsMap = new HashMap<>();
+  private Map<Unit, JButton> playerMoveMap = new HashMap<>();
   private JPanel playerMovePanel;
   
   public gameDisplay(Battlefield field, Unit player){
