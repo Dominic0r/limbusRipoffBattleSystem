@@ -143,6 +143,22 @@ public class Unit{
                 }
         }
 
+        public String overView(){
+                String outP = "<html> ";
+                outP += "Morale: "+ morale;
+                if(effectsOnUnit.size()>0){
+                        
+                    for(appliedEffect app: effectsOnUnit){
+                            outP += "<br/>"+app.stat().getName() +" "+ app.getPotency()+ " potency, "+ app.getStack()+ " stack";
+                    }
+                }
+
+                if(isStaggered){
+                        outP+= "<br/>STAGGERED!";
+                }
+                return outP;
+        }
+
         
         
         public void addFinalCoinPowerMod(int toAdd){
