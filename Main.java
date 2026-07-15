@@ -668,6 +668,14 @@ public class Main
                     }
                 }
             }
+
+            for(Unit un: field.getEnemies()){
+                for(combatContext comc : attackQueue){
+                    if(un!=comc.getAttacker() && un!= comc.getDefender()){
+                        attackQueue.add(enemMove(field, un, attackQueue));
+                    }
+                }
+            }
         }else{
             if(field.getEnemies().size()>0){
                 for(Unit un: field.getEnemies()){
@@ -675,6 +683,15 @@ public class Main
                     attackQueue.add(enemMove(field, un, attackQueue));
                     }
                 }
+
+            for(Unit un: field.getAllies()){
+                for(combatContext comc : attackQueue){
+                    if(un!=comc.getAttacker() && un!= comc.getDefender()){
+                        attackQueue.add(allyMove(field, un, attackQueue));
+                    }
+                }
+            }
+                
             }
         }
         
