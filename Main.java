@@ -874,9 +874,9 @@ public class Main
         
         battleStart(batContext);
         while(true){
+            gameDisplay GD = new gameDisplay(batContext, playerUnit);
+            GD.setVisible();
         battleFlow(batContext);
-        uiTest test = new uiTest(batContext);
-            test.setVisible(true);
         }
         
         
