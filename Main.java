@@ -587,6 +587,7 @@ public class Main
             eMov = maxMove; 
         }else{
             targetUn = playerUnit;
+            secondary = true;
         }
         if(secondary){
             eMov = targetUn.unop();
