@@ -54,8 +54,9 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
 
     displayHP();
     displayMoves();
-    setupCombatLog();
     hijackSystemOut();
+    setupCombatLog();
+    
     setVisible(true);
   }
 
@@ -80,6 +81,7 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
             });
         }
     };
+    System.setOut(new PrintStream(out, true));
   }
 
   private void setupCombatLog() {
