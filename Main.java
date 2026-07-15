@@ -218,7 +218,7 @@ public class Main
             }else{
                 System.out.println(" - TAILS!");
             }
-            waitFor(1000/(result.getLoserUnbreakables().size()+));
+            waitFor(1000/(result.getLoserUnbreakables().size()+1));
             checkStacks(field);
             checkHP(field);
                 GD.updateHP();
