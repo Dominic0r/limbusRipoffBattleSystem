@@ -547,7 +547,7 @@ public class Main
         int maxnum=Integer.MIN_VALUE; // pick their move
         Move maxMove=null;
         for(Move mov: un.getMoveSet()){
-            if(mov.getTotalPoints()+ ra.nextInt(10)> maxnum){
+            if(mov.getTotalPoints()> maxnum){
                 maxnum = mov.getTotalPoints();
                 maxMove = mov;
             }
