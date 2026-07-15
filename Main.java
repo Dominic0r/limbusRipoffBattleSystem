@@ -198,9 +198,9 @@ public class Main
             GD.updateHP();
                 checkWin(field);
         }
-
+        
         System.out.println("\n");
-        if(!result.getLoserUnbreakables().isEmpty()){
+        if(!result.getLoserUnbreakables().isEmpty() && !loser.isStaggered() && loser.getHP()>0){
             for(Coin co: result.getLoserUnbreakables()){
             System.out.print(result.getLoser().getName() + " activates unbreakable coin: " + co.getDesc()); // Added UI
             waitFor(500);
@@ -225,6 +225,8 @@ public class Main
                 checkWin(field);
             }
         }
+
+        
     }
     
     public static void turnStart(Battlefield field){
