@@ -876,6 +876,7 @@ public class Main
         gameDisplay GD = new gameDisplay(batContext, playerUnit);
         while(true){
         GD.updateHP();
+            GD.updateMoves();
         battleFlow(batContext);
         }
         
