@@ -41,7 +41,7 @@ public class Main
             currentAttackerPoints = comctx.getAttackerMove().getBaseAtk();
             currentDefenderPoints = comctx.getDefenderMove().getBaseAtk();
             System.out.print(comctx.getAttacker().getName()+ ": ");
-            waitFor(500);
+            
             for(Coin co: attackerCoinSet){
                 int cby = co.getCoinPower(comctx.getAttacker().getMorale());
                 if(cby >0){
@@ -49,18 +49,20 @@ public class Main
                 }else{
                     System.out.print("TAILS ");
                 }
+                waitFor(1000);
                 cby += comctx.getAttacker().getCoinPowerMod();
                 currentAttackerPoints += cby;
             }
             System.out.print("\n"+comctx.getDefender().getName()+": ");
             for(Coin co: defenderCoinSet){
-                waitFor(500);
+                
                 int cby = co.getCoinPower(comctx.getDefender().getMorale());
                 if(cby >0){
                     System.out.print("HEADS ");
                 }else{
                     System.out.print("TAILS ");
                 }
+                waitFor(1000);
                 cby += comctx.getDefender().getCoinPowerMod();
                 currentDefenderPoints += co.getCoinPower(comctx.getDefender().getMorale()) + comctx.getDefender().getCoinPowerMod();
             }
@@ -79,11 +81,10 @@ public class Main
 
             
             
-            // Added UI for Clash Results per round
             System.out.println("  [Round " + clashRound + "] " 
                                + comctx.getAttacker().getName() + " rolled: " + currentAttackerPoints + " | " 
                                + comctx.getDefender().getName() + " rolled: " + currentDefenderPoints);
-            waitFor(500);
+            waitFor(1000);
             if(currentAttackerPoints == currentDefenderPoints){
                 System.out.println("    -> Tie! No coins lost.");
             }else{
@@ -115,7 +116,7 @@ public class Main
             }
             
             checkStacks(field);
-            waitFor(1000);
+            waitFor(2000);
             bothStillHaveCoins = (attackerCoinCount> 0) && (defenderCoinCount > 0);
             clashRound++;
         }while(bothStillHaveCoins);
@@ -146,9 +147,8 @@ public class Main
             unopposed = comctx.getAttackerMove() == comctx.getAttacker().unop();
         }
         
-        // Added UI for winner
         System.out.println("\n" + winner.getName() + " won the clash with " + remainingCoins + " coin(s) remaining!");
-        waitFor(1000);
+        waitFor(2000);
         
         if(!unopposed){
             if(winner.canChangeMorale()){
@@ -178,7 +178,7 @@ public class Main
             System.out.print(result.getWinner().getName() + " activates: " + co.getDesc()); // Added UI
             
             if(co.getCoinPower(result.getWinner().getMorale()) >0){
-                waitFor(500);
+                
                 System.out.print(" - HEADS!");
                 co.triggerOnHit(result, result.getWinner());
                 
@@ -192,7 +192,7 @@ public class Main
             }else{
                 System.out.println(" - TAILS!");
             }
-            
+            waitFor(1000);
             checkStacks(field);
             checkHP(field);
             GD.updateHP();
@@ -203,7 +203,7 @@ public class Main
         if(!result.getLoserUnbreakables().isEmpty() && !result.getLoser().staggered() && result.getLoser().getHP()>0){
             for(Coin co: result.getLoserUnbreakables()){
             System.out.print(result.getLoser().getName() + " activates unbreakable coin: " + co.getDesc()); // Added UI
-            waitFor(500);
+            
             if(co.getCoinPower(result.getLoser().getMorale()) >0){
                 System.out.print(" - HEADS!");
                 co.triggerOnHit(result, result.getLoser());
@@ -218,7 +218,7 @@ public class Main
             }else{
                 System.out.println(" - TAILS!");
             }
-            
+            waitFor(1000);
             checkStacks(field);
             checkHP(field);
                 GD.updateHP();
