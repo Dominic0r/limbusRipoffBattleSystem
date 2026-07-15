@@ -297,7 +297,7 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
         bar.setMaximum(max);
         bar.setValue(current);
         bar.setString(name + ": " + current + "/" + max + " HP");
-    bar.setToolTipText(un.getKey().overView());
+        bar.setToolTipText(un.getKey().overView());
     }
 
   private void updateSide(Map<Unit, JProgressBar> barMap, JPanel containerPanel) {
@@ -308,13 +308,12 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
             Map.Entry<Unit, JProgressBar> entry = iterator.next();
             Unit unit = entry.getKey();
             JProgressBar bar = entry.getValue();
-          bar.setToolTipText(entry.getKey().overView());
             if (unit.getHP() <= 0) {
                 containerPanel.remove(bar);
                 iterator.remove(); 
                 structureChanged = true;
             } else {
-                updateBarValue(bar, unit.getName(), unit.getHP(), unit.maxHP);
+                updateBarValue(bar, unit.getName(), unit.getHP(), unit.maxHP, unit);
             }
         }
 
