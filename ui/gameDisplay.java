@@ -54,7 +54,7 @@ public class gameDisplay extends JFrame{
 
     allyPanel.add(createHealthBar(player.getName(), player.getHP(), player.maxHP));
     for(Unit un : allies){
-      allyPanel.add(createHealthBar(un.getName(), un.getHP(), un.maxHP, Color.RED);)
+      allyPanel.add(createHealthBar(un.getName(), un.getHP(), un.maxHP, Color.RED));
     }
 
     for(Unit un : enemies){
