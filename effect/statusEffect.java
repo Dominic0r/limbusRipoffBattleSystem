@@ -20,6 +20,8 @@ public class statusEffect{
         private BiConsumer<Unit, Unit> onEnemyDeath; // first unit is the unit that dies, second is the unit holder
         private BiConsumer<Unit, Unit> onAllyDeath;
         private BiConsumer<Battlefield, Unit> onDeath;
+        private BiConsumer<Unit, Unit> onCriticalGet; // first unit is source, second unit is holder
+        private BiConsumer<Unit, Unit> onCriticalInflict; // first unit is target, second unit is holder
         
         public statusEffect(String name, boolean decays, int potencyLimit, int stackLimit, String description){
             this.name = name;
@@ -88,6 +90,16 @@ public class statusEffect{
             this.onDeath = hook;
             return this;
         }
+
+        public statusEffect setOnCriticalGet(BiConsumer<Unit, Unit> hook) {
+            this.onCriticalGet = hook;
+            return this;
+        }
+
+        public statusEffect setOnCriticalInflict(BiConsumer<Unit, Unit> hook) {
+            this.onCriticalInflict = hook;
+            return this;
+        }
         
         public void triggerTurnStart(Battlefield field, Unit un) {
             if (onTurnStart != null) onTurnStart.accept(field, un);
@@ -134,7 +146,15 @@ public class statusEffect{
         }
 
         public void triggerOnDeath(Battlefield field, Unit un){
-            if(onAllyDeath != null) onDeath.accept(field, un);
+            if(onDeath != null) onDeath.accept(field, un);
+        }
+
+        public void triggerOnCriticalGet(Unit source, Unit un){
+            if(onCriticalGet != null) onCriticalGet.accept(source, un);
+        }
+
+        public void triggerOnCriticalInflict(Unit target, Unit un){
+            if(onCriticalInflict != null) onCriticalInfict.accept(source, un);
         }
         
         public String getName(){ return name;}
