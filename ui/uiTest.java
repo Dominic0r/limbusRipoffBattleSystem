@@ -4,6 +4,7 @@ import combat.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class uiTest extends JFrame{
   List<Unit> allies = new ArrayList<>();
