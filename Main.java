@@ -782,14 +782,16 @@ public class Main
     
     public static void checkWin(Battlefield field){
         if(field.getEnemies().size() <=0){
-            System.out.println("YOU WIN!");
-            System.exit(0);
+            System.out.println("==========");
+            System.out.println("|YOU WIN!|");
+            System.out.println("==========");
         }
     }
     
     public static void youlose(){
-        System.out.println("YOU LOSE!");
-        System.exit(0);
+        System.out.println("===========");
+        System.out.println("|YOU LOSE!|");
+        System.out.println("===========");
     }
     
     public static void haveAllPendingMutationsApplied(Battlefield field){
