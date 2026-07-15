@@ -34,14 +34,15 @@ public class Move{
         public String overView(){
                 
         int coincounter=1;
-                String outP = "";
-                outP+=this.name+ "\n"+this.description;
+                String outP = "<html>";
+                outP+=this.name+ "<br/>"+this.description;
                 
             for(Coin co: this.coinSet){
-                outP+="\n     Coin "+ coincounter+ ": "+ co.getDesc();
+                outP+="<br/>     Coin "+ coincounter+ ": "+ co.getDesc();
                 coincounter++;
             }
-                return outP;
+                
+                return outP+ "</html>";
         }
         
         public int getTotalPoints(){
