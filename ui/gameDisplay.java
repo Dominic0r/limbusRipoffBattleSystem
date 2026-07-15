@@ -56,7 +56,7 @@ public class gameDisplay extends JFrame{
     enemContentPanel.add(new JLabel("Enemies"));
 
     playerHPBar = createHealthBar(player.getName(), player.getHP(), player.maxHP);
-
+    allyContentPanel.add(playerHPBar);
     for (Unit un : allies) {
             JProgressBar bar = createHealthBar(un.getName(), un.getHP(), un.maxHP);
             allyBarsMap.put(un, bar);
