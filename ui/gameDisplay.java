@@ -17,14 +17,12 @@ public class gameDisplay extends JFrame{
 
   JProgressBar playerHPBar;
 
-  public JFrame frame;
 
   public gameDisplay(Battlefield field, Unit player){
     this.field = field;
     this.player= player;
     this.allies = field.getAllies();
     this.enemies = field.getEnemies();
-    frame = new JFrame("Game Display");
     setTitle("Game Display");
         setSize(700, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
