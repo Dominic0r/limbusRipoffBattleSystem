@@ -25,8 +25,11 @@ public class gameDisplay extends JFrame{
     this.allies = field.getAllies();
     this.enemies = field.getEnemies();
     frame = new JFrame("Game Display");
-    frame.setSize(720,720);
-    frame.setLayout(new BorderLayout());
+    setTitle("Game Display");
+        setSize(700, 500);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null); // Center on screen
+        setLayout(new BorderLayout(10, 10));
 
     displayHP();
   }
