@@ -10,6 +10,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
 public class gameDisplay extends JFrame{
   java.util.List<Unit> allies = new ArrayList<>();
@@ -34,6 +36,8 @@ java.util.List<Move> playerMoves = new ArrayList<>();
 
   private Unit chosenTarget = null;
 private Map<Unit, JButton> targetButtonMap = new HashMap<>();
+
+  private JTextArea logArea;
   
   public gameDisplay(Battlefield field, Unit player){
     this.field = field;
@@ -50,8 +54,48 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
 
     displayHP();
     displayMoves();
+    setupCombatLog();
+    hijackSystemOut();
     setVisible(true);
   }
+
+  public void hijackSystemOut() {
+    OutputStream out = new OutputStream() {
+        @Override
+        public void write(int b) {
+            // Write a single byte character to the JTextArea (on the EDT thread)
+            SwingUtilities.invokeLater(() -> {
+                logArea.append(String.valueOf((char) b));
+                logArea.setCaretPosition(logArea.getDocument().getLength());
+            });
+        }
+
+        @Override
+        public void write(byte[] b, int off, int len) {
+            // Write character chunks for performance
+            String s = new String(b, off, len);
+            SwingUtilities.invokeLater(() -> {
+                logArea.append(s);
+                logArea.setCaretPosition(logArea.getDocument().getLength());
+            });
+        }
+    };
+
+  private void setupCombatLog() {
+    logArea = new JTextArea();
+    logArea.setEditable(false);       
+    logArea.setLineWrap(true);       
+    logArea.setWrapStyleWord(true);   
+    logArea.setFont(new Font("Monospaced", Font.PLAIN, 12)); 
+    logArea.setBackground(Color.BLACK);
+    logArea.setForeground(Color.WHITE); 
+
+    // Wrap the text area inside a scroll pane so it handles large logs gracefully
+    JScrollPane logScrollPane = new JScrollPane(logArea);
+    
+    // Add it to the exact CENTER of your BorderLayout
+    add(logScrollPane, BorderLayout.CENTER);
+}
 
   public Unit getPlayerTargetChoice() {
     synchronized (lock) {
