@@ -307,7 +307,7 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
             Map.Entry<Unit, JProgressBar> entry = iterator.next();
             Unit unit = entry.getKey();
             JProgressBar bar = entry.getValue();
-          bar.setToolTipText(entry.overView());
+          bar.setToolTipText(entry.getKey());
             if (unit.getHP() <= 0) {
                 containerPanel.remove(bar);
                 iterator.remove(); 
