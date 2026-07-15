@@ -58,7 +58,7 @@ public class gameDisplay extends JFrame{
     
     allyContentPanel.add(new JLabel("Your Side"));
 
-    enemPanel.add(new JLabel("Enemies"));
+    enemContentPanel.add(new JLabel("Enemies"));
 
     allyContentPanel.add(createHealthBar(player.getName(), player.getHP(), player.maxHP));
     for(Unit un : allies){
