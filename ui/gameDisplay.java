@@ -53,11 +53,12 @@ java.util.List<Move> playerMoves = new ArrayList<>();
     playerMovePanel.add(new JLabel("Your Moves:"));
 
     for(Move mov: playerMoves){
-      if(mov.isUsable(field, player)){
-        playerMovePanel.add(createMoveButton(mov));
-      }
+      Jbutton but = createMoveButton(mov);
+      playerMoveMap.put(mov,but);
+        playerMovePanel.add(but);
+      
     }
-
+    updateMoves();
     JScrollPane movelist = new JScrollPane(playerMovePanel);
 
     add(movelist, BorderLayout.SOUTH);
@@ -68,8 +69,19 @@ java.util.List<Move> playerMoves = new ArrayList<>();
     JButton but = new JButton(mov.getName());
     return but;
   }
-  
 
+  public void updateMoves() {
+    SwingUtilities.invokeLater(() -> {
+        for (Map.Entry<Move, JButton> entry : playerMoveMap.entrySet()) {
+            Move mov = entry.getKey();
+            JButton button = entry.getValue();
+            
+            // Set whether the button is clickable based on usability
+            button.setEnabled(mov.isUsable(field, player));
+        }
+    });
+}
+  
   public void displayHP(){
     allyContentPanel = new JPanel();
     enemContentPanel = new JPanel();
