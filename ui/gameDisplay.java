@@ -30,24 +30,14 @@ public class gameDisplay extends JFrame{
         setLayout(new BorderLayout(10, 10));
 
     displayHP();
+
+    setVisible(true);
   }
 
   public void displayHP(){
-    /*JTextArea allyList = new JTextArea();
-    JTextArea enemList = new JTextArea();
-    allyList.setEditable(false);
-    allyList.setText("Allies: ");
-    allyList.setBackground(Color.WHITE);
-    allyList.setForeground(Color.BLACK);
-
-    enemList.setEditable(false);
-    enemList.setText("Enemies: ");
-    enemList.setBackground(Color.WHITE);
-    enemList.setForeground(Color.BLACK);*/
 
 
     JPanel allyContentPanel = new JPanel();
-    // BoxLayout.Y_AXIS stacks components vertically
     allyContentPanel.setLayout(new BoxLayout(allyContentPanel, BoxLayout.Y_AXIS)); 
     allyContentPanel.setBackground(Color.LIGHT_GRAY);
 
@@ -60,13 +50,19 @@ public class gameDisplay extends JFrame{
 
     enemContentPanel.add(new JLabel("Enemies"));
 
-    allyContentPanel.add(createHealthBar(player.getName(), player.getHP(), player.maxHP));
+    playerHPBar = createHealthBar(player.getName(), player.getHP(), player.maxHP);
+
+    allyContentPanel.add(playerHPBar);
     for(Unit un : allies){
-      allyContentPanel.add(createHealthBar(un.getName(), un.getHP(), un.maxHP));
+      JProgressBar bar = createHealthBar(un.getName(), un.getHP(), un.maxHP);
+      allyHPBar.add(bar);
+      allyContentPanel.add(bar);
     }
 
     for(Unit un : enemies){
-      enemContentPanel.add(createHealthBar(un.getName(), un.getHP(), un.maxHP));
+      JProgressBar bar = createHealthBar(un.getName(), un.getHP(), un.maxHP);
+      enemyHPBar.add(bar);
+      enemContentPanel.add(bar);
     }
 
     JScrollPane allyScroll = new JScrollPane(allyContentPanel);
@@ -86,7 +82,26 @@ public class gameDisplay extends JFrame{
         return bar;
     }
 
-  public void updateData(){
-    displayHP();
-  }
+  public void updateHP() {
+        // SwingUtilities.invokeLater ensures this runs safely on the UI thread
+        SwingUtilities.invokeLater(() -> {
+            // Update Player
+            updateBarValue(playerHPBar, player.getName(), player.getHP(), player.maxHP);
+
+            // Update Allies (assuming the lists stay in the same order)
+            for (int i = 0; i < allies.size(); i++) {
+                Unit unit = allies.get(i);
+                JProgressBar bar = allyHPBars.get(i);
+                updateBarValue(bar, unit.getName(), unit.getHP(), unit.maxHP);
+            }
+
+            // Update Enemies
+            for (int i = 0; i < enemies.size(); i++) {
+                Unit unit = enemies.get(i);
+                JProgressBar bar = enemyHPBars.get(i);
+                updateBarValue(bar, unit.getName(), unit.getHP(), unit.maxHP);
+            }
+        });
+    }
+
 }
