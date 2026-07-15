@@ -200,7 +200,7 @@ public class Main
         }
         
         System.out.println("\n");
-        if(!result.getLoserUnbreakables().isEmpty() && !result.getLoser().isStaggered() && result.getLoser().getHP()>0){
+        if(!result.getLoserUnbreakables().isEmpty() && !result.getLoser().staggered() && result.getLoser().getHP()>0){
             for(Coin co: result.getLoserUnbreakables()){
             System.out.print(result.getLoser().getName() + " activates unbreakable coin: " + co.getDesc()); // Added UI
             waitFor(500);
