@@ -49,7 +49,7 @@ public class Main
                 }else{
                     System.out.print("TAILS ");
                 }
-                waitFor(1000);
+                waitFor(1000/(attackerCoinCount+1));
                 cby += comctx.getAttacker().getCoinPowerMod();
                 currentAttackerPoints += cby;
             }
@@ -62,7 +62,7 @@ public class Main
                 }else{
                     System.out.print("TAILS ");
                 }
-                waitFor(1000);
+                waitFor(1000/(defenderCoinCount+1));
                 cby += comctx.getDefender().getCoinPowerMod();
                 currentDefenderPoints += co.getCoinPower(comctx.getDefender().getMorale()) + comctx.getDefender().getCoinPowerMod();
             }
@@ -84,7 +84,7 @@ public class Main
             System.out.println("  [Round " + clashRound + "] " 
                                + comctx.getAttacker().getName() + " rolled: " + currentAttackerPoints + " | " 
                                + comctx.getDefender().getName() + " rolled: " + currentDefenderPoints);
-            waitFor(1000);
+            waitFor(500);
             if(currentAttackerPoints == currentDefenderPoints){
                 System.out.println("    -> Tie! No coins lost.");
             }else{
@@ -105,7 +105,7 @@ public class Main
                     System.out.println("    -> " + comctx.getAttacker().getName() + " lost a coin!"); 
                 }
             }
-            
+            waitFor(500);
             
             for(appliedEffect app : comctx.getAttacker().getEffectList()){
                 app.stat().triggerOnClash(field, comctx.getAttacker());
@@ -116,7 +116,7 @@ public class Main
             }
             
             checkStacks(field);
-            waitFor(2000);
+            waitFor(1000);
             bothStillHaveCoins = (attackerCoinCount> 0) && (defenderCoinCount > 0);
             clashRound++;
         }while(bothStillHaveCoins);
@@ -148,7 +148,7 @@ public class Main
         }
         
         System.out.println("\n" + winner.getName() + " won the clash with " + remainingCoins + " coin(s) remaining!");
-        waitFor(2000);
+        waitFor(1500);
         
         if(!unopposed){
             if(winner.canChangeMorale()){
@@ -192,7 +192,7 @@ public class Main
             }else{
                 System.out.println(" - TAILS!");
             }
-            waitFor(1000);
+            waitFor(1000/(result.getCoinSet().size()+1));
             checkStacks(field);
             checkHP(field);
             GD.updateHP();
@@ -218,7 +218,7 @@ public class Main
             }else{
                 System.out.println(" - TAILS!");
             }
-            waitFor(1000);
+            waitFor(1000/(result.getLoserUnbreakables().size()+));
             checkStacks(field);
             checkHP(field);
                 GD.updateHP();
