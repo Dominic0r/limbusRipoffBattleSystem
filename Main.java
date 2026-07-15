@@ -874,10 +874,8 @@ public class Main
         
         battleStart(batContext);
         gameDisplay GD = new gameDisplay(batContext, playerUnit);
-        GD.setVisible(true);
         while(true){
-            GD.updateData();
-            
+        GD.updateHP();
         battleFlow(batContext);
         }
         
