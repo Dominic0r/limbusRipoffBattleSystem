@@ -315,6 +315,13 @@ public class Unit{
                 if(ra.nextInt(100) < source.getCritChance()){
                         System.out.println("Critical Hit (+"+ ((int)(source.getCritmodifier()*100))+"%)");
                         dam += dam*source.getCritmodifier();
+
+                        for(appliedEffect app : source.getEffectList()){
+                                app.triggerOnCriticalInflict();
+                        }
+                        for(appliedEffect app : this.getEffectList()){
+                                app.triggerOnCriticalGet();
+                        }
                 }
 
                 float totalDamageModifier = 0.0f;
