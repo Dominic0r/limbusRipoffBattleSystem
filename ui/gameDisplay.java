@@ -91,17 +91,22 @@ public class gameDisplay extends JFrame{
             // Update Allies (assuming the lists stay in the same order)
             for (int i = 0; i < allies.size(); i++) {
                 Unit unit = allies.get(i);
-                JProgressBar bar = allyHPBars.get(i);
+                JProgressBar bar = allyHPBar.get(i);
                 updateBarValue(bar, unit.getName(), unit.getHP(), unit.maxHP);
             }
 
             // Update Enemies
             for (int i = 0; i < enemies.size(); i++) {
                 Unit unit = enemies.get(i);
-                JProgressBar bar = enemyHPBars.get(i);
+                JProgressBar bar = enemyHPBar.get(i);
                 updateBarValue(bar, unit.getName(), unit.getHP(), unit.maxHP);
             }
         });
+    }
+  private void updateBarValue(JProgressBar bar, String name, int current, int max) {
+        bar.setMaximum(max);
+        bar.setValue(current);
+        bar.setString(name + ": " + current + "/" + max + " HP");
     }
 
 }
