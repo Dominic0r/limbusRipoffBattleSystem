@@ -56,7 +56,7 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
         setLocationRelativeTo(null); // Center on screen
         setLayout(new BorderLayout(10, 10));
 
-    buttonFont = loadCustomFont("assets/ExcelsiorSans.ttf", 14f);
+    buttonFont = loadCustomFont("ui/assets/ExcelsiorSans.ttf", 14f);
     
     displayHP();
     displayMoves();
