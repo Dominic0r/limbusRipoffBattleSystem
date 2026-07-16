@@ -12,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.awt.Font;
+import java.io.File;
 
 public class gameDisplay extends JFrame{
   java.util.List<Unit> allies = new ArrayList<>();
@@ -38,8 +40,10 @@ java.util.List<Move> playerMoves = new ArrayList<>();
 private Map<Unit, JButton> targetButtonMap = new HashMap<>();
 
   private JTextArea logArea;
+  private Font buttonFont;
   
   public gameDisplay(Battlefield field, Unit player){
+    
     this.field = field;
     this.player= player;
     this.allies = field.getAllies();
@@ -52,12 +56,26 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
         setLocationRelativeTo(null); // Center on screen
         setLayout(new BorderLayout(10, 10));
 
+    buttonFont = loadCustomFont("assets/ExcelsiorSans.ttf", 14f);
+    
     displayHP();
     displayMoves();
     hijackSystemOut();
     setupCombatLog();
     
     setVisible(true);
+  }
+
+  public Font loadCustomFont(String path, float size){
+    try{
+      File fontFile = new File(path);
+      Font customFont = Font.createFont(Font.TRUETYPE_FONT, fontFile);
+      return customFont.deriveFont(size);
+    }catch(Exception e){
+      e.printStackTrace();
+        // Fallback to default sans-serif if file load fails
+        return new Font("SansSerif", Font.BOLD, (int) size);
+    }
   }
 
   public void hijackSystemOut() {
@@ -117,6 +135,7 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
                         }
                     });
                   targetBtn.setToolTipText(enemy.overView());
+                  targetBtn.setFont(buttonFont);
                     targetButtonMap.put(enemy, targetBtn);
                     playerMovePanel.add(targetBtn);
                 }
@@ -214,6 +233,7 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
   private JButton createMoveButton(Move mov){
     JButton but = new JButton(mov.getName());
     but.setToolTipText(mov.overView());
+    targetBtn.setFont(buttonFont);
     return but;
   }
 
