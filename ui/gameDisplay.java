@@ -41,6 +41,7 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
 
   private JTextArea logArea;
   private Font buttonFont;
+  private Font barFont;
   
   public gameDisplay(Battlefield field, Unit player){
     
@@ -56,8 +57,8 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
         setLocationRelativeTo(null); // Center on screen
         setLayout(new BorderLayout(10, 10));
 
-    buttonFont = loadCustomFont("ui/assets/ExcelsiorSans.ttf", 14f);
-    
+    buttonFont = loadCustomFont("ui/assets/ExcelsiorSans.ttf", 24f);
+    barFont = loadCustomFont("ui/assets/KOTRA_BOLD.ttf", 16f);
     displayHP();
     displayMoves();
     hijackSystemOut();
@@ -264,18 +265,18 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
 
     enemContentPanel.add(new JLabel("Enemies"));
 
-    playerHPBar = createHealthBar(player.getName(), player.getHP(), player.maxHP);
+    playerHPBar = createHealthBar(player.getName(), player.getHP(), player.maxHP, player);
     playerHPBar.setToolTipText(player.overView());
     allyContentPanel.add(playerHPBar);
     for (Unit un : allies) {
-            JProgressBar bar = createHealthBar(un.getName(), un.getHP(), un.maxHP);
+            JProgressBar bar = createHealthBar(un.getName(), un.getHP(), un.maxHP, un);
       bar.setToolTipText(un.overView());
             allyBarsMap.put(un, bar);
             allyContentPanel.add(bar);
         }
 
     for (Unit un : enemies) {
-            JProgressBar bar = createHealthBar(un.getName(), un.getHP(), un.maxHP);
+            JProgressBar bar = createHealthBar(un.getName(), un.getHP(), un.maxHP,un);
       bar.setToolTipText(un.overView());
             enemyBarsMap.put(un, bar);
             enemContentPanel.add(bar);
@@ -289,12 +290,18 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
     
   }
 
-  private JProgressBar createHealthBar(String name, int current, int max) {
+  private JProgressBar createHealthBar(String name, int current, int max, Unit un) {
         JProgressBar bar = new JProgressBar(0, max);
         bar.setValue(current);
         bar.setStringPainted(true);
+        bar.setFont(barFont);
         bar.setString(name + ": " + current + "/" + max + " HP");
+        if(un.staggered()){
+        bar.setForeground(Color.YELLOW);
+        }else{
         bar.setForeground(Color.RED);
+        }
+
         return bar;
     }
 
@@ -318,6 +325,11 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
         bar.setValue(current);
         bar.setString(name + ": " + current + "/" + max + " HP");
         bar.setToolTipText(un.overView());
+        if(un.staggered()){
+        bar.setForeground(Color.YELLOW);
+        }else{
+        bar.setForeground(Color.RED);
+        }
     }
 
   private void updateSide(Map<Unit, JProgressBar> barMap, JPanel containerPanel) {
