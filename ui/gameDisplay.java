@@ -233,7 +233,7 @@ private Map<Unit, JButton> targetButtonMap = new HashMap<>();
   private JButton createMoveButton(Move mov){
     JButton but = new JButton(mov.getName());
     but.setToolTipText(mov.overView());
-    targetBtn.setFont(buttonFont);
+    but.setFont(buttonFont);
     return but;
   }
 
